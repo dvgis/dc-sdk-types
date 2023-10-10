@@ -1,0 +1,16 @@
+{
+  "name": "@dvgis/dc-sdk-types",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "description": "Type definitions for @dvgis/dc-sdk.",
+  "repository": "https://github.com/dvgis/dc-sdk-types.git",
+  "homepage": "https://dc.dvgis.cn",
+  "author": "Caven Chen <cavencj@gmail.com>",
+  "types": "index.d.ts",
+  "scripts": {
+    "postinstall": "node ./scripts/copy-to-types.js"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  }
+}
