@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/dc-sdk-types",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "description": "Type definitions for @dvgis/dc-sdk.",
   "repository": "https://github.com/dvgis/dc-sdk-types.git",
