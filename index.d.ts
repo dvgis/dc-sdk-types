@@ -497,6 +497,10 @@ declare namespace DC {
     constructor(id: string);
   }
 
+  class FeatureGridLayer extends Layer {
+    constructor(id: string, url: string, options?: JSON);
+  }
+
   class GeoJsonLayer extends Layer {
     constructor(id: string, url: string, options?: JSON);
     toVectorLayer(): VectorLayer;
