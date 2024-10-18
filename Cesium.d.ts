@@ -596,10 +596,10 @@ export enum WebGLConstants {
 export namespace ArcGISTiledElevationTerrainProvider {
     /**
      * Initialization options for the ArcGISTiledElevationTerrainProvider constructor
-     * [token] - The authorization token to use to connect to the service.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+     * @property [token] - The authorization token to use to connect to the service.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If the tilingScheme is specified,
      *                    this parameter is ignored and the tiling scheme's ellipsoid is used instead.
-     *                    If neither parameter is specified, the WGS84 ellipsoid is used.
+     *                    If neither parameter is specified, the default ellipsoid is used.
      */
     type ConstructorOptions = {
         token?: string;
@@ -1055,7 +1055,7 @@ export class BoundingSphere {
      * Computes a bounding sphere from a rectangle in 3D. The bounding sphere is created using a subsample of points
      * on the ellipsoid and contained in the rectangle. It may not be accurate for all rectangles on all types of ellipsoids.
      * @param [rectangle] - The valid rectangle used to create a bounding sphere.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid used to determine positions of the rectangle.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid used to determine positions of the rectangle.
      * @param [surfaceHeight = 0.0] - The height above the surface of the ellipsoid.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new BoundingSphere instance if none was provided.
@@ -2135,7 +2135,7 @@ export class Cartesian3 {
      * @param longitude - The longitude, in degrees
      * @param latitude - The latitude, in degrees
      * @param [height = 0.0] - The height, in meters, above the ellipsoid.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the position lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the position lies.
      * @param [result] - The object onto which to store the result.
      * @returns The position
      */
@@ -2147,7 +2147,7 @@ export class Cartesian3 {
      * @param longitude - The longitude, in radians
      * @param latitude - The latitude, in radians
      * @param [height = 0.0] - The height, in meters, above the ellipsoid.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the position lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the position lies.
      * @param [result] - The object onto which to store the result.
      * @returns The position
      */
@@ -2157,7 +2157,7 @@ export class Cartesian3 {
      * @example
      * const positions = Cesium.Cartesian3.fromDegreesArray([-115.0, 37.0, -107.0, 33.0]);
      * @param coordinates - A list of longitude and latitude values. Values alternate [longitude, latitude, longitude, latitude...].
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the coordinates lie.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the coordinates lie.
      * @param [result] - An array of Cartesian3 objects to store the result.
      * @returns The array of positions.
      */
@@ -2167,7 +2167,7 @@ export class Cartesian3 {
      * @example
      * const positions = Cesium.Cartesian3.fromRadiansArray([-2.007, 0.645, -1.867, .575]);
      * @param coordinates - A list of longitude and latitude values. Values alternate [longitude, latitude, longitude, latitude...].
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the coordinates lie.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the coordinates lie.
      * @param [result] - An array of Cartesian3 objects to store the result.
      * @returns The array of positions.
      */
@@ -2177,7 +2177,7 @@ export class Cartesian3 {
      * @example
      * const positions = Cesium.Cartesian3.fromDegreesArrayHeights([-115.0, 37.0, 100000.0, -107.0, 33.0, 150000.0]);
      * @param coordinates - A list of longitude, latitude and height values. Values alternate [longitude, latitude, height, longitude, latitude, height...].
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the position lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the position lies.
      * @param [result] - An array of Cartesian3 objects to store the result.
      * @returns The array of positions.
      */
@@ -2187,7 +2187,7 @@ export class Cartesian3 {
      * @example
      * const positions = Cesium.Cartesian3.fromRadiansArrayHeights([-2.007, 0.645, 100000.0, -1.867, .575, 150000.0]);
      * @param coordinates - A list of longitude, latitude and height values. Values alternate [longitude, latitude, height, longitude, latitude, height...].
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the position lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the position lies.
      * @param [result] - An array of Cartesian3 objects to store the result.
      * @returns The array of positions.
      */
@@ -2633,7 +2633,7 @@ export class Cartographic {
      * Creates a new Cartographic instance from a Cartesian position. The values in the
      * resulting object will be in radians.
      * @param cartesian - The Cartesian position to convert to cartographic representation.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the position lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the position lies.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter, new Cartographic instance if none was provided, or undefined if the cartesian is at the center of the ellipsoid.
      */
@@ -2642,7 +2642,7 @@ export class Cartographic {
      * Creates a new Cartesian3 instance from a Cartographic input. The values in the inputted
      * object should be in radians.
      * @param cartographic - Input to be converted into a Cartesian3 output.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the position lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the position lies.
      * @param [result] - The object onto which to store the result.
      * @returns The position
      */
@@ -2804,11 +2804,11 @@ export class CatmullRomSpline {
 export namespace CesiumTerrainProvider {
     /**
      * Initialization options for the CesiumTerrainProvider constructor
-     * [requestVertexNormals = false] - Flag that indicates if the client should request additional lighting information from the server, in the form of per vertex normals if available.
-     * [requestWaterMask = false] - Flag that indicates if the client should request per tile water masks from the server, if available.
-     * [requestMetadata = true] - Flag that indicates if the client should request per tile metadata from the server, if available.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [requestVertexNormals = false] - Flag that indicates if the client should request additional lighting information from the server, in the form of per vertex normals if available.
+     * @property [requestWaterMask = false] - Flag that indicates if the client should request per tile water masks from the server, if available.
+     * @property [requestMetadata = true] - Flag that indicates if the client should request per tile metadata from the server, if available.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         requestVertexNormals?: boolean;
@@ -2982,6 +2982,136 @@ export class CesiumTerrainProvider {
     loadTileDataAvailability(x: number, y: number, level: number): undefined | Promise<void>;
 }
 
+
+/**
+ * Contains functions for checking that supplied arguments are of a specified type
+ * or meet specified conditions
+ */
+export const Check: {
+  /**
+   * Throws if test is not defined
+   *
+   * @param {string} name The name of the variable being tested
+   * @param {*} test The value that is to be checked
+   * @exception {DeveloperError} test must be defined
+   */
+  defined<T>(name: string, test: T): asserts test is NonNullable<T>;
+  /**
+   * Contains type checking functions, all using the typeof operator
+   */
+  typeOf: {
+    /**
+     * Throws if test is not typeof 'string'
+     *
+     * @param {string} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'string'
+     */
+    string(name: string, test: any): asserts test is string;
+    /**
+     * Throws if test is not typeof 'function'
+     *
+     * @param {string} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'function'
+     */
+    func(name: string, test: any): asserts test is Function;
+    /**
+     * Throws if test is not typeof 'object'
+     *
+     * @param {string} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'object'
+     */
+    object(name: string, test: any): asserts test is object;
+    /**
+     * Throws if test is not typeof 'boolean'
+     *
+     * @param {string} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'boolean'
+     */
+    bool(name: string, test: any): asserts test is boolean;
+    /**
+     * Throws if test is not typeof 'bigint'
+     *
+     * @param {string} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'bigint'
+     */
+    bigint(name: string, test: any): asserts test is bigint;
+    /**
+     * Throws if test is not typeof 'number'
+     *
+     * @param {string} name The name of the variable being tested
+     * @param {*} test The value to test
+     * @exception {DeveloperError} test must be typeof 'number'
+     */
+    number: {
+      (name: string, test: any): void;
+      /**
+       * Throws if test is not typeof 'number' and less than limit
+       *
+       * @param {string} name The name of the variable being tested
+       * @param {*} test The value to test
+       * @param {number} limit The limit value to compare against
+       * @exception {DeveloperError} test must be typeof 'number' and less than limit
+       */
+      lessThan(name: string, test: any, limit: number): asserts test is number;
+      /**
+       * Throws if test is not typeof 'number' and less than or equal to limit
+       *
+       * @param {string} name The name of the variable being tested
+       * @param {*} test The value to test
+       * @param {number} limit The limit value to compare against
+       * @exception {DeveloperError} test must be typeof 'number' and less than or equal to limit
+       */
+      lessThanOrEquals(
+        name: string,
+        test: any,
+        limit: number,
+      ): asserts test is number;
+      /**
+       * Throws if test is not typeof 'number' and greater than limit
+       *
+       * @param {string} name The name of the variable being tested
+       * @param {*} test The value to test
+       * @param {number} limit The limit value to compare against
+       * @exception {DeveloperError} test must be typeof 'number' and greater than limit
+       */
+      greaterThan(
+        name: string,
+        test: any,
+        limit: number,
+      ): asserts test is number;
+      /**
+       * Throws if test is not typeof 'number' and greater than or equal to limit
+       *
+       * @param {string} name The name of the variable being tested
+       * @param {*} test The value to test
+       * @param {number} limit The limit value to compare against
+       * @exception {DeveloperError} test must be typeof 'number' and greater than or equal to limit
+       */
+      greaterThanOrEquals(
+        name: string,
+        test: any,
+        limit: number,
+      ): asserts test is number;
+      /**
+       * Throws if test1 and test2 is not typeof 'number' and not equal in value
+       *
+       * @param {string} name1 The name of the first variable being tested
+       * @param {string} name2 The name of the second variable being tested against
+       * @param {*} test1 The value to test
+       * @param {*} test2 The value to test against
+       * @exception {DeveloperError} test1 and test2 should be type of 'number' and be equal in value
+       */
+      equals(name1: string, name2: string, test1: any, test2: any): void;
+    };
+  };
+};
+
+
 /**
  * A description of a circle on the ellipsoid. Circle geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
  * @example
@@ -2994,7 +3124,7 @@ export class CesiumTerrainProvider {
  * @param options - Object with the following properties:
  * @param options.center - The circle's center point in the fixed frame.
  * @param options.radius - The radius in meters.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid the circle will be on.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid the circle will be on.
  * @param [options.height = 0.0] - The distance in meters between the circle and the ellipsoid surface.
  * @param [options.granularity = 0.02] - The angular distance between points on the circle in radians.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
@@ -3052,7 +3182,7 @@ export class CircleGeometry {
  * @param options - Object with the following properties:
  * @param options.center - The circle's center point in the fixed frame.
  * @param options.radius - The radius in meters.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid the circle will be on.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid the circle will be on.
  * @param [options.height = 0.0] - The distance in meters between the circle and the ellipsoid surface.
  * @param [options.granularity = 0.02] - The angular distance between points on the circle in radians.
  * @param [options.extrudedHeight = 0.0] - The distance in meters between the circle's extruded face and the ellipsoid surface.
@@ -4459,6 +4589,10 @@ export class CompressedTextureBuffer {
      */
     readonly bufferView: Uint8Array;
     /**
+     * The compressed texture buffer. Alias for bufferView.
+     */
+    readonly arrayBufferView: Uint8Array;
+    /**
      * Creates a shallow clone of a compressed texture buffer.
      * @param object - The compressed texture buffer to be cloned.
      * @returns A shallow clone of the compressed texture buffer.
@@ -4532,7 +4666,7 @@ export class ConstantSpline {
  * @param options.polygonHierarchy - A polygon hierarchy that can include holes.
  * @param [options.stRotation = 0.0] - The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.textureCoordinates] - Texture coordinates as a {@link PolygonHierarchy} of {@link Cartesian2} points.
  */
 export class CoplanarPolygonGeometry {
@@ -4565,7 +4699,7 @@ export class CoplanarPolygonGeometry {
      * @param options.positions - An array of positions that defined the corner points of the polygon.
      * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
      * @param [options.stRotation = 0.0] - The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
      * @param [options.textureCoordinates] - Texture coordinates as a {@link PolygonHierarchy} of {@link Cartesian2} points.
      */
     static fromPositions(options: {
@@ -4689,7 +4823,7 @@ export enum CornerType {
  * @param options - Object with the following properties:
  * @param options.positions - An array of positions that define the center of the corridor.
  * @param options.width - The distance between the edges of the corridor in meters.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.height = 0] - The distance in meters between the ellipsoid surface and the positions.
  * @param [options.extrudedHeight] - The distance in meters between the ellipsoid surface and the extruded face.
@@ -4732,7 +4866,7 @@ export class CorridorGeometry {
      * @param options - Object with the following properties:
      * @param options.positions - An array of positions that define the center of the corridor.
      * @param options.width - The distance between the edges of the corridor in meters.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
      * @param [options.cornerType = CornerType.ROUNDED] - Determines the style of the corners.
      * @param [result] - An object in which to store the result.
      * @returns The result rectangle.
@@ -4761,7 +4895,7 @@ export class CorridorGeometry {
  * @param options - Object with the following properties:
  * @param options.positions - An array of positions that define the center of the corridor outline.
  * @param options.width - The distance between the edges of the corridor outline.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.height = 0] - The distance in meters between the positions and the ellipsoid surface.
  * @param [options.extrudedHeight] - The distance in meters between the extruded face and the ellipsoid surface.
@@ -4809,9 +4943,9 @@ export class CorridorOutlineGeometry {
  * A credit contains data pertaining to how to display attributions/credits for certain content on the screen.
  * @example
  * // Create a credit with a tooltip, image and link
- * const credit = new Cesium.Credit('<a href="https://cesium.com/" target="_blank"><img src="/images/cesium_logo.png" title="Cesium"/></a>');
+ * const credit = new Cesium.Credit('<a href="https://cesium.com/" target="_blank"><img src="/images/cesium_logo.png"  style="vertical-align: -7px" title="Cesium"/></a>');
  * @param html - An string representing an html code snippet
- * @param [showOnScreen = false] - If true, the credit will be visible in the main credit container.  Otherwise, it will appear in a popover
+ * @param [showOnScreen = false] - If true, the credit will be visible in the main credit container.  Otherwise, it will appear in a popover. All credits are displayed `inline`, if you have an image we recommend sizing it correctly to match the text or use css to `vertical-align` it.
  */
 export class Credit {
     constructor(html: string, showOnScreen?: boolean);
@@ -4934,9 +5068,9 @@ export namespace CustomHeightmapTerrainProvider {
  * @param [options.tilingScheme] - The tiling scheme specifying how the ellipsoidal
  * surface is broken into tiles. If this parameter is not provided, a {@link GeographicTilingScheme}
  * is used.
- * @param [options.ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid.  If the tilingScheme is specified,
  * this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
- * parameter is specified, the WGS84 ellipsoid is used.
+ * parameter is specified, the default ellipsoid is used.
  * @param [options.credit] - A credit for the data source, which is displayed on the canvas.
  */
 export class CustomHeightmapTerrainProvider {
@@ -4977,6 +5111,12 @@ export class CustomHeightmapTerrainProvider {
      * value will always be false.
      */
     readonly hasVertexNormals: boolean;
+    /**
+     * Gets an object that can be used to determine availability of terrain from this provider, such as
+     * at points and in rectangles. This property may be undefined if availability
+     * information is not available.
+     */
+    readonly availability: TileAvailability;
     /**
      * Gets the number of columns per heightmap tile.
      */
@@ -5461,7 +5601,7 @@ export namespace EasingFunction {
  * @param options.center - The ellipse's center point in the fixed frame.
  * @param options.semiMajorAxis - The length of the ellipse's semi-major axis in meters.
  * @param options.semiMinorAxis - The length of the ellipse's semi-minor axis in meters.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid the ellipse will be on.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid the ellipse will be on.
  * @param [options.height = 0.0] - The distance in meters between the ellipse and the ellipsoid surface.
  * @param [options.extrudedHeight] - The distance in meters between the ellipse's extruded face and the ellipsoid surface.
  * @param [options.rotation = 0.0] - The angle of rotation counter-clockwise from north.
@@ -5508,7 +5648,7 @@ export class EllipseGeometry {
      * @param options.center - The ellipse's center point in the fixed frame.
      * @param options.semiMajorAxis - The length of the ellipse's semi-major axis in meters.
      * @param options.semiMinorAxis - The length of the ellipse's semi-minor axis in meters.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid the ellipse will be on.
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid the ellipse will be on.
      * @param [options.rotation = 0.0] - The angle of rotation counter-clockwise from north.
      * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The angular distance between points on the ellipse in radians.
      * @param [result] - An object in which to store the result
@@ -5544,7 +5684,7 @@ export class EllipseGeometry {
  * @param options.center - The ellipse's center point in the fixed frame.
  * @param options.semiMajorAxis - The length of the ellipse's semi-major axis in meters.
  * @param options.semiMinorAxis - The length of the ellipse's semi-minor axis in meters.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid the ellipse will be on.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid the ellipse will be on.
  * @param [options.height = 0.0] - The distance in meters between the ellipse and the ellipsoid surface.
  * @param [options.extrudedHeight] - The distance in meters between the ellipse's extruded face and the ellipsoid surface.
  * @param [options.rotation = 0.0] - The angle from north (counter-clockwise) in radians.
@@ -5660,6 +5800,18 @@ export class Ellipsoid {
      * An Ellipsoid instance initialized to a sphere with the lunar radius.
      */
     static readonly MOON: Ellipsoid;
+    /**
+     * The default ellipsoid used when not otherwise specified.
+     * @example
+     * Cesium.Ellipsoid.default = Cesium.Ellipsoid.MOON;
+     *
+     * // Apollo 11 landing site
+     * const position = Cesium.Cartesian3.fromRadians(
+     *   0.67416,
+     *   23.47315,
+     * );
+     */
+    static default: Ellipsoid;
     /**
      * Duplicates an Ellipsoid instance.
      * @param [result] - The object onto which to store the result, or undefined if a new
@@ -5819,6 +5971,13 @@ export class Ellipsoid {
      */
     getSurfaceNormalIntersectionWithZAxis(position: Cartesian3, buffer?: number, result?: Cartesian3): Cartesian3 | undefined;
     /**
+     * Computes the ellipsoid curvatures at a given position on the surface.
+     * @param surfacePosition - The position on the ellipsoid surface where curvatures will be calculated.
+     * @param [result] - The cartesian to which to copy the result, or undefined to create and return a new instance.
+     * @returns The local curvature of the ellipsoid surface at the provided position, in east and north directions.
+     */
+    getLocalCurvature(surfacePosition: Cartesian3, result?: Cartesian2): Cartesian2;
+    /**
      * Computes an approximation of the surface area of a rectangle on the surface of an ellipsoid using
      * Gauss-Legendre 10th order quadrature.
      * @param rectangle - The rectangle used for computing the surface area.
@@ -5831,7 +5990,7 @@ export class Ellipsoid {
  * Initializes a geodesic on the ellipsoid connecting the two provided planetodetic points.
  * @param [start] - The initial planetodetic point on the path.
  * @param [end] - The final planetodetic point on the path.
- * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the geodesic lies.
+ * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the geodesic lies.
  */
 export class EllipsoidGeodesic {
     constructor(start?: Cartographic, end?: Cartographic, ellipsoid?: Ellipsoid);
@@ -6004,7 +6163,7 @@ export class EllipsoidOutlineGeometry {
  * Initializes a rhumb line on the ellipsoid connecting the two provided planetodetic points.
  * @param [start] - The initial planetodetic point on the path.
  * @param [end] - The final planetodetic point on the path.
- * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the rhumb line lies.
+ * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the rhumb line lies.
  */
 export class EllipsoidRhumbLine {
     constructor(start?: Cartographic, end?: Cartographic, ellipsoid?: Ellipsoid);
@@ -6033,7 +6192,7 @@ export class EllipsoidRhumbLine {
      * @param start - The initial planetodetic point on the path.
      * @param heading - The heading in radians.
      * @param distance - The rhumb line distance between the start and end point.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the rhumb line lies.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the rhumb line lies.
      * @param [result] - The object in which to store the result.
      * @returns The EllipsoidRhumbLine object.
      */
@@ -6081,7 +6240,7 @@ export class EllipsoidRhumbLine {
  * If origin is not on the surface of the ellipsoid, it's surface projection will be used.
  * If origin is at the center of the ellipsoid, an exception will be thrown.
  * @param origin - The point on the surface of the ellipsoid where the tangent plane touches.
- * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid to use.
+ * @param [ellipsoid = Ellipsoid.default] - The ellipsoid to use.
  */
 export class EllipsoidTangentPlane {
     constructor(origin: Cartesian3, ellipsoid?: Ellipsoid);
@@ -6113,7 +6272,7 @@ export class EllipsoidTangentPlane {
      * Creates a new instance from the provided ellipsoid and the center
      * point of the provided Cartesians.
      * @param cartesians - The list of positions surrounding the center point.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid to use.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid to use.
      * @returns The new instance of EllipsoidTangentPlane.
      */
     static fromPoints(cartesians: Cartesian3[], ellipsoid?: Ellipsoid): EllipsoidTangentPlane;
@@ -6169,9 +6328,9 @@ export class EllipsoidTangentPlane {
  * @param [options.tilingScheme] - The tiling scheme specifying how the ellipsoidal
  * surface is broken into tiles.  If this parameter is not provided, a {@link GeographicTilingScheme}
  * is used.
- * @param [options.ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid.  If the tilingScheme is specified,
  * this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
- * parameter is specified, the WGS84 ellipsoid is used.
+ * parameter is specified, the default ellipsoid is used.
  */
 export class EllipsoidTerrainProvider {
     constructor(options?: {
@@ -6288,7 +6447,7 @@ export class Event<Listener extends (...args: any[]) => void = (...args: any[]) 
      * Raises the event by calling each registered listener with all supplied arguments.
      * @param arguments - This method takes any number of parameters and passes them through to the listener functions.
      */
-    raiseEvent(...arguments: Parameters<Listener>[]): void;
+    raiseEvent(...arguments: Parameters<Listener>): void;
 }
 
 export namespace Event {
@@ -6568,8 +6727,8 @@ export enum GeocodeType {
 
 export namespace GeocoderService {
     /**
-     * displayName - The display name for a location
-     * destination - The bounding box for a location
+     * @property displayName - The display name for a location
+     * @property destination - The bounding box for a location
      */
     type Result = {
         displayName: string;
@@ -6605,9 +6764,9 @@ export class GeocoderService {
 /**
  * A simple map projection where longitude and latitude are linearly mapped to X and Y by multiplying
  * them by the {@link Ellipsoid#maximumRadius}.  This projection
- * is commonly known as geographic, equirectangular, equidistant cylindrical, or plate carrée.  It
+ * is commonly known as geographic, equirectangular, equidistant cylindrical, or plate carrée. When using the WGS84 ellipsoid, it
  * is also known as EPSG:4326.
- * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid.
+ * @param [ellipsoid = Ellipsoid.default] - The ellipsoid.
  */
 export class GeographicProjection {
     constructor(ellipsoid?: Ellipsoid);
@@ -6646,8 +6805,8 @@ export class GeographicProjection {
  * longitude and latitude are directly mapped to X and Y.  This projection is commonly
  * known as geographic, equirectangular, equidistant cylindrical, or plate carrée.
  * @param [options] - Object with the following properties:
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose surface is being tiled. Defaults to
- * the WGS84 ellipsoid.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid whose surface is being tiled. Defaults to
+ * the default ellipsoid.
  * @param [options.rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the tiling scheme.
  * @param [options.numberOfLevelZeroTilesX = 2] - The number of tiles in the X direction at level zero of
  * the tile tree.
@@ -6796,7 +6955,7 @@ export class Geometry {
      * <ul>
      *    <li><code>position3DHigh</code> - High 32 bits for encoded 64-bit position computed with {@link GeometryPipeline.encodeAttribute}.  32-bit floating-point.  4 components per attribute.</li>
      *    <li><code>position3DLow</code> - Low 32 bits for encoded 64-bit position computed with {@link GeometryPipeline.encodeAttribute}.  32-bit floating-point.  4 components per attribute.</li>
-     *    <li><code>position3DHigh</code> - High 32 bits for encoded 64-bit 2D (Columbus view) position computed with {@link GeometryPipeline.encodeAttribute}.  32-bit floating-point.  4 components per attribute.</li>
+     *    <li><code>position2DHigh</code> - High 32 bits for encoded 64-bit 2D (Columbus view) position computed with {@link GeometryPipeline.encodeAttribute}.  32-bit floating-point.  4 components per attribute.</li>
      *    <li><code>position2DLow</code> - Low 32 bits for encoded 64-bit 2D (Columbus view) position computed with {@link GeometryPipeline.encodeAttribute}.  32-bit floating-point.  4 components per attribute.</li>
      *    <li><code>color</code> - RGBA color (normalized) usually from {@link GeometryInstance#color}.  32-bit floating-point.  4 components per attribute.</li>
      *    <li><code>pickColor</code> - RGBA color used for picking.  32-bit floating-point.  4 components per attribute.</li>
@@ -6814,17 +6973,17 @@ export class Geometry {
      * Optional index data that - along with {@link Geometry#primitiveType} -
      * determines the primitives in the geometry.
      */
-    indices: any[];
+    indices: any[] | undefined;
     /**
      * The type of primitives in the geometry.  This is most often {@link PrimitiveType.TRIANGLES},
      * but can varying based on the specific geometry.
      */
-    primitiveType: PrimitiveType;
+    primitiveType: PrimitiveType | undefined;
     /**
      * An optional bounding sphere that fully encloses the geometry.  This is
      * commonly used for culling.
      */
-    boundingSphere: BoundingSphere;
+    boundingSphere: BoundingSphere | undefined;
     /**
      * Computes the number of vertices in a geometry.  The runtime is linear with
      * respect to the number of attributes in a vertex, not the number of vertices.
@@ -6856,17 +7015,17 @@ export class Geometry {
  *   primitiveType : Cesium.PrimitiveType.LINE_LOOP
  * });
  * @param [options] - Object with the following properties:
- * @param [options.componentDatatype] - The datatype of each component in the attribute, e.g., individual elements in values.
- * @param [options.componentsPerAttribute] - A number between 1 and 4 that defines the number of components in an attributes.
+ * @param options.componentDatatype - The datatype of each component in the attribute, e.g., individual elements in values.
+ * @param options.componentsPerAttribute - A number between 1 and 4 that defines the number of components in an attributes.
  * @param [options.normalize = false] - When <code>true</code> and <code>componentDatatype</code> is an integer format, indicate that the components should be mapped to the range [0, 1] (unsigned) or [-1, 1] (signed) when they are accessed as floating-point for rendering.
- * @param [options.values] - The values for the attributes stored in a typed array.
+ * @param options.values - The values for the attributes stored in a typed array.
  */
 export class GeometryAttribute {
     constructor(options?: {
-        componentDatatype?: ComponentDatatype;
-        componentsPerAttribute?: number;
+        componentDatatype: ComponentDatatype;
+        componentsPerAttribute: number;
         normalize?: boolean;
-        values?: number[] | Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
+        values: number[] | Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
     });
     /**
      * The datatype of each component in the attribute, e.g., individual elements in
@@ -6937,42 +7096,42 @@ export class GeometryAttributes {
      * 64-bit floating-point (for precision).  3 components per attribute.
      * </p>
      */
-    position: GeometryAttribute;
+    position: GeometryAttribute | undefined;
     /**
      * The normal attribute (normalized), which is commonly used for lighting.
      * <p>
      * 32-bit floating-point.  3 components per attribute.
      * </p>
      */
-    normal: GeometryAttribute;
+    normal: GeometryAttribute | undefined;
     /**
      * The 2D texture coordinate attribute.
      * <p>
      * 32-bit floating-point.  2 components per attribute
      * </p>
      */
-    st: GeometryAttribute;
+    st: GeometryAttribute | undefined;
     /**
      * The bitangent attribute (normalized), which is used for tangent-space effects like bump mapping.
      * <p>
      * 32-bit floating-point.  3 components per attribute.
      * </p>
      */
-    bitangent: GeometryAttribute;
+    bitangent: GeometryAttribute | undefined;
     /**
      * The tangent attribute (normalized), which is used for tangent-space effects like bump mapping.
      * <p>
      * 32-bit floating-point.  3 components per attribute.
      * </p>
      */
-    tangent: GeometryAttribute;
+    tangent: GeometryAttribute | undefined;
     /**
      * The color attribute.
      * <p>
      * 8-bit unsigned integer. 4 components per attribute.
      * </p>
      */
-    color: GeometryAttribute;
+    color: GeometryAttribute | undefined;
 }
 
 /**
@@ -7047,7 +7206,7 @@ export class GeometryInstance {
     /**
      * User-defined object returned when the instance is picked or used to get/set per-instance attributes.
      */
-    id: any;
+    id: any | undefined;
     /**
      * Per-instance attributes like {@link ColorGeometryInstanceAttribute} or {@link ShowGeometryInstanceAttribute}.
      * {@link Geometry} attributes varying per vertex; these attributes are constant for the entire instance.
@@ -7307,7 +7466,7 @@ export class GoogleEarthEnterpriseMetadata {
     /**
      * True if imagery is sent as a protocol buffer, false if sent as plain images. If undefined we will try both.
      */
-    protoImagery: boolean;
+    protoImagery: boolean | undefined;
     /**
      * True if terrain is available.
      */
@@ -7460,8 +7619,8 @@ export class GoogleEarthEnterpriseTerrainData {
 export namespace GoogleEarthEnterpriseTerrainProvider {
     /**
      * Initialization options for GoogleEarthEnterpriseTerrainProvider constructor
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         ellipsoid?: Ellipsoid;
@@ -7568,15 +7727,14 @@ export class GoogleEarthEnterpriseTerrainProvider {
 /**
  * Default settings for accessing the Google Maps API.
  * <br/>
- * An API key is only required if you are using any Google Maps APIs, such as {@link createGooglePhotorealistic3DTileset}.
- * A default key is provided for evaluation purposes only.
+ * An API key is only required if you are directly using any Google Maps APIs, such as through {@link createGooglePhotorealistic3DTileset}.
  * Follow instructions for managing API keys for the Google Maps Platform at {@link https://developers.google.com/maps/documentation/embed/get-api-key}
  */
 export namespace GoogleMaps {
     /**
      * Gets or sets the default Google Maps API key.
      */
-    var defaultApiKey: string;
+    var defaultApiKey: undefined | string;
     /**
      * Gets or sets the default Google Map Tiles API endpoint.
      */
@@ -7695,7 +7853,7 @@ export class GroundPolylineGeometry {
 
 /**
  * Defines a heading angle, pitch angle, and range in a local frame.
- * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
+ * Heading is the rotation from the local east direction where a positive angle is increasing southward.
  * Pitch is the rotation from the local xy-plane. Positive pitch angles are above the plane. Negative pitch
  * angles are below the plane. Range is the distance from the center of the frame.
  * @param [heading = 0.0] - The heading angle in radians.
@@ -7705,7 +7863,7 @@ export class GroundPolylineGeometry {
 export class HeadingPitchRange {
     constructor(heading?: number, pitch?: number, range?: number);
     /**
-     * Heading is the rotation from the local north direction where a positive angle is increasing eastward.
+     * Heading is the rotation from the local east direction where a positive angle is increasing southward.
      */
     heading: number;
     /**
@@ -10673,8 +10831,8 @@ export class Matrix4 implements ArrayLike<number> {
      * Computes a Matrix4 instance representing an off center perspective transformation.
      * @param left - The number of meters to the left of the camera that will be in view.
      * @param right - The number of meters to the right of the camera that will be in view.
-     * @param bottom - The number of meters below of the camera that will be in view.
-     * @param top - The number of meters above of the camera that will be in view.
+     * @param bottom - The number of meters below the camera that will be in view.
+     * @param top - The number of meters above the camera that will be in view.
      * @param near - The distance to the near plane in meters.
      * @param far - The distance to the far plane in meters.
      * @param result - The object in which the result will be stored.
@@ -11545,7 +11703,7 @@ export class Occluder {
     /**
      * Computes a point that can be used as the occludee position to the visibility functions from a rectangle.
      * @param rectangle - The rectangle used to create a bounding sphere.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid used to determine positions of the rectangle.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid used to determine positions of the rectangle.
      * @returns An object containing two attributes: <code>occludeePoint</code> and <code>valid</code>
      * which is a boolean value.
      */
@@ -11663,7 +11821,7 @@ export class OrientedBoundingBox {
      * @param rectangle - The cartographic rectangle on the surface of the ellipsoid.
      * @param [minimumHeight = 0.0] - The minimum height (elevation) within the tile.
      * @param [maximumHeight = 0.0] - The maximum height (elevation) within the tile.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the rectangle is defined.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid on which the rectangle is defined.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new OrientedBoundingBox instance if none was provided.
      */
@@ -11836,11 +11994,11 @@ export class OrthographicFrustum {
     /**
      * The horizontal width of the frustum in meters.
      */
-    width: number;
+    width: number | undefined;
     /**
      * The aspect ratio of the frustum's width to it's height.
      */
-    aspectRatio: number;
+    aspectRatio: number | undefined;
     /**
      * The distance of the near plane.
      */
@@ -11959,19 +12117,19 @@ export class OrthographicOffCenterFrustum {
     /**
      * The left clipping plane.
      */
-    left: number;
+    left: number | undefined;
     /**
      * The right clipping plane.
      */
-    right: number;
+    right: number | undefined;
     /**
      * The top clipping plane.
      */
-    top: number;
+    top: number | undefined;
     /**
      * The bottom clipping plane.
      */
-    bottom: number;
+    bottom: number | undefined;
     /**
      * The distance of the near plane.
      */
@@ -12161,11 +12319,11 @@ export class PerspectiveFrustum {
      * as the horizontal FOV if the width is greater than the height, otherwise
      * it will be the vertical FOV.
      */
-    fov: number;
+    fov: number | undefined;
     /**
      * The aspect ratio of the frustum's width to it's height.
      */
-    aspectRatio: number;
+    aspectRatio: number | undefined;
     /**
      * The distance of the near plane.
      */
@@ -12204,6 +12362,7 @@ export class PerspectiveFrustum {
     static unpack(array: number[], startingIndex?: number, result?: PerspectiveFrustum): PerspectiveFrustum;
     /**
      * Gets the perspective projection matrix computed from the view frustum.
+     * If necessary, the projection matrix will be recomputed.
      */
     readonly projectionMatrix: Matrix4;
     /**
@@ -12213,7 +12372,7 @@ export class PerspectiveFrustum {
     /**
      * Gets the angle of the vertical field of view, in radians.
      */
-    readonly fovy: number;
+    readonly fovy: number | undefined;
     /**
      * Creates a culling volume for this frustum.
      * @example
@@ -12309,19 +12468,19 @@ export class PerspectiveOffCenterFrustum {
     /**
      * Defines the left clipping plane.
      */
-    left: number;
+    left: number | undefined;
     /**
      * Defines the right clipping plane.
      */
-    right: number;
+    right: number | undefined;
     /**
      * Defines the top clipping plane.
      */
-    top: number;
+    top: number | undefined;
     /**
      * Defines the bottom clipping plane.
      */
-    bottom: number;
+    bottom: number | undefined;
     /**
      * The distance of the near plane.
      */
@@ -12332,6 +12491,7 @@ export class PerspectiveOffCenterFrustum {
     far: number;
     /**
      * Gets the perspective projection matrix computed from the view frustum.
+     * The projection matrix will be recomputed if any frustum parameters have changed.
      */
     readonly projectionMatrix: Matrix4;
     /**
@@ -12790,7 +12950,7 @@ export class PlaneOutlineGeometry {
  * @param [options.extrudedHeight] - The distance in meters between the polygon's extruded face and the ellipsoid surface.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
  * @param [options.stRotation = 0.0] - The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.perPositionHeight = false] - Use the height of options.positions for each position instead of using options.height to determine the height.
  * @param [options.closeTop = true] - When false, leaves off the top of an extruded polygon open.
@@ -12837,7 +12997,7 @@ export class PolygonGeometry {
      * @param [options.extrudedHeight] - The height of the polygon extrusion.
      * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
      * @param [options.stRotation = 0.0] - The rotation of the texture coordinates, in radians. A positive rotation is counter-clockwise.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
      * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
      * @param [options.perPositionHeight = false] - Use the height of options.positions for each position instead of using options.height to determine the height.
      * @param [options.closeTop = true] - When false, leaves off the top of an extruded polygon open.
@@ -12877,28 +13037,12 @@ export class PolygonGeometry {
     /**
      * Computes a rectangle which encloses the polygon defined by the list of positions, including cases over the international date line and the poles.
      * @param positions - A linear ring defining the outer boundary of the polygon.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
      * @param [arcType = ArcType.GEODESIC] - The type of line the polygon edges must follow. Valid options are {@link ArcType.GEODESIC} and {@link ArcType.RHUMB}.
      * @param [result] - An object in which to store the result.
      * @returns The result rectangle
      */
     static computeRectangleFromPositions(positions: Cartesian3[], ellipsoid?: Ellipsoid, arcType?: ArcType, result?: Rectangle): Rectangle;
-    /**
-     * Returns the bounding rectangle given the provided options
-     * @param options - Object with the following properties:
-     * @param options.polygonHierarchy - A polygon hierarchy that can include holes.
-     * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions sampled.
-     * @param [options.arcType = ArcType.GEODESIC] - The type of line the polygon edges must follow. Valid options are {@link ArcType.GEODESIC} and {@link ArcType.RHUMB}.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
-     * @param [result] - An object in which to store the result.
-     * @returns The result rectangle
-     */
-    static computeRectangle(options: {
-        polygonHierarchy: PolygonHierarchy;
-        granularity?: number;
-        arcType?: ArcType;
-        ellipsoid?: Ellipsoid;
-    }, result?: Rectangle): Rectangle;
     /**
      * Computes the geometric representation of a polygon, including its vertices, indices, and a bounding sphere.
      * @param polygonGeometry - A description of the polygon.
@@ -12998,7 +13142,7 @@ export class PolygonHierarchy {
  * @param [options.height = 0.0] - The distance in meters between the polygon and the ellipsoid surface.
  * @param [options.extrudedHeight] - The distance in meters between the polygon's extruded face and the ellipsoid surface.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.perPositionHeight = false] - Use the height of options.positions for each position instead of using options.height to determine the height.
  * @param [options.arcType = ArcType.GEODESIC] - The type of path the outline must follow. Valid options are {@link ArcType.GEODESIC} and {@link ArcType.RHUMB}.
@@ -13052,7 +13196,7 @@ export class PolygonOutlineGeometry {
      * @param options.positions - An array of positions that defined the corner points of the polygon.
      * @param [options.height = 0.0] - The height of the polygon.
      * @param [options.extrudedHeight] - The height of the polygon extrusion.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
      * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
      * @param [options.perPositionHeight = false] - Use the height of options.positions for each position instead of using options.height to determine the height.
      * @param [options.arcType = ArcType.GEODESIC] - The type of path the outline must follow. Valid options are {@link LinkType.GEODESIC} and {@link ArcType.RHUMB}.
@@ -13097,7 +13241,7 @@ export class PolygonOutlineGeometry {
  * @param [options.arcType = ArcType.GEODESIC] - The type of line the polyline segments must follow.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude if options.arcType is not ArcType.NONE. Determines the number of positions in the buffer.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  */
 export class PolylineGeometry {
     constructor(options: {
@@ -13161,7 +13305,7 @@ export class PolylineGeometry {
  * @param options - Object with the following properties:
  * @param options.polylinePositions - An array of {@link Cartesian3} positions that define the center of the polyline volume.
  * @param options.shapePositions - An array of {@link Cartesian2} positions that define the shape to be extruded along the polyline
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
  * @param [options.cornerType = CornerType.ROUNDED] - Determines the style of the corners.
@@ -13225,7 +13369,7 @@ export class PolylineVolumeGeometry {
  * @param options - Object with the following properties:
  * @param options.polylinePositions - An array of positions that define the center of the polyline volume.
  * @param options.shapePositions - An array of positions that define the shape to be extruded along the polyline
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.cornerType = CornerType.ROUNDED] - Determines the style of the corners.
  */
@@ -14085,11 +14229,19 @@ export class Rectangle {
     /**
      * Creates the smallest possible Rectangle that encloses all positions in the provided array.
      * @param cartesians - The list of Cartesian instances.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid the cartesians are on.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid the cartesians are on.
      * @param [result] - The object onto which to store the result, or undefined if a new instance should be created.
      * @returns The modified result parameter or a new Rectangle instance if none was provided.
      */
     static fromCartesianArray(cartesians: Cartesian3[], ellipsoid?: Ellipsoid, result?: Rectangle): Rectangle;
+    /**
+     * Create a rectangle from a bounding sphere, ignoring height.
+     * @param boundingSphere - The bounding sphere.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid.
+     * @param [result] - The object onto which to store the result, or undefined if a new instance should be created.
+     * @returns The modified result parameter or a new Rectangle instance if none was provided.
+     */
+    static fromBoundingSphere(boundingSphere: BoundingSphere, ellipsoid?: Ellipsoid, result?: Rectangle): Rectangle;
     /**
      * Duplicates a Rectangle.
      * @param rectangle - The rectangle to clone.
@@ -14228,7 +14380,7 @@ export class Rectangle {
      * {@link BoundingSphere#fromPoints}.  Sampling is necessary to account
      * for rectangles that cover the poles or cross the equator.
      * @param rectangle - The rectangle to subsample.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid to use.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid to use.
      * @param [surfaceHeight = 0.0] - The height of the rectangle above the ellipsoid.
      * @param [result] - The array of Cartesians onto which to store the result.
      * @returns The modified result parameter or a new Array of Cartesians instances if none was provided.
@@ -14256,7 +14408,7 @@ export class Rectangle {
  * @example
  * // 1. create a rectangle
  * const rectangle = new Cesium.RectangleGeometry({
- *   ellipsoid : Cesium.Ellipsoid.WGS84,
+ *   ellipsoid : Cesium.Ellipsoid.default,
  *   rectangle : Cesium.Rectangle.fromDegrees(-80.0, 39.0, -74.0, 42.0),
  *   height : 10000.0
  * });
@@ -14264,7 +14416,7 @@ export class Rectangle {
  *
  * // 2. create an extruded rectangle without a top
  * const rectangle = new Cesium.RectangleGeometry({
- *   ellipsoid : Cesium.Ellipsoid.WGS84,
+ *   ellipsoid : Cesium.Ellipsoid.default,
  *   rectangle : Cesium.Rectangle.fromDegrees(-80.0, 39.0, -74.0, 42.0),
  *   height : 10000.0,
  *   extrudedHeight: 300000
@@ -14273,7 +14425,7 @@ export class Rectangle {
  * @param options - Object with the following properties:
  * @param options.rectangle - A cartographic rectangle with north, south, east and west properties in radians.
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the rectangle lies.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid on which the rectangle lies.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.height = 0.0] - The distance in meters between the rectangle and the ellipsoid surface.
  * @param [options.rotation = 0.0] - The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
@@ -14315,7 +14467,7 @@ export class RectangleGeometry {
      * Computes the bounding rectangle based on the provided options
      * @param options - Object with the following properties:
      * @param options.rectangle - A cartographic rectangle with north, south, east and west properties in radians.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the rectangle lies.
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid on which the rectangle lies.
      * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
      * @param [options.rotation = 0.0] - The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
      * @param [result] - An object in which to store the result.
@@ -14346,7 +14498,7 @@ export class RectangleGeometry {
  * const geometry = Cesium.RectangleOutlineGeometry.createGeometry(rectangle);
  * @param options - Object with the following properties:
  * @param options.rectangle - A cartographic rectangle with north, south, east and west properties in radians.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid on which the rectangle lies.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid on which the rectangle lies.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
  * @param [options.height = 0.0] - The distance in meters between the rectangle and the ellipsoid surface.
  * @param [options.rotation = 0.0] - The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
@@ -14614,15 +14766,15 @@ export enum RequestType {
 export namespace Resource {
     /**
      * Initialization options for the Resource constructor
-     * url - The url of the resource.
-     * [queryParameters] - An object containing query parameters that will be sent when retrieving the resource.
-     * [templateValues] - Key/Value pairs that are used to replace template values (eg. {x}).
-     * [headers = {}] - Additional HTTP headers that will be sent.
-     * [proxy] - A proxy to be used when loading the resource.
-     * [retryCallback] - The Function to call when a request for this resource fails. If it returns true, the request will be retried.
-     * [retryAttempts = 0] - The number of times the retryCallback should be called before giving up.
-     * [request] - A Request object that will be used. Intended for internal use only.
-     * [parseUrl = true] - If true, parse the url for query parameters; otherwise store the url without change
+     * @property url - The url of the resource.
+     * @property [queryParameters] - An object containing query parameters that will be sent when retrieving the resource.
+     * @property [templateValues] - Key/Value pairs that are used to replace template values (eg. {x}).
+     * @property [headers = {}] - Additional HTTP headers that will be sent.
+     * @property [proxy] - A proxy to be used when loading the resource.
+     * @property [retryCallback] - The Function to call when a request for this resource fails. If it returns true, the request will be retried.
+     * @property [retryAttempts = 0] - The number of times the retryCallback should be called before giving up.
+     * @property [request] - A Request object that will be used. Intended for internal use only.
+     * @property [parseUrl = true] - If true, parse the url for query parameters; otherwise store the url without change
      */
     type ConstructorOptions = {
         url: string;
@@ -15744,7 +15896,7 @@ export namespace Simon1994PlanetaryPositions {
     function computeSunPositionInEarthInertialFrame(julianDate?: JulianDate, result?: Cartesian3): Cartesian3;
     /**
      * Computes the position of the Moon in the Earth-centered inertial frame
-     * @param [julianDate] - The time at which to compute the Sun's position, if not provided the current system time is used.
+     * @param [julianDate] - The time at which to compute the Moon's position, if not provided the current system time is used.
      * @param [result] - The object onto which to store the result.
      * @returns Calculated moon position
      */
@@ -15770,7 +15922,7 @@ export namespace Simon1994PlanetaryPositions {
  * @param [options.colorsPerVertex = false] - A boolean that determines whether the colors will be flat across each segment of the line or interpolated across the vertices.
  * @param [options.arcType = ArcType.GEODESIC] - The type of line the polyline segments must follow.
  * @param [options.granularity = Math.RADIANS_PER_DEGREE] - The distance, in radians, between each latitude and longitude if options.arcType is not ArcType.NONE. Determines the number of positions in the buffer.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid to be used as a reference.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid to be used as a reference.
  */
 export class SimplePolylineGeometry {
     constructor(options: {
@@ -17010,7 +17162,7 @@ export namespace Transforms {
      * Computes a 4x4 transformation matrix from a reference frame
      * centered at the provided origin to the provided ellipsoid's fixed reference frame.
      * @param origin - The center point of the local reference frame.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [result] - The object onto which to store the result.
      */
     type LocalFrameToFixedFrame = (origin: Cartesian3, ellipsoid?: Ellipsoid, result?: Matrix4) => Matrix4;
@@ -17028,7 +17180,7 @@ export namespace Transforms {
      * const center = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
      * @param origin - The center point of the local reference frame.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new Matrix4 instance if none was provided.
      */
@@ -17047,7 +17199,7 @@ export namespace Transforms {
      * const center = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const transform = Cesium.Transforms.northEastDownToFixedFrame(center);
      * @param origin - The center point of the local reference frame.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new Matrix4 instance if none was provided.
      */
@@ -17066,7 +17218,7 @@ export namespace Transforms {
      * const center = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const transform = Cesium.Transforms.northUpEastToFixedFrame(center);
      * @param origin - The center point of the local reference frame.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new Matrix4 instance if none was provided.
      */
@@ -17085,14 +17237,14 @@ export namespace Transforms {
      * const center = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const transform = Cesium.Transforms.northWestUpToFixedFrame(center);
      * @param origin - The center point of the local reference frame.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new Matrix4 instance if none was provided.
      */
     function northWestUpToFixedFrame(origin: Cartesian3, ellipsoid?: Ellipsoid, result?: Matrix4): Matrix4;
     /**
      * Computes a 4x4 transformation matrix from a reference frame with axes computed from the heading-pitch-roll angles
-     * centered at the provided origin to the provided ellipsoid's fixed reference frame. Heading is the rotation from the local north
+     * centered at the provided origin to the provided ellipsoid's fixed reference frame. Heading is the rotation from the local east
      * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
      * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
      * @example
@@ -17105,7 +17257,7 @@ export namespace Transforms {
      * const transform = Cesium.Transforms.headingPitchRollToFixedFrame(center, hpr);
      * @param origin - The center point of the local reference frame.
      * @param headingPitchRoll - The heading, pitch, and roll.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [fixedFrameTransform = Transforms.eastNorthUpToFixedFrame] - A 4x4 transformation
      *  matrix from a reference frame to the provided ellipsoid's fixed reference frame
      * @param [result] - The object onto which to store the result.
@@ -17114,7 +17266,7 @@ export namespace Transforms {
     function headingPitchRollToFixedFrame(origin: Cartesian3, headingPitchRoll: HeadingPitchRoll, ellipsoid?: Ellipsoid, fixedFrameTransform?: Transforms.LocalFrameToFixedFrame, result?: Matrix4): Matrix4;
     /**
      * Computes a quaternion from a reference frame with axes computed from the heading-pitch-roll angles
-     * centered at the provided origin. Heading is the rotation from the local north
+     * centered at the provided origin. Heading is the rotation from the local east
      * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
      * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
      * @example
@@ -17127,7 +17279,7 @@ export namespace Transforms {
      * const quaternion = Cesium.Transforms.headingPitchRollQuaternion(center, hpr);
      * @param origin - The center point of the local reference frame.
      * @param headingPitchRoll - The heading, pitch, and roll.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [fixedFrameTransform = Transforms.eastNorthUpToFixedFrame] - A 4x4 transformation
      *  matrix from a reference frame to the provided ellipsoid's fixed reference frame
      * @param [result] - The object onto which to store the result.
@@ -17135,17 +17287,32 @@ export namespace Transforms {
      */
     function headingPitchRollQuaternion(origin: Cartesian3, headingPitchRoll: HeadingPitchRoll, ellipsoid?: Ellipsoid, fixedFrameTransform?: Transforms.LocalFrameToFixedFrame, result?: Quaternion): Quaternion;
     /**
-     * Computes heading-pitch-roll angles from a transform in a particular reference frame. Heading is the rotation from the local north
+     * Computes heading-pitch-roll angles from a transform in a particular reference frame. Heading is the rotation from the local east
      * direction where a positive angle is increasing eastward. Pitch is the rotation from the local east-north plane. Positive pitch angles
      * are above the plane. Negative pitch angles are below the plane. Roll is the first rotation applied about the local east axis.
      * @param transform - The transform
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [fixedFrameTransform = Transforms.eastNorthUpToFixedFrame] - A 4x4 transformation
      *  matrix from a reference frame to the provided ellipsoid's fixed reference frame
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new HeadingPitchRoll instance if none was provided.
      */
     function fixedFrameToHeadingPitchRoll(transform: Matrix4, ellipsoid?: Ellipsoid, fixedFrameTransform?: Transforms.LocalFrameToFixedFrame, result?: HeadingPitchRoll): HeadingPitchRoll;
+    /**
+     * The default function to compute a rotation matrix to transform a point or vector from the International Celestial
+     * Reference Frame (GCRF/ICRF) inertial frame axes to the central body, typically Earth, fixed frame axis at a given
+     * time for use in lighting and transformation from inertial reference frames. This function may return undefined if
+     * the data necessary to do the transformation is not yet loaded.
+     * @example
+     * // Set the default ICRF to fixed transformation to that of the Moon.
+     * Cesium.Transforms.computeIcrfToCentralBodyFixedMatrix = Cesium.Transforms.computeIcrfToMoonFixedMatrix;
+     * @param date - The time at which to compute the rotation matrix.
+     * @param [result] - The object onto which to store the result.  If this parameter is
+     *                  not specified, a new instance is created and returned.
+     * @returns The rotation matrix, or undefined if the data necessary to do the
+     *                   transformation is not yet loaded.
+     */
+    function computeIcrfToCentralBodyFixedMatrix(date: JulianDate, result?: Matrix3): Matrix3 | undefined;
     /**
      * Computes a rotation matrix to transform a point or vector from True Equator Mean Equinox (TEME) axes to the
      * pseudo-fixed axes at a given time.  This method treats the UT1 time standard as equivalent to UTC.
@@ -17199,7 +17366,39 @@ export namespace Transforms {
      * @returns The rotation matrix, or undefined if the data necessary to do the
      *                   transformation is not yet loaded.
      */
-    function computeIcrfToFixedMatrix(date: JulianDate, result?: Matrix3): Matrix3;
+    function computeIcrfToFixedMatrix(date: JulianDate, result?: Matrix3): Matrix3 | undefined;
+    /**
+     * Computes a rotation matrix to transform a point or vector from the Moon-Fixed frame axes
+     * to the International Celestial Reference Frame (GCRF/ICRF) inertial frame axes
+     * at a given time.
+     * @example
+     * // Transform a point from the Fixed axes to the ICRF axes.
+     * const now = Cesium.JulianDate.now();
+     * const pointInFixed = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
+     * const fixedToIcrf = Cesium.Transforms.computeMoonFixedToIcrfMatrix(now);
+     * let pointInInertial = new Cesium.Cartesian3();
+     * if (Cesium.defined(fixedToIcrf)) {
+     *     pointInInertial = Cesium.Matrix3.multiplyByVector(fixedToIcrf, pointInFixed, pointInInertial);
+     * }
+     * @param date - The time at which to compute the rotation matrix.
+     * @param [result] - The object onto which to store the result.  If this parameter is
+     *                  not specified, a new instance is created and returned.
+     * @returns The rotation matrix.
+     */
+    function computeMoonFixedToIcrfMatrix(date: JulianDate, result?: Matrix3): Matrix3;
+    /**
+     * Computes a rotation matrix to transform a point or vector from the International Celestial
+     * Reference Frame (GCRF/ICRF) inertial frame axes to the Moon-Fixed frame axes
+     * at a given time.
+     * @example
+     * // Set the default ICRF to fixed transformation to that of the Moon.
+     * Cesium.Transforms.computeIcrfToCentralBodyFixedMatrix = Cesium.Transforms.computeIcrfToMoonFixedMatrix;
+     * @param date - The time at which to compute the rotation matrix.
+     * @param [result] - The object onto which to store the result.  If this parameter is
+     *                  not specified, a new instance is created and returned.
+     * @returns The rotation matrix.
+     */
+    function computeIcrfToMoonFixedMatrix(date: JulianDate, result?: Matrix3): Matrix3;
     /**
      * Computes a rotation matrix to transform a point or vector from the Earth-Fixed frame axes (ITRF)
      * to the International Celestial Reference Frame (GCRF/ICRF) inertial frame axes
@@ -17220,7 +17419,7 @@ export namespace Transforms {
      * @returns The rotation matrix, or undefined if the data necessary to do the
      *                   transformation is not yet loaded.
      */
-    function computeFixedToIcrfMatrix(date: JulianDate, result?: Matrix3): Matrix3;
+    function computeFixedToIcrfMatrix(date: JulianDate, result?: Matrix3): Matrix3 | undefined;
     /**
      * Transform a point from model coordinates to window coordinates.
      * @param modelViewProjectionMatrix - The 4x4 model-view-projection matrix.
@@ -17234,7 +17433,7 @@ export namespace Transforms {
      * Transform a position and velocity to a rotation matrix.
      * @param position - The position to transform.
      * @param velocity - The velocity vector to transform.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose fixed frame is used in the transformation.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid whose fixed frame is used in the transformation.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new Matrix3 instance if none was provided.
      */
@@ -17351,8 +17550,8 @@ export namespace TrustedServers {
 export namespace VRTheWorldTerrainProvider {
     /**
      * Initialization options for the VRTheWorldTerrainProvider constructor
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         ellipsoid?: Ellipsoid;
@@ -17664,7 +17863,7 @@ export enum Visibility {
  *        wall at <code>positions</code>. If undefined, the height of each position in used.
  * @param [options.minimumHeights] - An array parallel to <code>positions</code> that give the minimum height of the
  *        wall at <code>positions</code>. If undefined, the height at each position is 0.0.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid for coordinate manipulation
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid for coordinate manipulation
  * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
  */
 export class WallGeometry {
@@ -17719,7 +17918,7 @@ export class WallGeometry {
      *        wall at <code>positions</code>. If undefined, the height of each position in used.
      * @param [options.minimumHeight] - A constant that defines the minimum height of the
      *        wall at <code>positions</code>. If undefined, the height at each position is 0.0.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid for coordinate manipulation
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid for coordinate manipulation
      * @param [options.vertexFormat = VertexFormat.DEFAULT] - The vertex attributes to be computed.
      */
     static fromConstantHeights(options: {
@@ -17759,7 +17958,7 @@ export class WallGeometry {
  *        wall at <code>positions</code>. If undefined, the height of each position in used.
  * @param [options.minimumHeights] - An array parallel to <code>positions</code> that give the minimum height of the
  *        wall at <code>positions</code>. If undefined, the height at each position is 0.0.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid for coordinate manipulation
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid for coordinate manipulation
  */
 export class WallOutlineGeometry {
     constructor(options: {
@@ -17812,7 +18011,7 @@ export class WallOutlineGeometry {
      *        wall at <code>positions</code>. If undefined, the height of each position in used.
      * @param [options.minimumHeight] - A constant that defines the minimum height of the
      *        wall at <code>positions</code>. If undefined, the height at each position is 0.0.
-     * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid for coordinate manipulation
+     * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid for coordinate manipulation
      */
     static fromConstantHeights(options: {
         positions: Cartesian3[];
@@ -17893,8 +18092,8 @@ export class WebMercatorProjection {
  * A tiling scheme for geometry referenced to a {@link WebMercatorProjection}, EPSG:3857.  This is
  * the tiling scheme used by Google Maps, Microsoft Bing Maps, and most of ESRI ArcGIS Online.
  * @param [options] - Object with the following properties:
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid whose surface is being tiled. Defaults to
- * the WGS84 ellipsoid.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid whose surface is being tiled. Defaults to
+ * the default ellipsoid.
  * @param [options.numberOfLevelZeroTilesX = 1] - The number of tiles in the X direction at level zero of
  *        the tile tree.
  * @param [options.numberOfLevelZeroTilesY = 1] - The number of tiles in the Y direction at level zero of
@@ -18107,6 +18306,36 @@ export function combine(object1?: any, object2?: any, deep?: boolean): any;
  * this.guid = Cesium.createGuid();
  */
 export function createGuid(): string;
+
+/**
+ * Creates a {@link CesiumTerrainProvider} instance for the {@link https://cesium.com/content/#cesium-world-bathymetry|Cesium World Bathymetry}.
+ * @example
+ * // Create Cesium World Bathymetry with default settings
+ * try {
+ *   const viewer = new Cesium.Viewer("cesiumContainer", {
+ *     terrainProvider: await Cesium.createWorldBathymetryAsync();
+ *   });
+ * } catch (error) {
+ *   console.log(error);
+ * }
+ * @example
+ * // Create Cesium World Bathymetry with normals.
+ * try {
+ *   const viewer1 = new Cesium.Viewer("cesiumContainer", {
+ *     terrainProvider: await Cesium.createWorldBathymetryAsync({
+ *       requestVertexNormals: true
+ *     });
+ *   });
+ * } catch (error) {
+ *   console.log(error);
+ * }
+ * @param [options] - Object with the following properties:
+ * @param [options.requestVertexNormals = false] - Flag that indicates if the client should request additional lighting information from the server if available.
+ * @returns A promise that resolves to the created CesiumTerrainProvider
+ */
+export function createWorldBathymetryAsync(options?: {
+    requestVertexNormals?: boolean;
+}): Promise<CesiumTerrainProvider>;
 
 /**
  * Creates a {@link CesiumTerrainProvider} instance for the {@link https://cesium.com/content/#cesium-world-terrain|Cesium World Terrain}.
@@ -18374,7 +18603,7 @@ export function queryToObject(queryString: string): any;
  * @param terrainProvider - The terrain provider from which to query heights.
  * @param level - The terrain level-of-detail from which to query terrain heights.
  * @param positions - The positions to update with terrain heights.
- * @param [rejectOnTileFail = false] - If true, for a failed terrain tile request the promise will be rejected. If false, returned heights will be undefined.
+ * @param [rejectOnTileFail = false] - If true, for any failed terrain tile requests, the promise will be rejected. If false, returned heights will be undefined.
  * @returns A promise that resolves to the provided list of positions when terrain the query has completed.
  */
 export function sampleTerrain(terrainProvider: TerrainProvider, level: number, positions: Cartographic[], rejectOnTileFail?: boolean): Promise<Cartographic[]>;
@@ -18405,6 +18634,18 @@ export function sampleTerrain(terrainProvider: TerrainProvider, level: number, p
  *                                     promise will reject if the terrain provider's `availability` property is undefined.
  */
 export function sampleTerrainMostDetailed(terrainProvider: TerrainProvider, positions: Cartographic[], rejectOnTileFail?: boolean): Promise<Cartographic[]>;
+
+/**
+ * Converts the value from sRGB color space to linear color space.
+ * @example
+ * const srgbColor = [0.5, 0.5, 0.5];
+ * const linearColor = srgbColor.map(function (c) {
+ *     return Cesium.srgbToLinear(c);
+ * });
+ * @param value - The color value in sRGB color space.
+ * @returns Returns the color value in linear color space.
+ */
+export function srgbToLinear(value: number): number;
 
 /**
  * Subdivides an array into a number of smaller, equal sized arrays.
@@ -18446,26 +18687,27 @@ export function writeTextToCanvas(text: string, options?: {
 export namespace BillboardGraphics {
     /**
      * Initialization options for the BillboardGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the billboard.
-     * [image] - A Property specifying the Image, URI, or Canvas to use for the billboard.
-     * [scale = 1.0] - A numeric Property specifying the scale to apply to the image size.
-     * [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} Property specifying the pixel offset.
-     * [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the eye offset.
-     * [horizontalOrigin = HorizontalOrigin.CENTER] - A Property specifying the {@link HorizontalOrigin}.
-     * [verticalOrigin = VerticalOrigin.CENTER] - A Property specifying the {@link VerticalOrigin}.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [color = Color.WHITE] - A Property specifying the tint {@link Color} of the image.
-     * [rotation = 0] - A numeric Property specifying the rotation about the alignedAxis.
-     * [alignedAxis = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the unit vector axis of rotation.
-     * [sizeInMeters] - A boolean Property specifying whether this billboard's size should be measured in meters.
-     * [width] - A numeric Property specifying the width of the billboard in pixels, overriding the native size.
-     * [height] - A numeric Property specifying the height of the billboard in pixels, overriding the native size.
-     * [scaleByDistance] - A {@link NearFarScalar} Property used to scale the point based on distance from the camera.
-     * [translucencyByDistance] - A {@link NearFarScalar} Property used to set translucency based on distance from the camera.
-     * [pixelOffsetScaleByDistance] - A {@link NearFarScalar} Property used to set pixelOffset based on distance from the camera.
-     * [imageSubRegion] - A Property specifying a {@link BoundingRectangle} that defines a sub-region of the image to use for the billboard, rather than the entire image, measured in pixels from the bottom-left.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this billboard will be displayed.
-     * [disableDepthTestDistance] - A Property specifying the distance from the camera at which to disable the depth test to.
+     * @property [show = true] - A boolean Property specifying the visibility of the billboard.
+     * @property [image] - A Property specifying the Image, URI, or Canvas to use for the billboard.
+     * @property [scale = 1.0] - A numeric Property specifying the scale to apply to the image size.
+     * @property [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} Property specifying the pixel offset.
+     * @property [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the eye offset.
+     * @property [horizontalOrigin = HorizontalOrigin.CENTER] - A Property specifying the {@link HorizontalOrigin}.
+     * @property [verticalOrigin = VerticalOrigin.CENTER] - A Property specifying the {@link VerticalOrigin}.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [color = Color.WHITE] - A Property specifying the tint {@link Color} of the image.
+     * @property [rotation = 0] - A numeric Property specifying the rotation about the alignedAxis.
+     * @property [alignedAxis = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the unit vector axis of rotation.
+     * @property [sizeInMeters] - A boolean Property specifying whether this billboard's size should be measured in meters.
+     * @property [width] - A numeric Property specifying the width of the billboard in pixels, overriding the native size.
+     * @property [height] - A numeric Property specifying the height of the billboard in pixels, overriding the native size.
+     * @property [scaleByDistance] - A {@link NearFarScalar} Property used to scale the point based on distance from the camera.
+     * @property [translucencyByDistance] - A {@link NearFarScalar} Property used to set translucency based on distance from the camera.
+     * @property [pixelOffsetScaleByDistance] - A {@link NearFarScalar} Property used to set pixelOffset based on distance from the camera.
+     * @property [imageSubRegion] - A Property specifying a {@link BoundingRectangle} that defines a sub-region of the image to use for the billboard, rather than the entire image, measured in pixels from the bottom-left.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this billboard will be displayed.
+     * @property [disableDepthTestDistance] - A Property specifying the distance from the camera at which to disable the depth test to.
+     * @property [splitDirection] - A Property specifying the {@link SplitDirection} of the billboard.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -18488,6 +18730,7 @@ export namespace BillboardGraphics {
         imageSubRegion?: Property | BoundingRectangle;
         distanceDisplayCondition?: Property | DistanceDisplayCondition;
         disableDepthTestDistance?: Property | number;
+        splitDirection?: Property | SplitDirection;
     };
 }
 
@@ -18655,6 +18898,10 @@ export class BillboardGraphics {
      */
     disableDepthTestDistance: Property | undefined;
     /**
+     * Gets or sets the Property specifying the {@link SplitDirection} of this billboard.
+     */
+    splitDirection: Property | undefined;
+    /**
      * Duplicates this instance.
      * @param [result] - The object onto which to store the result.
      * @returns The modified result parameter or a new instance if one was not provided.
@@ -18718,16 +18965,16 @@ export class BoxGeometryUpdater {
 export namespace BoxGraphics {
     /**
      * Initialization options for the BoxGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the box.
-     * [dimensions] - A {@link Cartesian3} Property specifying the length, width, and height of the box.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height from the entity position is relative to.
-     * [fill = true] - A boolean Property specifying whether the box is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the box.
-     * [outline = false] - A boolean Property specifying whether the box is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the box casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this box will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the box.
+     * @property [dimensions] - A {@link Cartesian3} Property specifying the length, width, and height of the box.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height from the entity position is relative to.
+     * @property [fill = true] - A boolean Property specifying whether the box is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the box.
+     * @property [outline = false] - A boolean Property specifying whether the box is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the box casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this box will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -18812,6 +19059,67 @@ export class BoxGraphics {
 }
 
 /**
+ * A {@link PositionProperty} whose value is lazily evaluated by a callback function.
+ * @param callback - The function to be called when the position property is evaluated.
+ * @param isConstant - <code>true</code> when the callback function returns the same value every time, <code>false</code> if the value will change.
+ * @param [referenceFrame = ReferenceFrame.FIXED] - The reference frame in which the position is defined.
+ */
+export class CallbackPositionProperty {
+    constructor(callback: CallbackPositionProperty.Callback, isConstant: boolean, referenceFrame?: ReferenceFrame);
+    /**
+     * Gets a value indicating if this property is constant.
+     */
+    readonly isConstant: boolean;
+    /**
+     * Gets the event that is raised whenever the definition of this property changes.
+     * The definition is considered to have changed if a call to getValue would return
+     * a different result for the same time.
+     */
+    readonly definitionChanged: Event;
+    /**
+     * Gets the reference frame in which the position is defined.
+     */
+    referenceFrame: ReferenceFrame;
+    /**
+     * Gets the value of the property at the provided time in the fixed frame.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
+     * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
+     * @returns The modified result parameter or a new instance if the result parameter was not supplied.
+     */
+    getValue(time?: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
+    /**
+     * Sets the callback to be used.
+     * @param callback - The function to be called when the property is evaluated.
+     * @param isConstant - <code>true</code> when the callback function returns the same value every time, <code>false</code> if the value will change.
+     */
+    setCallback(callback: CallbackPositionProperty.Callback, isConstant: boolean): void;
+    /**
+     * Gets the value of the property at the provided time and in the provided reference frame.
+     * @param time - The time for which to retrieve the value.
+     * @param referenceFrame - The desired referenceFrame of the result.
+     * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
+     * @returns The modified result parameter or a new instance if the result parameter was not supplied.
+     */
+    getValueInReferenceFrame(time: JulianDate, referenceFrame: ReferenceFrame, result?: Cartesian3): Cartesian3 | undefined;
+    /**
+     * Compares this property to the provided property and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     * @param [other] - The other property.
+     * @returns <code>true</code> if left and right are equal, <code>false</code> otherwise.
+     */
+    equals(other?: Property): boolean;
+}
+
+export namespace CallbackPositionProperty {
+    /**
+     * A function that returns the value of the position property.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
+     * @param [result] - The object to store the value into. If omitted, the function must create and return a new instance.
+     */
+    type Callback = (time?: JulianDate, result?: Cartesian3) => Cartesian3 | undefined;
+}
+
+/**
  * A {@link Property} whose value is lazily evaluated by a callback function.
  * @param callback - The function to be called when the property is evaluated.
  * @param isConstant - <code>true</code> when the callback function returns the same value every time, <code>false</code> if the value will change.
@@ -18829,11 +19137,11 @@ export class CallbackProperty {
     readonly definitionChanged: Event;
     /**
      * Gets the value of the property.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied or is unsupported.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Sets the callback to be used.
      * @param callback - The function to be called when the property is evaluated.
@@ -18852,18 +19160,18 @@ export class CallbackProperty {
 export namespace CallbackProperty {
     /**
      * A function that returns the value of the property.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into. If omitted, the function must create and return a new instance.
      */
-    type Callback = (time: JulianDate, result?: any) => any;
+    type Callback = (time?: JulianDate, result?: any) => any;
 }
 
 export namespace Cesium3DTilesetGraphics {
     /**
      * Initialization options for the Cesium3DTilesetGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the tileset.
-     * [uri] - A string or Resource Property specifying the URI of the tileset.
-     * [maximumScreenSpaceError] - A number or Property specifying the maximum screen space error used to drive level of detail refinement.
+     * @property [show = true] - A boolean Property specifying the visibility of the tileset.
+     * @property [uri] - A string or Resource Property specifying the URI of the tileset.
+     * @property [maximumScreenSpaceError] - A number or Property specifying the maximum screen space error used to drive level of detail refinement.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -18979,11 +19287,11 @@ export class CheckerboardMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -19022,11 +19330,11 @@ export class ColorMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -19195,11 +19503,11 @@ export class CompositeMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -19239,11 +19547,11 @@ export class CompositePositionProperty {
     referenceFrame: ReferenceFrame;
     /**
      * Gets the value of the property at the provided time in the fixed frame.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
+    getValue(time?: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time - The time for which to retrieve the value.
@@ -19304,11 +19612,11 @@ export class CompositeProperty {
     intervals: TimeIntervalCollection;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -19343,11 +19651,11 @@ export class ConstantPositionProperty {
     referenceFrame: ReferenceFrame;
     /**
      * Gets the value of the property at the provided time in the fixed frame.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Sets the value of the property.
      * @param value - The property value.
@@ -19444,24 +19752,24 @@ export class CorridorGeometryUpdater {
 export namespace CorridorGraphics {
     /**
      * Initialization options for the CorridorGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the corridor.
-     * [positions] - A Property specifying the array of {@link Cartesian3} positions that define the centerline of the corridor.
-     * [width] - A numeric Property specifying the distance between the edges of the corridor.
-     * [height = 0] - A numeric Property specifying the altitude of the corridor relative to the ellipsoid surface.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [extrudedHeight] - A numeric Property specifying the altitude of the corridor's extruded face relative to the ellipsoid surface.
-     * [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
-     * [cornerType = CornerType.ROUNDED] - A {@link CornerType} Property specifying the style of the corners.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the distance between each latitude and longitude.
-     * [fill = true] - A boolean Property specifying whether the corridor is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the corridor.
-     * [outline = false] - A boolean Property specifying whether the corridor is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the corridor casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this corridor will be displayed.
-     * [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this corridor will classify terrain, 3D Tiles, or both when on the ground.
-     * [zIndex] - A Property specifying the zIndex of the corridor, used for ordering.  Only has an effect if height and extrudedHeight are undefined, and if the corridor is static.
+     * @property [show = true] - A boolean Property specifying the visibility of the corridor.
+     * @property [positions] - A Property specifying the array of {@link Cartesian3} positions that define the centerline of the corridor.
+     * @property [width] - A numeric Property specifying the distance between the edges of the corridor.
+     * @property [height = 0] - A numeric Property specifying the altitude of the corridor relative to the ellipsoid surface.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [extrudedHeight] - A numeric Property specifying the altitude of the corridor's extruded face relative to the ellipsoid surface.
+     * @property [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
+     * @property [cornerType = CornerType.ROUNDED] - A {@link CornerType} Property specifying the style of the corners.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the distance between each latitude and longitude.
+     * @property [fill = true] - A boolean Property specifying whether the corridor is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the corridor.
+     * @property [outline = false] - A boolean Property specifying whether the corridor is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the corridor casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this corridor will be displayed.
+     * @property [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this corridor will classify terrain, 3D Tiles, or both when on the ground.
+     * @property [zIndex] - A Property specifying the zIndex of the corridor, used for ordering.  Only has an effect if height and extrudedHeight are undefined, and if the corridor is static.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -19678,20 +19986,20 @@ export class CylinderGeometryUpdater {
 export namespace CylinderGraphics {
     /**
      * Initialization options for the CylinderGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the cylinder.
-     * [length] - A numeric Property specifying the length of the cylinder.
-     * [topRadius] - A numeric Property specifying the radius of the top of the cylinder.
-     * [bottomRadius] - A numeric Property specifying the radius of the bottom of the cylinder.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height from the entity position is relative to.
-     * [fill = true] - A boolean Property specifying whether the cylinder is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the cylinder.
-     * [outline = false] - A boolean Property specifying whether the cylinder is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [numberOfVerticalLines = 16] - A numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
-     * [slices = 128] - The number of edges around the perimeter of the cylinder.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the cylinder casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this cylinder will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the cylinder.
+     * @property [length] - A numeric Property specifying the length of the cylinder.
+     * @property [topRadius] - A numeric Property specifying the radius of the top of the cylinder.
+     * @property [bottomRadius] - A numeric Property specifying the radius of the bottom of the cylinder.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height from the entity position is relative to.
+     * @property [fill = true] - A boolean Property specifying whether the cylinder is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the cylinder.
+     * @property [outline = false] - A boolean Property specifying whether the cylinder is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [numberOfVerticalLines = 16] - A numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
+     * @property [slices = 128] - The number of edges around the perimeter of the cylinder.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the cylinder casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this cylinder will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -19799,8 +20107,8 @@ export class CylinderGraphics {
 export namespace CzmlDataSource {
     /**
      * Initialization options for the <code>load</code> method.
-     * [sourceUri] - Overrides the url to use for resolving relative links.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [sourceUri] - Overrides the url to use for resolving relative links.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type LoadOptions = {
         sourceUri?: Resource | string;
@@ -20262,26 +20570,26 @@ export class EllipseGeometryUpdater {
 export namespace EllipseGraphics {
     /**
      * Initialization options for the EllipseGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the ellipse.
-     * [semiMajorAxis] - The numeric Property specifying the semi-major axis.
-     * [semiMinorAxis] - The numeric Property specifying the semi-minor axis.
-     * [height = 0] - A numeric Property specifying the altitude of the ellipse relative to the ellipsoid surface.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [extrudedHeight] - A numeric Property specifying the altitude of the ellipse's extruded face relative to the ellipsoid surface.
-     * [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
-     * [rotation = 0.0] - A numeric property specifying the rotation of the ellipse counter-clockwise from north.
-     * [stRotation = 0.0] - A numeric property specifying the rotation of the ellipse texture counter-clockwise from north.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between points on the ellipse.
-     * [fill = true] - A boolean Property specifying whether the ellipse is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the ellipse.
-     * [outline = false] - A boolean Property specifying whether the ellipse is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [numberOfVerticalLines = 16] - A numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the ellipse casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this ellipse will be displayed.
-     * [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this ellipse will classify terrain, 3D Tiles, or both when on the ground.
-     * [zIndex = 0] - A property specifying the zIndex of the Ellipse.  Used for ordering ground geometry.  Only has an effect if the ellipse is constant and neither height or exturdedHeight are specified.
+     * @property [show = true] - A boolean Property specifying the visibility of the ellipse.
+     * @property [semiMajorAxis] - The numeric Property specifying the semi-major axis.
+     * @property [semiMinorAxis] - The numeric Property specifying the semi-minor axis.
+     * @property [height = 0] - A numeric Property specifying the altitude of the ellipse relative to the ellipsoid surface.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [extrudedHeight] - A numeric Property specifying the altitude of the ellipse's extruded face relative to the ellipsoid surface.
+     * @property [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
+     * @property [rotation = 0.0] - A numeric property specifying the rotation of the ellipse counter-clockwise from north.
+     * @property [stRotation = 0.0] - A numeric property specifying the rotation of the ellipse texture counter-clockwise from north.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between points on the ellipse.
+     * @property [fill = true] - A boolean Property specifying whether the ellipse is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the ellipse.
+     * @property [outline = false] - A boolean Property specifying whether the ellipse is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [numberOfVerticalLines = 16] - A numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the ellipse casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this ellipse will be displayed.
+     * @property [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this ellipse will classify terrain, 3D Tiles, or both when on the ground.
+     * @property [zIndex = 0] - A property specifying the zIndex of the Ellipse.  Used for ordering ground geometry.  Only has an effect if the ellipse is constant and neither height or exturdedHeight are specified.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -20448,24 +20756,24 @@ export class EllipsoidGeometryUpdater {
 export namespace EllipsoidGraphics {
     /**
      * Initialization options for the EllipsoidGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the ellipsoid.
-     * [radii] - A {@link Cartesian3} Property specifying the radii of the ellipsoid.
-     * [innerRadii] - A {@link Cartesian3} Property specifying the inner radii of the ellipsoid.
-     * [minimumClock = 0.0] - A Property specifying the minimum clock angle of the ellipsoid.
-     * [maximumClock = 2*PI] - A Property specifying the maximum clock angle of the ellipsoid.
-     * [minimumCone = 0.0] - A Property specifying the minimum cone angle of the ellipsoid.
-     * [maximumCone = PI] - A Property specifying the maximum cone angle of the ellipsoid.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height from the entity position is relative to.
-     * [fill = true] - A boolean Property specifying whether the ellipsoid is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the ellipsoid.
-     * [outline = false] - A boolean Property specifying whether the ellipsoid is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [stackPartitions = 64] - A Property specifying the number of stacks.
-     * [slicePartitions = 64] - A Property specifying the number of radial slices.
-     * [subdivisions = 128] - A Property specifying the number of samples per outline ring, determining the granularity of the curvature.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the ellipsoid casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this ellipsoid will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the ellipsoid.
+     * @property [radii] - A {@link Cartesian3} Property specifying the radii of the ellipsoid.
+     * @property [innerRadii] - A {@link Cartesian3} Property specifying the inner radii of the ellipsoid.
+     * @property [minimumClock = 0.0] - A Property specifying the minimum clock angle of the ellipsoid.
+     * @property [maximumClock = 2*PI] - A Property specifying the maximum clock angle of the ellipsoid.
+     * @property [minimumCone = 0.0] - A Property specifying the minimum cone angle of the ellipsoid.
+     * @property [maximumCone = PI] - A Property specifying the maximum cone angle of the ellipsoid.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height from the entity position is relative to.
+     * @property [fill = true] - A boolean Property specifying whether the ellipsoid is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the ellipsoid.
+     * @property [outline = false] - A boolean Property specifying whether the ellipsoid is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [stackPartitions = 64] - A Property specifying the number of stacks.
+     * @property [slicePartitions = 64] - A Property specifying the number of radial slices.
+     * @property [subdivisions = 128] - A Property specifying the number of samples per outline ring, determining the granularity of the curvature.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the ellipsoid casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this ellipsoid will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -20592,33 +20900,33 @@ export class EllipsoidGraphics {
 export namespace Entity {
     /**
      * Initialization options for the Entity constructor
-     * [id] - A unique identifier for this object. If none is provided, a GUID is generated.
-     * [name] - A human readable name to display to users. It does not have to be unique.
-     * [availability] - The availability, if any, associated with this object.
-     * [show] - A boolean value indicating if the entity and its children are displayed.
-     * [description] - A string Property specifying an HTML description for this entity.
-     * [position] - A Property specifying the entity position.
-     * [orientation] - A Property specifying the entity orientation.
-     * [viewFrom] - A suggested initial offset for viewing this object.
-     * [parent] - A parent entity to associate with this entity.
-     * [billboard] - A billboard to associate with this entity.
-     * [box] - A box to associate with this entity.
-     * [corridor] - A corridor to associate with this entity.
-     * [cylinder] - A cylinder to associate with this entity.
-     * [ellipse] - A ellipse to associate with this entity.
-     * [ellipsoid] - A ellipsoid to associate with this entity.
-     * [label] - A options.label to associate with this entity.
-     * [model] - A model to associate with this entity.
-     * [tileset] - A 3D Tiles tileset to associate with this entity.
-     * [path] - A path to associate with this entity.
-     * [plane] - A plane to associate with this entity.
-     * [point] - A point to associate with this entity.
-     * [polygon] - A polygon to associate with this entity.
-     * [polyline] - A polyline to associate with this entity.
-     * [properties] - Arbitrary properties to associate with this entity.
-     * [polylineVolume] - A polylineVolume to associate with this entity.
-     * [rectangle] - A rectangle to associate with this entity.
-     * [wall] - A wall to associate with this entity.
+     * @property [id] - A unique identifier for this object. If none is provided, a GUID is generated.
+     * @property [name] - A human readable name to display to users. It does not have to be unique.
+     * @property [availability] - The availability, if any, associated with this object.
+     * @property [show] - A boolean value indicating if the entity and its children are displayed.
+     * @property [description] - A string Property specifying an HTML description for this entity.
+     * @property [position] - A Property specifying the entity position.
+     * @property [orientation = Transforms.eastNorthUpToFixedFrame(position)] - A Property specifying the entity orientation in respect to Earth-fixed-Earth-centered (ECEF). If undefined, east-north-up at entity position is used.
+     * @property [viewFrom] - A suggested initial offset for viewing this object.
+     * @property [parent] - A parent entity to associate with this entity.
+     * @property [billboard] - A billboard to associate with this entity.
+     * @property [box] - A box to associate with this entity.
+     * @property [corridor] - A corridor to associate with this entity.
+     * @property [cylinder] - A cylinder to associate with this entity.
+     * @property [ellipse] - A ellipse to associate with this entity.
+     * @property [ellipsoid] - A ellipsoid to associate with this entity.
+     * @property [label] - A options.label to associate with this entity.
+     * @property [model] - A model to associate with this entity.
+     * @property [tileset] - A 3D Tiles tileset to associate with this entity.
+     * @property [path] - A path to associate with this entity.
+     * @property [plane] - A plane to associate with this entity.
+     * @property [point] - A point to associate with this entity.
+     * @property [polygon] - A polygon to associate with this entity.
+     * @property [polyline] - A polyline to associate with this entity.
+     * @property [properties] - Arbitrary properties to associate with this entity.
+     * @property [polylineVolume] - A polylineVolume to associate with this entity.
+     * @property [rectangle] - A rectangle to associate with this entity.
+     * @property [wall] - A wall to associate with this entity.
      */
     type ConstructorOptions = {
         id?: string;
@@ -20626,9 +20934,9 @@ export namespace Entity {
         availability?: TimeIntervalCollection;
         show?: boolean;
         description?: Property | string;
-        position?: PositionProperty | Cartesian3;
-        orientation?: Property;
-        viewFrom?: Property;
+        position?: PositionProperty | Cartesian3 | CallbackProperty;
+        orientation?: Property | Quaternion;
+        viewFrom?: Property | Cartesian3;
         parent?: Entity;
         billboard?: BillboardGraphics | BillboardGraphics.ConstructorOptions;
         box?: BoxGraphics | BoxGraphics.ConstructorOptions;
@@ -20745,7 +21053,8 @@ export class Entity {
      */
     tileset: Cesium3DTilesetGraphics | undefined;
     /**
-     * Gets or sets the orientation.
+     * Gets or sets the orientation in respect to Earth-fixed-Earth-centered (ECEF).
+     * Defaults to east-north-up at entity position.
      */
     orientation: Property | undefined;
     /**
@@ -21039,7 +21348,7 @@ export namespace EntityCollection {
  * A utility object for tracking an entity with the camera.
  * @param entity - The entity to track with the camera.
  * @param scene - The scene to use.
- * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid to use for orienting the camera.
+ * @param [ellipsoid = Ellipsoid.default] - The ellipsoid to use for orienting the camera.
  */
 export class EntityView {
     constructor(entity: Entity, scene: Scene, ellipsoid?: Ellipsoid);
@@ -21076,16 +21385,16 @@ export class EntityView {
 export namespace GeoJsonDataSource {
     /**
      * Initialization options for the <code>load</code> method.
-     * [sourceUri] - Overrides the url to use for resolving relative links.
-     * [describe = GeoJsonDataSource.defaultDescribeProperty] - A function which returns a Property object (or just a string).
-     * [markerSize = GeoJsonDataSource.markerSize] - The default size of the map pin created for each point, in pixels.
-     * [markerSymbol = GeoJsonDataSource.markerSymbol] - The default symbol of the map pin created for each point.
-     * [markerColor = GeoJsonDataSource.markerColor] - The default color of the map pin created for each point.
-     * [stroke = GeoJsonDataSource.stroke] - The default color of polylines and polygon outlines.
-     * [strokeWidth = GeoJsonDataSource.strokeWidth] - The default width of polylines and polygon outlines.
-     * [fill = GeoJsonDataSource.fill] - The default color for polygon interiors.
-     * [clampToGround = GeoJsonDataSource.clampToGround] - true if we want the geometry features (polygons or linestrings) clamped to the ground.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [sourceUri] - Overrides the url to use for resolving relative links.
+     * @property [describe = GeoJsonDataSource.defaultDescribeProperty] - A function which returns a Property object (or just a string).
+     * @property [markerSize = GeoJsonDataSource.markerSize] - The default size of the map pin created for each point, in pixels.
+     * @property [markerSymbol = GeoJsonDataSource.markerSymbol] - The default symbol of the map pin created for each point.
+     * @property [markerColor = GeoJsonDataSource.markerColor] - The default color of the map pin created for each point.
+     * @property [stroke = GeoJsonDataSource.stroke] - The default color of polylines and polygon outlines.
+     * @property [strokeWidth = GeoJsonDataSource.strokeWidth] - The default width of polylines and polygon outlines.
+     * @property [fill = GeoJsonDataSource.fill] - The default color for polygon interiors.
+     * @property [clampToGround = GeoJsonDataSource.clampToGround] - true if we want the geometry features (polygons or linestrings) clamped to the ground.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type LoadOptions = {
         sourceUri?: string;
@@ -21318,8 +21627,6 @@ export class GeometryUpdater {
     readonly classificationTypeProperty: Property;
     /**
      * Gets a value indicating if the geometry is time-varying.
-     * If true, all visualization is delegated to a DynamicGeometryUpdater
-     * returned by GeometryUpdater#createDynamicUpdater.
      */
     readonly isDynamic: boolean;
     /**
@@ -21366,6 +21673,8 @@ export class GeometryUpdater {
      */
     destroy(): void;
 }
+
+export const geometryUpdaters: GeometryUpdater[];
 
 /**
  * A general purpose visualizer for geometry represented by {@link Primitive} instances.
@@ -21557,11 +21866,11 @@ export class GridMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -21648,11 +21957,11 @@ export class ImageMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -21674,10 +21983,10 @@ export class KmlCamera {
 export namespace KmlDataSource {
     /**
      * Initialization options for the `load` method.
-     * [sourceUri] - Overrides the url to use for resolving relative links and other KML network features.
-     * [clampToGround = false] - true if we want the geometry features (Polygons, LineStrings and LinearRings) clamped to the ground.
-     * [ellipsoid = Ellipsoid.WGS84] - The global ellipsoid used for geographical calculations.
-     * [screenOverlayContainer] - A container for ScreenOverlay images.
+     * @property [sourceUri] - Overrides the url to use for resolving relative links and other KML network features.
+     * @property [clampToGround = false] - true if we want the geometry features (Polygons, LineStrings and LinearRings) clamped to the ground.
+     * @property [ellipsoid = Ellipsoid.default] - The global ellipsoid used for geographical calculations.
+     * @property [screenOverlayContainer] - A container for ScreenOverlay images.
      */
     type LoadOptions = {
         sourceUri?: string;
@@ -21687,13 +21996,13 @@ export namespace KmlDataSource {
     };
     /**
      * Options for constructing a new KmlDataSource, or calling the static `load` method.
-     * [camera] - The camera that is used for viewRefreshModes and sending camera properties to network links.
-     * [canvas] - The canvas that is used for sending viewer properties to network links.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
-     * [sourceUri] - Overrides the url to use for resolving relative links and other KML network features.
-     * [clampToGround = false] - true if we want the geometry features (Polygons, LineStrings and LinearRings) clamped to the ground.
-     * [ellipsoid = Ellipsoid.WGS84] - The global ellipsoid used for geographical calculations.
-     * [screenOverlayContainer] - A container for ScreenOverlay images.
+     * @property [camera] - The camera that is used for viewRefreshModes and sending camera properties to network links.
+     * @property [canvas] - The canvas that is used for sending viewer properties to network links.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [sourceUri] - Overrides the url to use for resolving relative links and other KML network features.
+     * @property [clampToGround = false] - true if we want the geometry features (Polygons, LineStrings and LinearRings) clamped to the ground.
+     * @property [ellipsoid = Ellipsoid.default] - The global ellipsoid used for geographical calculations.
+     * @property [screenOverlayContainer] - A container for ScreenOverlay images.
      */
     type ConstructorOptions = {
         camera?: Camera;
@@ -21860,9 +22169,9 @@ export class KmlFeatureData {
 
 export namespace KmlFeatureData {
     /**
-     * name - Gets the name.
-     * uri - Gets the URI.
-     * age - Gets the email.
+     * @property name - Gets the name.
+     * @property uri - Gets the URI.
+     * @property age - Gets the email.
      */
     type Author = {
         name: string;
@@ -21870,12 +22179,12 @@ export namespace KmlFeatureData {
         age: number;
     };
     /**
-     * href - Gets the href.
-     * hreflang - Gets the language of the linked resource.
-     * rel - Gets the link relation.
-     * type - Gets the link type.
-     * title - Gets the link title.
-     * length - Gets the link length.
+     * @property href - Gets the href.
+     * @property hreflang - Gets the language of the linked resource.
+     * @property rel - Gets the link relation.
+     * @property type - Gets the link type.
+     * @property title - Gets the link title.
+     * @property length - Gets the link length.
      */
     type Link = {
         href: string;
@@ -22032,27 +22341,27 @@ export namespace KmlTourWait {
 export namespace LabelGraphics {
     /**
      * Initialization options for the LabelGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the label.
-     * [text] - A Property specifying the text. Explicit newlines '\n' are supported.
-     * [font = '30px sans-serif'] - A Property specifying the CSS font.
-     * [style = LabelStyle.FILL] - A Property specifying the {@link LabelStyle}.
-     * [scale = 1.0] - A numeric Property specifying the scale to apply to the text.
-     * [showBackground = false] - A boolean Property specifying the visibility of the background behind the label.
-     * [backgroundColor = new Color(0.165, 0.165, 0.165, 0.8)] - A Property specifying the background {@link Color}.
-     * [backgroundPadding = new Cartesian2(7, 5)] - A {@link Cartesian2} Property specifying the horizontal and vertical background padding in pixels.
-     * [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} Property specifying the pixel offset.
-     * [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the eye offset.
-     * [horizontalOrigin = HorizontalOrigin.CENTER] - A Property specifying the {@link HorizontalOrigin}.
-     * [verticalOrigin = VerticalOrigin.CENTER] - A Property specifying the {@link VerticalOrigin}.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [fillColor = Color.WHITE] - A Property specifying the fill {@link Color}.
-     * [outlineColor = Color.BLACK] - A Property specifying the outline {@link Color}.
-     * [outlineWidth = 1.0] - A numeric Property specifying the outline width.
-     * [translucencyByDistance] - A {@link NearFarScalar} Property used to set translucency based on distance from the camera.
-     * [pixelOffsetScaleByDistance] - A {@link NearFarScalar} Property used to set pixelOffset based on distance from the camera.
-     * [scaleByDistance] - A {@link NearFarScalar} Property used to set scale based on distance from the camera.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this label will be displayed.
-     * [disableDepthTestDistance] - A Property specifying the distance from the camera at which to disable the depth test to.
+     * @property [show = true] - A boolean Property specifying the visibility of the label.
+     * @property [text] - A Property specifying the text. Explicit newlines '\n' are supported.
+     * @property [font = '30px sans-serif'] - A Property specifying the CSS font.
+     * @property [style = LabelStyle.FILL] - A Property specifying the {@link LabelStyle}.
+     * @property [scale = 1.0] - A numeric Property specifying the scale to apply to the text.
+     * @property [showBackground = false] - A boolean Property specifying the visibility of the background behind the label.
+     * @property [backgroundColor = new Color(0.165, 0.165, 0.165, 0.8)] - A Property specifying the background {@link Color}.
+     * @property [backgroundPadding = new Cartesian2(7, 5)] - A {@link Cartesian2} Property specifying the horizontal and vertical background padding in pixels.
+     * @property [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} Property specifying the pixel offset.
+     * @property [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the eye offset.
+     * @property [horizontalOrigin = HorizontalOrigin.CENTER] - A Property specifying the {@link HorizontalOrigin}.
+     * @property [verticalOrigin = VerticalOrigin.CENTER] - A Property specifying the {@link VerticalOrigin}.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [fillColor = Color.WHITE] - A Property specifying the fill {@link Color}.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the outline {@link Color}.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the outline width.
+     * @property [translucencyByDistance] - A {@link NearFarScalar} Property used to set translucency based on distance from the camera.
+     * @property [pixelOffsetScaleByDistance] - A {@link NearFarScalar} Property used to set pixelOffset based on distance from the camera.
+     * @property [scaleByDistance] - A {@link NearFarScalar} Property used to set scale based on distance from the camera.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this label will be displayed.
+     * @property [disableDepthTestDistance] - A Property specifying the distance from the camera at which to disable the depth test to.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -22297,11 +22606,11 @@ export class MaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -22314,33 +22623,35 @@ export class MaterialProperty {
 export namespace ModelGraphics {
     /**
      * Initialization options for the ModelGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the model.
-     * [uri] - A string or Resource Property specifying the URI of the glTF asset.
-     * [scale = 1.0] - A numeric Property specifying a uniform linear scale.
-     * [minimumPixelSize = 0.0] - A numeric Property specifying the approximate minimum pixel size of the model regardless of zoom.
-     * [maximumScale] - The maximum scale size of a model. An upper limit for minimumPixelSize.
-     * [incrementallyLoadTextures = true] - Determine if textures may continue to stream in after the model is loaded.
-     * [runAnimations = true] - A boolean Property specifying if glTF animations specified in the model should be started.
-     * [clampAnimations = true] - A boolean Property specifying if glTF animations should hold the last pose for time durations with no keyframes.
-     * [shadows = ShadowMode.ENABLED] - An enum Property specifying whether the model casts or receives shadows from light sources.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [silhouetteColor = Color.RED] - A Property specifying the {@link Color} of the silhouette.
-     * [silhouetteSize = 0.0] - A numeric Property specifying the size of the silhouette in pixels.
-     * [color = Color.WHITE] - A Property specifying the {@link Color} that blends with the model's rendered color.
-     * [colorBlendMode = ColorBlendMode.HIGHLIGHT] - An enum Property specifying how the color blends with the model.
-     * [colorBlendAmount = 0.5] - A numeric Property specifying the color strength when the <code>colorBlendMode</code> is <code>MIX</code>. A value of 0.0 results in the model's rendered color while a value of 1.0 results in a solid color, with any value in-between resulting in a mix of the two.
-     * [imageBasedLightingFactor = new Cartesian2(1.0, 1.0)] - A property specifying the contribution from diffuse and specular image-based lighting.
-     * [lightColor] - A property specifying the light color when shading the model. When <code>undefined</code> the scene's light color is used instead.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this model will be displayed.
-     * [nodeTransformations] - An object, where keys are names of nodes, and values are {@link TranslationRotationScale} Properties describing the transformation to apply to that node. The transformation is applied after the node's existing transformation as specified in the glTF, and does not replace the node's existing transformation.
-     * [articulations] - An object, where keys are composed of an articulation name, a single space, and a stage name, and the values are numeric properties.
-     * [clippingPlanes] - A property specifying the {@link ClippingPlaneCollection} used to selectively disable rendering the model.
-     * [customShader] - A property specifying the {@link CustomShader} to apply to this model.
+     * @property [show = true] - A boolean Property specifying the visibility of the model.
+     * @property [uri] - A string or Resource Property specifying the URI of the glTF asset.
+     * @property [scale = 1.0] - A numeric Property specifying a uniform linear scale.
+     * @property [enableVerticalExaggeration = true] - A boolean Property specifying if the model is exaggerated along the ellipsoid normal when {@link Scene.verticalExaggeration} is set to a value other than <code>1.0</code>.
+     * @property [minimumPixelSize = 0.0] - A numeric Property specifying the approximate minimum pixel size of the model regardless of zoom.
+     * @property [maximumScale] - The maximum scale size of a model. An upper limit for minimumPixelSize.
+     * @property [incrementallyLoadTextures = true] - Determine if textures may continue to stream in after the model is loaded.
+     * @property [runAnimations = true] - A boolean Property specifying if glTF animations specified in the model should be started.
+     * @property [clampAnimations = true] - A boolean Property specifying if glTF animations should hold the last pose for time durations with no keyframes.
+     * @property [shadows = ShadowMode.ENABLED] - An enum Property specifying whether the model casts or receives shadows from light sources.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [silhouetteColor = Color.RED] - A Property specifying the {@link Color} of the silhouette.
+     * @property [silhouetteSize = 0.0] - A numeric Property specifying the size of the silhouette in pixels.
+     * @property [color = Color.WHITE] - A Property specifying the {@link Color} that blends with the model's rendered color.
+     * @property [colorBlendMode = ColorBlendMode.HIGHLIGHT] - An enum Property specifying how the color blends with the model.
+     * @property [colorBlendAmount = 0.5] - A numeric Property specifying the color strength when the <code>colorBlendMode</code> is <code>MIX</code>. A value of 0.0 results in the model's rendered color while a value of 1.0 results in a solid color, with any value in-between resulting in a mix of the two.
+     * @property [imageBasedLightingFactor = new Cartesian2(1.0, 1.0)] - A property specifying the contribution from diffuse and specular image-based lighting.
+     * @property [lightColor] - A property specifying the light color when shading the model. When <code>undefined</code> the scene's light color is used instead.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this model will be displayed.
+     * @property [nodeTransformations] - An object, where keys are names of nodes, and values are {@link TranslationRotationScale} Properties describing the transformation to apply to that node. The transformation is applied after the node's existing transformation as specified in the glTF, and does not replace the node's existing transformation.
+     * @property [articulations] - An object, where keys are composed of an articulation name, a single space, and a stage name, and the values are numeric properties.
+     * @property [clippingPlanes] - A property specifying the {@link ClippingPlaneCollection} used to selectively disable rendering the model.
+     * @property [customShader] - A property specifying the {@link CustomShader} to apply to this model.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
         uri?: Property | string | Resource;
         scale?: Property | number;
+        enableVerticalExaggeration?: Property | boolean;
         minimumPixelSize?: Property | number;
         maximumScale?: Property | number;
         incrementallyLoadTextures?: Property | boolean;
@@ -22396,6 +22707,10 @@ export class ModelGraphics {
      * values less than 1.0 decrease it.
      */
     scale: Property | undefined;
+    /**
+     * Gets or sets the boolean Property specifying if the model is exaggerated along the ellipsoid normal when {@link Scene.verticalExaggeration} is set to a value other than <code>1.0</code>.
+     */
+    enableVerticalExaggeration: Property | undefined;
     /**
      * Gets or sets the numeric Property specifying the approximate minimum
      * pixel size of the model regardless of zoom. This can be used to ensure that
@@ -22561,11 +22876,11 @@ export class NodeTransformationProperty {
     scale: Property | undefined;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: TranslationRotationScale): TranslationRotationScale;
+    getValue(time?: JulianDate, result?: TranslationRotationScale): TranslationRotationScale;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -22578,13 +22893,13 @@ export class NodeTransformationProperty {
 export namespace PathGraphics {
     /**
      * Initialization options for the PathGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the path.
-     * [leadTime] - A Property specifying the number of seconds in front the object to show.
-     * [trailTime] - A Property specifying the number of seconds behind of the object to show.
-     * [width = 1.0] - A numeric Property specifying the width in pixels.
-     * [resolution = 60] - A numeric Property specifying the maximum number of seconds to step when sampling the position.
-     * [material = Color.WHITE] - A Property specifying the material used to draw the path.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this path will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the path.
+     * @property [leadTime] - A Property specifying the number of seconds in front the object to show.
+     * @property [trailTime] - A Property specifying the number of seconds behind of the object to show.
+     * @property [width = 1.0] - A numeric Property specifying the width in pixels.
+     * @property [resolution = 60] - A numeric Property specifying the maximum number of seconds to step when sampling the position.
+     * @property [material = Color.WHITE] - A Property specifying the material used to draw the path.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this path will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -22699,16 +23014,16 @@ export class PlaneGeometryUpdater {
 export namespace PlaneGraphics {
     /**
      * Initialization options for the PlaneGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the plane.
-     * [plane] - A {@link Plane} Property specifying the normal and distance for the plane.
-     * [dimensions] - A {@link Cartesian2} Property specifying the width and height of the plane.
-     * [fill = true] - A boolean Property specifying whether the plane is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the plane.
-     * [outline = false] - A boolean Property specifying whether the plane is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the plane casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this plane will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the plane.
+     * @property [plane] - A {@link Plane} Property specifying the normal and distance for the plane.
+     * @property [dimensions] - A {@link Cartesian2} Property specifying the width and height of the plane.
+     * @property [fill = true] - A boolean Property specifying whether the plane is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the plane.
+     * @property [outline = false] - A boolean Property specifying whether the plane is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the plane casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this plane will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -22795,16 +23110,17 @@ export class PlaneGraphics {
 export namespace PointGraphics {
     /**
      * Initialization options for the PointGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the point.
-     * [pixelSize = 1] - A numeric Property specifying the size in pixels.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [color = Color.WHITE] - A Property specifying the {@link Color} of the point.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 0] - A numeric Property specifying the the outline width in pixels.
-     * [scaleByDistance] - A {@link NearFarScalar} Property used to scale the point based on distance.
-     * [translucencyByDistance] - A {@link NearFarScalar} Property used to set translucency based on distance from the camera.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this point will be displayed.
-     * [disableDepthTestDistance] - A Property specifying the distance from the camera at which to disable the depth test to.
+     * @property [show = true] - A boolean Property specifying the visibility of the point.
+     * @property [pixelSize = 1] - A numeric Property specifying the size in pixels.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [color = Color.WHITE] - A Property specifying the {@link Color} of the point.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 0] - A numeric Property specifying the the outline width in pixels.
+     * @property [scaleByDistance] - A {@link NearFarScalar} Property used to scale the point based on distance.
+     * @property [translucencyByDistance] - A {@link NearFarScalar} Property used to set translucency based on distance from the camera.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this point will be displayed.
+     * @property [disableDepthTestDistance] - A Property specifying the distance from the camera at which to disable the depth test to.
+     * @property [splitDirection] - A Property specifying the {@link SplitDirection} split to apply to this point.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -22817,6 +23133,7 @@ export namespace PointGraphics {
         translucencyByDistance?: Property | NearFarScalar;
         distanceDisplayCondition?: Property | DistanceDisplayCondition;
         disableDepthTestDistance?: Property | number;
+        splitDirection?: Property | SplitDirection;
     };
 }
 
@@ -22876,6 +23193,10 @@ export class PointGraphics {
      * When set to zero, the depth test is always applied. When set to Number.POSITIVE_INFINITY, the depth test is never applied.
      */
     disableDepthTestDistance: Property | undefined;
+    /**
+     * Gets or sets the Property specifying the {@link SplitDirection} of this point.
+     */
+    splitDirection: Property | undefined;
     /**
      * Duplicates this instance.
      * @param [result] - The object onto which to store the result.
@@ -22940,28 +23261,28 @@ export class PolygonGeometryUpdater {
 export namespace PolygonGraphics {
     /**
      * Initialization options for the PolygonGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the polygon.
-     * [hierarchy] - A Property specifying the {@link PolygonHierarchy}.
-     * [height = 0] - A numeric Property specifying the altitude of the polygon relative to the ellipsoid surface.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [extrudedHeight] - A numeric Property specifying the altitude of the polygon's extruded face relative to the ellipsoid surface.
-     * [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
-     * [stRotation = 0.0] - A numeric property specifying the rotation of the polygon texture counter-clockwise from north. Only has an effect if textureCoordinates is not defined.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude point.
-     * [fill = true] - A boolean Property specifying whether the polygon is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the polygon.
-     * [outline = false] - A boolean Property specifying whether the polygon is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [perPositionHeight = false] - A boolean specifying whether or not the height of each position is used.
-     * [closeTop = true] - When false, leaves off the top of an extruded polygon open.
-     * [closeBottom = true] - When false, leaves off the bottom of an extruded polygon open.
-     * [arcType = ArcType.GEODESIC] - The type of line the polygon edges must follow.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the polygon casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this polygon will be displayed.
-     * [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this polygon will classify terrain, 3D Tiles, or both when on the ground.
-     * [zIndex = 0] - A property specifying the zIndex used for ordering ground geometry.  Only has an effect if the polygon is constant and neither height or extrudedHeight are specified.
-     * [textureCoordinates] - A Property specifying texture coordinates as a {@link PolygonHierarchy} of {@link Cartesian2} points. Has no effect for ground primitives.
+     * @property [show = true] - A boolean Property specifying the visibility of the polygon.
+     * @property [hierarchy] - A Property specifying the {@link PolygonHierarchy}.
+     * @property [height = 0] - A numeric Property specifying the altitude of the polygon relative to the ellipsoid surface.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [extrudedHeight] - A numeric Property specifying the altitude of the polygon's extruded face relative to the ellipsoid surface.
+     * @property [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
+     * @property [stRotation = 0.0] - A numeric property specifying the rotation of the polygon texture counter-clockwise from north. Only has an effect if textureCoordinates is not defined.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude point.
+     * @property [fill = true] - A boolean Property specifying whether the polygon is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the polygon.
+     * @property [outline = false] - A boolean Property specifying whether the polygon is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [perPositionHeight = false] - A boolean specifying whether or not the height of each position is used.
+     * @property [closeTop = true] - When false, leaves off the top of an extruded polygon open.
+     * @property [closeBottom = true] - When false, leaves off the bottom of an extruded polygon open.
+     * @property [arcType = ArcType.GEODESIC] - The type of line the polygon edges must follow.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the polygon casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this polygon will be displayed.
+     * @property [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this polygon will classify terrain, 3D Tiles, or both when on the ground.
+     * @property [zIndex = 0] - A property specifying the zIndex used for ordering ground geometry.  Only has an effect if the polygon is constant and neither height or extrudedHeight are specified.
+     * @property [textureCoordinates] - A Property specifying texture coordinates as a {@link PolygonHierarchy} of {@link Cartesian2} points. Has no effect for ground primitives.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -23140,11 +23461,11 @@ export class PolylineArrowMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -23204,11 +23525,11 @@ export class PolylineDashMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -23277,8 +23598,6 @@ export class PolylineGeometryUpdater {
     readonly classificationTypeProperty: Property;
     /**
      * Gets a value indicating if the geometry is time-varying.
-     * If true, all visualization is delegated to the {@link DynamicGeometryUpdater}
-     * returned by GeometryUpdater#createDynamicUpdater.
      */
     readonly isDynamic: boolean;
     /**
@@ -23383,11 +23702,11 @@ export class PolylineGlowMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -23400,18 +23719,18 @@ export class PolylineGlowMaterialProperty {
 export namespace PolylineGraphics {
     /**
      * Initialization options for the PolylineGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the polyline.
-     * [positions] - A Property specifying the array of {@link Cartesian3} positions that define the line strip.
-     * [width = 1.0] - A numeric Property specifying the width in pixels.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude if arcType is not ArcType.NONE.
-     * [material = Color.WHITE] - A Property specifying the material used to draw the polyline.
-     * [depthFailMaterial] - A property specifying the material used to draw the polyline when it is below the terrain.
-     * [arcType = ArcType.GEODESIC] - The type of line the polyline segments must follow.
-     * [clampToGround = false] - A boolean Property specifying whether the Polyline should be clamped to the ground.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the polyline casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this polyline will be displayed.
-     * [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this polyline will classify terrain, 3D Tiles, or both when on the ground.
-     * [zIndex = 0] - A Property specifying the zIndex used for ordering ground geometry. Only has an effect if `clampToGround` is true and polylines on terrain is supported.
+     * @property [show = true] - A boolean Property specifying the visibility of the polyline.
+     * @property [positions] - A Property specifying the array of {@link Cartesian3} positions that define the line strip.
+     * @property [width = 1.0] - A numeric Property specifying the width in pixels.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude if arcType is not ArcType.NONE.
+     * @property [material = Color.WHITE] - A Property specifying the material used to draw the polyline.
+     * @property [depthFailMaterial] - A property specifying the material used to draw the polyline when it is below the terrain.
+     * @property [arcType = ArcType.GEODESIC] - The type of line the polyline segments must follow.
+     * @property [clampToGround = false] - A boolean Property specifying whether the Polyline should be clamped to the ground.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the polyline casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this polyline will be displayed.
+     * @property [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this polyline will classify terrain, 3D Tiles, or both when on the ground.
+     * @property [zIndex = 0] - A Property specifying the zIndex used for ordering ground geometry. Only has an effect if `clampToGround` is true and polylines on terrain is supported.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -23554,11 +23873,11 @@ export class PolylineOutlineMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -23621,18 +23940,18 @@ export class PolylineVolumeGeometryUpdater {
 export namespace PolylineVolumeGraphics {
     /**
      * Initialization options for the PolylineVolumeGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the volume.
-     * [positions] - A Property specifying the array of {@link Cartesian3} positions which define the line strip.
-     * [shape] - A Property specifying the array of {@link Cartesian2} positions which define the shape to be extruded.
-     * [cornerType = CornerType.ROUNDED] - A {@link CornerType} Property specifying the style of the corners.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude point.
-     * [fill = true] - A boolean Property specifying whether the volume is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the volume.
-     * [outline = false] - A boolean Property specifying whether the volume is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the volume casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this volume will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the volume.
+     * @property [positions] - A Property specifying the array of {@link Cartesian3} positions which define the line strip.
+     * @property [shape] - A Property specifying the array of {@link Cartesian2} positions which define the shape to be extruded.
+     * @property [cornerType = CornerType.ROUNDED] - A {@link CornerType} Property specifying the style of the corners.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude point.
+     * @property [fill = true] - A boolean Property specifying whether the volume is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the volume.
+     * @property [outline = false] - A boolean Property specifying whether the volume is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the volume casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this volume will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -23751,11 +24070,11 @@ export class PositionProperty {
     referenceFrame: ReferenceFrame;
     /**
      * Gets the value of the property at the provided time in the fixed frame.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
+    getValue(time?: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time - The time for which to retrieve the value.
@@ -23798,11 +24117,11 @@ export class PositionPropertyArray {
     referenceFrame: ReferenceFrame;
     /**
      * Gets the value of the property.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: Cartesian3[]): Cartesian3[];
+    getValue(time?: JulianDate, result?: Cartesian3[]): Cartesian3[];
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time - The time for which to retrieve the value.
@@ -23844,11 +24163,11 @@ export class Property {
     readonly definitionChanged: Event;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -23878,11 +24197,11 @@ export class PropertyArray {
     readonly definitionChanged: Event;
     /**
      * Gets the value of the property.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter, which is an array of values produced by evaluating each of the contained properties at the given time or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: object[]): object[];
+    getValue(time?: JulianDate, result?: object[]): object[];
     /**
      * Sets the value of the property.
      * @param value - An array of Property instances.
@@ -23942,12 +24261,12 @@ export class PropertyBag implements Record<string, any> {
     /**
      * Gets the value of this property.  Each contained property will be evaluated at the given time, and the overall
      * result will be an object, mapping property names to those values.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * Note that any properties in result which are not part of this PropertyBag will be left as-is.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Assigns each unassigned property on this object to the value
      * of the same property on the provided source object.
@@ -23989,24 +24308,24 @@ export class RectangleGeometryUpdater {
 export namespace RectangleGraphics {
     /**
      * Initialization options for the RectangleGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the rectangle.
-     * [coordinates] - The Property specifying the {@link Rectangle}.
-     * [height = 0] - A numeric Property specifying the altitude of the rectangle relative to the ellipsoid surface.
-     * [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
-     * [extrudedHeight] - A numeric Property specifying the altitude of the rectangle's extruded face relative to the ellipsoid surface.
-     * [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
-     * [rotation = 0.0] - A numeric property specifying the rotation of the rectangle clockwise from north.
-     * [stRotation = 0.0] - A numeric property specifying the rotation of the rectangle texture counter-clockwise from north.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between points on the rectangle.
-     * [fill = true] - A boolean Property specifying whether the rectangle is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the rectangle.
-     * [outline = false] - A boolean Property specifying whether the rectangle is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the rectangle casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this rectangle will be displayed.
-     * [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this rectangle will classify terrain, 3D Tiles, or both when on the ground.
-     * [zIndex = 0] - A Property specifying the zIndex used for ordering ground geometry.  Only has an effect if the rectangle is constant and neither height or extrudedHeight are specified.
+     * @property [show = true] - A boolean Property specifying the visibility of the rectangle.
+     * @property [coordinates] - The Property specifying the {@link Rectangle}.
+     * @property [height = 0] - A numeric Property specifying the altitude of the rectangle relative to the ellipsoid surface.
+     * @property [heightReference = HeightReference.NONE] - A Property specifying what the height is relative to.
+     * @property [extrudedHeight] - A numeric Property specifying the altitude of the rectangle's extruded face relative to the ellipsoid surface.
+     * @property [extrudedHeightReference = HeightReference.NONE] - A Property specifying what the extrudedHeight is relative to.
+     * @property [rotation = 0.0] - A numeric property specifying the rotation of the rectangle clockwise from north.
+     * @property [stRotation = 0.0] - A numeric property specifying the rotation of the rectangle texture counter-clockwise from north.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between points on the rectangle.
+     * @property [fill = true] - A boolean Property specifying whether the rectangle is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the rectangle.
+     * @property [outline = false] - A boolean Property specifying whether the rectangle is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the rectangle casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this rectangle will be displayed.
+     * @property [classificationType = ClassificationType.BOTH] - An enum Property specifying whether this rectangle will classify terrain, 3D Tiles, or both when on the ground.
+     * @property [zIndex = 0] - A Property specifying the zIndex used for ordering ground geometry.  Only has an effect if the rectangle is constant and neither height or extrudedHeight are specified.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -24213,11 +24532,11 @@ export class ReferenceProperty {
     static fromString(targetCollection: EntityCollection, referenceString: string): ReferenceProperty;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * This method is only valid if the property being referenced is a {@link PositionProperty}.
@@ -24363,11 +24682,11 @@ export class SampledPositionProperty {
     backwardExtrapolationDuration: number;
     /**
      * Gets the position at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
+    getValue(time?: JulianDate, result?: Cartesian3): Cartesian3 | undefined;
     /**
      * Gets the position at the provided time and in the provided reference frame.
      * @param time - The time for which to retrieve the value.
@@ -24514,11 +24833,11 @@ export class SampledProperty {
     backwardExtrapolationDuration: number;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Sets the algorithm and degree to use when interpolating a value.
      * @param [options] - Object with the following properties:
@@ -24629,11 +24948,11 @@ export class StripeMaterialProperty {
     getType(time: JulianDate): string;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -24684,11 +25003,11 @@ export class TimeIntervalCollectionPositionProperty {
     readonly referenceFrame: ReferenceFrame;
     /**
      * Gets the value of the property at the provided time in the fixed frame.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): Cartesian3 | undefined;
+    getValue(time?: JulianDate, result?: any): Cartesian3 | undefined;
     /**
      * Gets the value of the property at the provided time and in the provided reference frame.
      * @param time - The time for which to retrieve the value.
@@ -24757,11 +25076,11 @@ export class TimeIntervalCollectionProperty {
     readonly intervals: TimeIntervalCollection;
     /**
      * Gets the value of the property at the provided time.
-     * @param time - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
-    getValue(time: JulianDate, result?: any): any;
+    getValue(time?: JulianDate, result?: any): any;
     /**
      * Compares this property to the provided property and returns
      * <code>true</code> if they are equal, <code>false</code> otherwise.
@@ -24783,7 +25102,7 @@ export class TimeIntervalCollectionProperty {
  *   orientation : new Cesium.VelocityOrientationProperty(position)
  * }));
  * @param [position] - The position property used to compute the orientation.
- * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid used to determine which way is up.
+ * @param [ellipsoid = Ellipsoid.default] - The ellipsoid used to determine which way is up.
  */
 export class VelocityOrientationProperty {
     constructor(position?: PositionProperty, ellipsoid?: Ellipsoid);
@@ -24805,7 +25124,7 @@ export class VelocityOrientationProperty {
     ellipsoid: Property | undefined;
     /**
      * Gets the value of the property at the provided time.
-     * @param [time] - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
@@ -24857,7 +25176,7 @@ export class VelocityVectorProperty {
     normalize: boolean;
     /**
      * Gets the value of the property at the provided time.
-     * @param [time] - The time for which to retrieve the value.
+     * @param [time = JulianDate.now()] - The time for which to retrieve the value. If omitted, the current system time is used.
      * @param [result] - The object to store the value into, if omitted, a new instance is created and returned.
      * @returns The modified result parameter or a new instance if the result parameter was not supplied.
      */
@@ -24924,18 +25243,18 @@ export class WallGeometryUpdater {
 export namespace WallGraphics {
     /**
      * Initialization options for the WallGraphics constructor
-     * [show = true] - A boolean Property specifying the visibility of the wall.
-     * [positions] - A Property specifying the array of {@link Cartesian3} positions which define the top of the wall.
-     * [minimumHeights] - A Property specifying an array of heights to be used for the bottom of the wall instead of the globe surface.
-     * [maximumHeights] - A Property specifying an array of heights to be used for the top of the wall instead of the height of each position.
-     * [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude point.
-     * [fill = true] - A boolean Property specifying whether the wall is filled with the provided material.
-     * [material = Color.WHITE] - A Property specifying the material used to fill the wall.
-     * [outline = false] - A boolean Property specifying whether the wall is outlined.
-     * [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
-     * [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
-     * [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the wall casts or receives shadows from light sources.
-     * [distanceDisplayCondition] - A Property specifying at what distance from the camera that this wall will be displayed.
+     * @property [show = true] - A boolean Property specifying the visibility of the wall.
+     * @property [positions] - A Property specifying the array of {@link Cartesian3} positions which define the top of the wall.
+     * @property [minimumHeights] - A Property specifying an array of heights to be used for the bottom of the wall instead of the globe surface.
+     * @property [maximumHeights] - A Property specifying an array of heights to be used for the top of the wall instead of the height of each position.
+     * @property [granularity = Cesium.Math.RADIANS_PER_DEGREE] - A numeric Property specifying the angular distance between each latitude and longitude point.
+     * @property [fill = true] - A boolean Property specifying whether the wall is filled with the provided material.
+     * @property [material = Color.WHITE] - A Property specifying the material used to fill the wall.
+     * @property [outline = false] - A boolean Property specifying whether the wall is outlined.
+     * @property [outlineColor = Color.BLACK] - A Property specifying the {@link Color} of the outline.
+     * @property [outlineWidth = 1.0] - A numeric Property specifying the width of the outline.
+     * @property [shadows = ShadowMode.DISABLED] - An enum Property specifying whether the wall casts or receives shadows from light sources.
+     * @property [distanceDisplayCondition] - A Property specifying at what distance from the camera that this wall will be displayed.
      */
     type ConstructorOptions = {
         show?: Property | boolean;
@@ -25033,8 +25352,8 @@ export class WallGraphics {
 }
 
 /**
- * kml - The generated KML.
- * externalFiles - An object dictionary of external files
+ * @property kml - The generated KML.
+ * @property externalFiles - An object dictionary of external files
  */
 export type exportKmlResultKml = {
     kml: string;
@@ -25044,7 +25363,7 @@ export type exportKmlResultKml = {
 };
 
 /**
- * kmz - The generated kmz file.
+ * @property kmz - The generated kmz file.
  */
 export type exportKmlResultKmz = {
     kmz: Blob;
@@ -25074,7 +25393,7 @@ export type exportKmlResultKmz = {
  *   });
  * @param options - An object with the following properties:
  * @param options.entities - The EntityCollection to export as KML.
- * @param [options.ellipsoid = Ellipsoid.WGS84] - The ellipsoid for the output file.
+ * @param [options.ellipsoid = Ellipsoid.default] - The ellipsoid for the output file.
  * @param [options.modelCallback] - A callback that will be called with a {@link ModelGraphics} instance and should return the URI to use in the KML. Required if a model exists in the entity collection.
  * @param [options.time = entities.computeAvailability().start] - The time value to use to get properties that are not time varying in KML.
  * @param [options.defaultAvailability = entities.computeAvailability()] - The interval that will be sampled if an entity doesn't have an availability.
@@ -25110,10 +25429,10 @@ export type exportKmlModelCallback = (model: ModelGraphics, time: JulianDate, ex
  * Setting this to false will improve performance, but hurt visual quality,
  * especially for horizon views.
  * </p>
- * [requestWebgl1 = false] - If true and the browser supports it, use a WebGL 1 rendering context
- * [allowTextureFilterAnisotropic = true] - If true, use anisotropic filtering during texture sampling
- * [webgl] - WebGL options to be passed on to canvas.getContext
- * [getWebGLStub] - A function to create a WebGL stub for testing
+ * @property [requestWebgl1 = false] - If true and the browser supports it, use a WebGL 1 rendering context
+ * @property [allowTextureFilterAnisotropic = true] - If true, use anisotropic filtering during texture sampling
+ * @property [webgl] - WebGL options to be passed on to canvas.getContext
+ * @property [getWebGLStub] - A function to create a WebGL stub for testing
  */
 export type ContextOptions = {
     requestWebgl1?: boolean;
@@ -25302,7 +25621,7 @@ export enum ArcGisBaseMapType {
 export namespace ArcGisMapServerImageryProvider {
     /**
      * Initialization options for the ArcGisMapServerImageryProvider constructor
-     * [tileDiscardPolicy] - The policy that determines if a tile
+     * @property [tileDiscardPolicy] - The policy that determines if a tile
      *        is invalid and should be discarded.  If this value is not specified, a default
      *        {@link DiscardMissingTileImagePolicy} is used for tiled map servers, and a
      *        {@link NeverTileDiscardPolicy} is used for non-tiled map servers.  In the former case,
@@ -25313,25 +25632,25 @@ export namespace ArcGisMapServerImageryProvider {
      *        these defaults should be correct tile discarding for a standard ArcGIS Server.  To ensure
      *        that no tiles are discarded, construct and pass a {@link NeverTileDiscardPolicy} for this
      *        parameter.
-     * [usePreCachedTilesIfAvailable = true] - If true, the server's pre-cached
+     * @property [usePreCachedTilesIfAvailable = true] - If true, the server's pre-cached
      *        tiles are used if they are available. Exporting Tiles is only supported with deprecated APIs.
-     * [layers] - A comma-separated list of the layers to show, or undefined if all layers should be shown.
-     * [enablePickFeatures = true] - If true, {@link ArcGisMapServerImageryProvider#pickFeatures} will invoke
+     * @property [layers] - A comma-separated list of the layers to show, or undefined if all layers should be shown.
+     * @property [enablePickFeatures = true] - If true, {@link ArcGisMapServerImageryProvider#pickFeatures} will invoke
      *        the Identify service on the MapServer and return the features included in the response.  If false,
      *        {@link ArcGisMapServerImageryProvider#pickFeatures} will immediately return undefined (indicating no pickable features)
      *        without communicating with the server.  Set this property to false if you don't want this provider's features to
      *        be pickable. Can be overridden by setting the {@link ArcGisMapServerImageryProvider#enablePickFeatures} property on the object.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle of the layer.  This parameter is ignored when accessing
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle of the layer.  This parameter is ignored when accessing
      *                    a tiled layer.
-     * [tilingScheme = new GeographicTilingScheme()] - The tiling scheme to use to divide the world into tiles.
+     * @property [tilingScheme = new GeographicTilingScheme()] - The tiling scheme to use to divide the world into tiles.
      *                       This parameter is ignored when accessing a tiled server.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified and used,
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If the tilingScheme is specified and used,
      *                    this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
-     *                    parameter is specified, the WGS84 ellipsoid is used.
-     * [credit] - A credit for the data source, which is displayed on the canvas.  This parameter is ignored when accessing a tiled server.
-     * [tileWidth = 256] - The width of each tile in pixels.  This parameter is ignored when accessing a tiled server.
-     * [tileHeight = 256] - The height of each tile in pixels.  This parameter is ignored when accessing a tiled server.
-     * [maximumLevel] - The maximum tile level to request, or undefined if there is no maximum.  This parameter is ignored when accessing
+     *                    parameter is specified, the default ellipsoid is used.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.  This parameter is ignored when accessing a tiled server.
+     * @property [tileWidth = 256] - The width of each tile in pixels.  This parameter is ignored when accessing a tiled server.
+     * @property [tileHeight = 256] - The height of each tile in pixels.  This parameter is ignored when accessing a tiled server.
+     * @property [maximumLevel] - The maximum tile level to request, or undefined if there is no maximum.  This parameter is ignored when accessing
      *                                        a tiled server.
      */
     type ConstructorOptions = {
@@ -25561,6 +25880,81 @@ export namespace ArcGisMapService {
 }
 
 /**
+ * Common atmosphere settings used by 3D Tiles and models for rendering sky atmosphere, ground atmosphere, and fog.
+ *
+ * <p>
+ * This class is not to be confused with {@link SkyAtmosphere}, which is responsible for rendering the sky.
+ * </p>
+ * <p>
+ * While the atmosphere settings affect the color of fog, see {@link Fog} to control how fog is rendered.
+ * </p>
+ * @example
+ * // Turn on dynamic atmosphere lighting using the sun direction
+ * scene.atmosphere.dynamicLighting = Cesium.DynamicAtmosphereLightingType.SUNLIGHT;
+ * @example
+ * // Turn on dynamic lighting using whatever light source is in the scene
+ * scene.light = new Cesium.DirectionalLight({
+ *   direction: new Cesium.Cartesian3(1, 0, 0)
+ * });
+ * scene.atmosphere.dynamicLighting = Cesium.DynamicAtmosphereLightingType.SCENE_LIGHT;
+ * @example
+ * // Adjust the color of the atmosphere effects.
+ * scene.atmosphere.hueShift = 0.4; // Cycle 40% around the color wheel
+ * scene.atmosphere.brightnessShift = 0.25; // Increase the brightness
+ * scene.atmosphere.saturationShift = -0.1; // Desaturate the colors
+ */
+export class Atmosphere {
+    constructor();
+    /**
+     * The intensity of the light that is used for computing the ground atmosphere color.
+     */
+    lightIntensity: number;
+    /**
+     * The Rayleigh scattering coefficient used in the atmospheric scattering equations for the ground atmosphere.
+     */
+    rayleighCoefficient: Cartesian3;
+    /**
+     * The Mie scattering coefficient used in the atmospheric scattering equations for the ground atmosphere.
+     */
+    mieCoefficient: Cartesian3;
+    /**
+     * The Rayleigh scale height used in the atmospheric scattering equations for the ground atmosphere, in meters.
+     */
+    rayleighScaleHeight: number;
+    /**
+     * The Mie scale height used in the atmospheric scattering equations for the ground atmosphere, in meters.
+     */
+    mieScaleHeight: number;
+    /**
+     * The anisotropy of the medium to consider for Mie scattering.
+     * <p>
+     * Valid values are between -1.0 and 1.0.
+     * </p>
+     */
+    mieAnisotropy: number;
+    /**
+     * The hue shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A hue shift of 1.0 indicates a complete rotation of the hues available.
+     */
+    hueShift: number;
+    /**
+     * The saturation shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A saturation shift of -1.0 is monochrome.
+     */
+    saturationShift: number;
+    /**
+     * The brightness shift to apply to the atmosphere. Defaults to 0.0 (no shift).
+     * A brightness shift of -1.0 is complete darkness, which will let space show through.
+     */
+    brightnessShift: number;
+    /**
+     * When not DynamicAtmosphereLightingType.NONE, the selected light source will
+     * be used for dynamically lighting all atmosphere-related rendering effects.
+     */
+    dynamicLighting: DynamicAtmosphereLightingType;
+}
+
+/**
  * An enum describing the x, y, and z axes and helper conversion functions.
  */
 export enum Axis {
@@ -25578,6 +25972,65 @@ export enum Axis {
     Z = 2
 }
 
+export namespace Billboard {
+    /**
+     * Initialization options for the first param of Billboard constructor
+     * @property position - The cartesian position of the billboard.
+     * @property [id] - A user-defined object to return when the billboard is picked with {@link Scene#pick}.
+     * @property [show = true] - Determines if this billboard will be shown.
+     * @property [image] - A loaded HTMLImageElement, ImageData, or a url to an image to use for the billboard.
+     * @property [scale = 1.0] - A number specifying the uniform scale that is multiplied with the billboard's image size in pixels.
+     * @property [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} Specifying the pixel offset in screen space from the origin of this billboard.
+     * @property [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} Specifying the 3D Cartesian offset applied to this billboard in eye coordinates.
+     * @property [horizontalOrigin = HorizontalOrigin.CENTER] - A {@link HorizontalOrigin} Specifying the horizontal origin of this billboard.
+     * @property [verticalOrigin = VerticalOrigin.CENTER] - A {@link VerticalOrigin} Specifying the vertical origin of this billboard.
+     * @property [heightReference = HeightReference.NONE] - A {@link HeightReference} Specifying the height reference of this billboard.
+     * @property [color = Color.WHITE] - A {@link Color} Specifying the color that is multiplied with the billboard's texture.
+     * @property [rotation = 0] - A number specifying the rotation angle in radians.
+     * @property [alignedAxis = Cartesian3.ZERO] - A {@link Cartesian3} Specifying the aligned axis in world space.
+     * @property [sizeInMeters] - A boolean specifying if the billboard size is in meters or pixels.
+     * @property [width] - A number specifying the width of the billboard. If undefined, the image width will be used.
+     * @property [height] - A number specifying the height of the billboard. If undefined, the image height will be used.
+     * @property [scaleByDistance] - A {@link NearFarScalar} Specifying near and far scaling properties of a Billboard based on the billboard's distance from the camera.
+     * @property [translucencyByDistance] - A {@link NearFarScalar} Specifying near and far translucency properties of a Billboard based on the billboard's distance from the camera.
+     * @property [pixelOffsetScaleByDistance] - A {@link NearFarScalar} Specifying near and far pixel offset scaling properties of a Billboard based on the billboard's distance from the camera.
+     * @property [imageSubRegion] - A {@link BoundingRectangle} Specifying the sub-region of the image to use for the billboard, rather than the entire image.
+     * @property [distanceDisplayCondition] - A {@link DistanceDisplayCondition} Specifying the distance from the camera at which this billboard will be displayed.
+     * @property [disableDepthTestDistance] - A number specifying the distance from the camera at which to disable the depth test to, for example, prevent clipping against terrain.
+     * @property [splitDirection] - A {@link SplitDirection} Specifying the split property of the billboard.
+     */
+    type ConstructorOptions = {
+        position: Cartesian3;
+        id?: any;
+        show?: boolean;
+        image?: string | HTMLCanvasElement;
+        scale?: number;
+        pixelOffset?: Cartesian2;
+        eyeOffset?: Cartesian3;
+        horizontalOrigin?: HorizontalOrigin;
+        verticalOrigin?: VerticalOrigin;
+        heightReference?: HeightReference;
+        color?: Color;
+        rotation?: number;
+        alignedAxis?: Cartesian3;
+        sizeInMeters?: boolean;
+        width?: number;
+        height?: number;
+        scaleByDistance?: NearFarScalar;
+        translucencyByDistance?: NearFarScalar;
+        pixelOffsetScaleByDistance?: NearFarScalar;
+        imageSubRegion?: BoundingRectangle;
+        distanceDisplayCondition?: DistanceDisplayCondition;
+        disableDepthTestDistance?: number;
+        splitDirection?: SplitDirection;
+    };
+    /**
+     * A function that creates an image.
+     * @param id - The identifier of the image to load.
+     */
+    type CreateImageCallback = (id: string) => HTMLImageElement | HTMLCanvasElement | Promise<HTMLImageElement | HTMLCanvasElement>;
+}
+
 /**
  * <div class="notice">
  * A billboard is created and its initial
@@ -25590,9 +26043,11 @@ export enum Axis {
  * <img src='Images/Billboard.png' width='400' height='300' /><br />
  * Example billboards
  * </div>
+ * @param options - Object describing initialization options
+ * @param billboardCollection - Instance of BillboardCollection
  */
 export class Billboard {
-    constructor();
+    constructor(options: Billboard.ConstructorOptions, billboardCollection: BillboardCollection);
     /**
      * Determines if this billboard will be shown.  Use this to hide or show a billboard, instead
      * of removing it and re-adding it to the collection.
@@ -25835,6 +26290,10 @@ export class Billboard {
      */
     readonly ready: boolean;
     /**
+     * Gets or sets the {@link SplitDirection} of this billboard.
+     */
+    splitDirection: SplitDirection;
+    /**
      * <p>
      * Sets the image to be used for this billboard.  If a texture has already been created for the
      * given id, the existing texture is used.
@@ -25893,14 +26352,6 @@ export class Billboard {
      * @returns <code>true</code> if the billboards are equal; otherwise, <code>false</code>.
      */
     equals(other: Billboard): boolean;
-}
-
-export namespace Billboard {
-    /**
-     * A function that creates an image.
-     * @param id - The identifier of the image to load.
-     */
-    type CreateImageCallback = (id: string) => HTMLImageElement | HTMLCanvasElement | Promise<HTMLImageElement | HTMLCanvasElement>;
 }
 
 /**
@@ -26036,7 +26487,7 @@ export class BillboardCollection {
      * @param [options] - A template describing the billboard's properties as shown in Example 1.
      * @returns The billboard that was added to the collection.
      */
-    add(options?: any): Billboard;
+    add(options?: Billboard.ConstructorOptions): Billboard;
     /**
      * Removes a billboard from the collection.
      * @example
@@ -26110,16 +26561,17 @@ export class BillboardCollection {
 export namespace BingMapsImageryProvider {
     /**
      * Initialization options for the BingMapsImageryProvider constructor
-     * [key] - The Bing Maps key for your application, which can be
+     * @property [key] - The Bing Maps key for your application, which can be
      *        created at {@link https://www.bingmapsportal.com/}.
-     * [tileProtocol] - The protocol to use when loading tiles, e.g. 'http' or 'https'.
+     * @property [tileProtocol] - The protocol to use when loading tiles, e.g. 'http' or 'https'.
      *        By default, tiles are loaded using the same protocol as the page.
-     * [mapStyle = BingMapsStyle.AERIAL] - The type of Bing Maps imagery to load.
-     * [culture = ''] - The culture to use when requesting Bing Maps imagery. Not
+     * @property [mapStyle = BingMapsStyle.AERIAL] - The type of Bing Maps imagery to load.
+     * @property [mapLayer] - Additional display layer options as defined on {@link https://learn.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters}
+     * @property [culture = ''] - The culture to use when requesting Bing Maps imagery. Not
      *        all cultures are supported. See {@link http://msdn.microsoft.com/en-us/library/hh441729.aspx}
      *        for information on the supported cultures.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [tileDiscardPolicy] - The policy that determines if a tile
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [tileDiscardPolicy] - The policy that determines if a tile
      *        is invalid and should be discarded.  By default, a {@link DiscardEmptyTileImagePolicy}
      *        will be used, with the expectation that the Bing Maps server will send a zero-length response for missing tiles.
      *        To ensure that no tiles are discarded, construct and pass a {@link NeverTileDiscardPolicy} for this parameter.
@@ -26128,6 +26580,7 @@ export namespace BingMapsImageryProvider {
         key?: string;
         tileProtocol?: string;
         mapStyle?: BingMapsStyle;
+        mapLayer?: string;
         culture?: string;
         ellipsoid?: Ellipsoid;
         tileDiscardPolicy?: TileDiscardPolicy;
@@ -26166,6 +26619,10 @@ export class BingMapsImageryProvider {
      * Gets the type of Bing Maps imagery to load.
      */
     readonly mapStyle: BingMapsStyle;
+    /**
+     * Gets the additional map layer options as defined in {@link https://learn.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters}/
+     */
+    readonly mapLayer: string;
     /**
      * The culture to use when requesting Bing Maps imagery. Not
      * all cultures are supported. See {@link http://msdn.microsoft.com/en-us/library/hh441729.aspx}
@@ -26485,8 +26942,8 @@ export class BoxEmitter {
 
 /**
  * An orientation given by a pair of unit vectors
- * direction - The unit "direction" vector
- * up - The unit "up" vector
+ * @property direction - The unit "direction" vector
+ * @property up - The unit "up" vector
  */
 export type DirectionUp = {
     direction: Cartesian3;
@@ -26495,9 +26952,9 @@ export type DirectionUp = {
 
 /**
  * An orientation given by numeric heading, pitch, and roll
- * [heading = 0.0] - The heading in radians
- * [pitch = -Math.PI_OVER_TWO] - The pitch in radians
- * [roll = 0.0] - The roll in radians
+ * @property [heading = 0.0] - The heading in radians
+ * @property [pitch = -Math.PI_OVER_TWO] - The pitch in radians
+ * @property [roll = 0.0] - The roll in radians
  */
 export type HeadingPitchRollValues = {
     heading?: number;
@@ -26571,7 +27028,7 @@ export class Camera {
     /**
      * If set, the camera will not be able to rotate past this axis in either direction.
      */
-    constrainedAxis: Cartesian3;
+    constrainedAxis: Cartesian3 | undefined;
     /**
      * The factor multiplied by the the map size used to determine where to clamp the camera position
      * when zooming out from the surface. The default is 1.5. Only valid for 2D and the map is rotatable.
@@ -26700,7 +27157,7 @@ export class Camera {
      *     }
      * });
      * @param options - Object with the following properties:
-     * @param [options.destination] - The final position of the camera in WGS84 (world) coordinates or a rectangle that would be visible from a top-down view.
+     * @param [options.destination] - The final position of the camera in world coordinates or a rectangle that would be visible from a top-down view.
      * @param [options.orientation] - An object that contains either direction and up properties or heading, pitch and roll properties. By default, the direction will point
      * towards the center of the frame in 3D and in the negative z direction in Columbus view. The up direction will point towards local north in 3D and in the positive
      * y direction in Columbus view. Orientation is not used in 2D when in infinite scrolling mode.
@@ -26950,10 +27407,10 @@ export class Camera {
      * @example
      * const canvas = viewer.scene.canvas;
      * const center = new Cesium.Cartesian2(canvas.clientWidth / 2.0, canvas.clientHeight / 2.0);
-     * const ellipsoid = viewer.scene.globe.ellipsoid;
+     * const ellipsoid = viewer.scene.ellipsoid;
      * const result = viewer.camera.pickEllipsoid(center, ellipsoid);
      * @param windowPosition - The x and y coordinates of a pixel.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid to pick.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid to pick.
      * @param [result] - The object onto which to store the result.
      * @returns If the ellipsoid or map was picked,
      * returns the point on the surface of the ellipsoid or map in world
@@ -27024,7 +27481,7 @@ export class Camera {
      *     }
      * });
      * @param options - Object with the following properties:
-     * @param options.destination - The final position of the camera in WGS84 (world) coordinates or a rectangle that would be visible from a top-down view.
+     * @param options.destination - The final position of the camera in world coordinates or a rectangle that would be visible from a top-down view.
      * @param [options.orientation] - An object that contains either direction and up properties or heading, pitch and roll properties. By default, the direction will point
      * towards the center of the frame in 3D and in the negative z direction in Columbus view. The up direction will point towards local north in 3D and in the positive
      * y direction in Columbus view.  Orientation is not used in 2D when in infinite scrolling mode.
@@ -27107,7 +27564,7 @@ export class Camera {
     }): void;
     /**
      * Computes the approximate visible rectangle on the ellipsoid.
-     * @param [ellipsoid = Ellipsoid.WGS84] - The ellipsoid that you want to know the visible region.
+     * @param [ellipsoid = Ellipsoid.default] - The ellipsoid that you want to know the visible region.
      * @param [result] - The rectangle in which to store the result
      * @returns The visible rectangle or undefined if the ellipsoid isn't visible at all.
      */
@@ -28625,65 +29082,68 @@ export class Cesium3DTilesVoxelProvider extends VoxelProvider {
 export namespace Cesium3DTileset {
     /**
      * Initialization options for the Cesium3DTileset constructor
-     * [show = true] - Determines if the tileset will be shown.
-     * [modelMatrix = Matrix4.IDENTITY] - A 4x4 transformation matrix that transforms the tileset's root tile.
-     * [modelUpAxis = Axis.Y] - Which axis is considered up when loading models for tile contents.
-     * [modelForwardAxis = Axis.X] - Which axis is considered forward when loading models for tile contents.
-     * [shadows = ShadowMode.ENABLED] - Determines whether the tileset casts or receives shadows from light sources.
-     * [maximumScreenSpaceError = 16] - The maximum screen space error used to drive level of detail refinement.
-     * [cacheBytes = 536870912] - The size (in bytes) to which the tile cache will be trimmed, if the cache contains tiles not needed for the current view.
-     * [maximumCacheOverflowBytes = 536870912] - The maximum additional memory (in bytes) to allow for cache headroom, if more than {@link Cesium3DTileset#cacheBytes} are needed for the current view.
-     * [cullWithChildrenBounds = true] - Optimization option. Whether to cull tiles using the union of their children bounding volumes.
-     * [cullRequestsWhileMoving = true] - Optimization option. Don't request tiles that will likely be unused when they come back because of the camera's movement. This optimization only applies to stationary tilesets.
-     * [cullRequestsWhileMovingMultiplier = 60.0] - Optimization option. Multiplier used in culling requests while moving. Larger is more aggressive culling, smaller less aggressive culling.
-     * [preloadWhenHidden = false] - Preload tiles when <code>tileset.show</code> is <code>false</code>. Loads tiles as if the tileset is visible but does not render them.
-     * [preloadFlightDestinations = true] - Optimization option. Preload tiles at the camera's flight destination while the camera is in flight.
-     * [preferLeaves = false] - Optimization option. Prefer loading of leaves first.
-     * [dynamicScreenSpaceError = false] - Optimization option. Reduce the screen space error for tiles that are further away from the camera.
-     * [dynamicScreenSpaceErrorDensity = 0.00278] - Density used to adjust the dynamic screen space error, similar to fog density.
-     * [dynamicScreenSpaceErrorFactor = 4.0] - A factor used to increase the computed dynamic screen space error.
-     * [dynamicScreenSpaceErrorHeightFalloff = 0.25] - A ratio of the tileset's height at which the density starts to falloff.
-     * [progressiveResolutionHeightFraction = 0.3] - Optimization option. If between (0.0, 0.5], tiles at or above the screen space error for the reduced screen resolution of <code>progressiveResolutionHeightFraction*screenHeight</code> will be prioritized first. This can help get a quick layer of tiles down while full resolution tiles continue to load.
-     * [foveatedScreenSpaceError = true] - Optimization option. Prioritize loading tiles in the center of the screen by temporarily raising the screen space error for tiles around the edge of the screen. Screen space error returns to normal once all the tiles in the center of the screen as determined by the {@link Cesium3DTileset#foveatedConeSize} are loaded.
-     * [foveatedConeSize = 0.1] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control the cone size that determines which tiles are deferred. Tiles that are inside this cone are loaded immediately. Tiles outside the cone are potentially deferred based on how far outside the cone they are and their screen space error. This is controlled by {@link Cesium3DTileset#foveatedInterpolationCallback} and {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation}. Setting this to 0.0 means the cone will be the line formed by the camera position and its view direction. Setting this to 1.0 means the cone encompasses the entire field of view of the camera, disabling the effect.
-     * [foveatedMinimumScreenSpaceErrorRelaxation = 0.0] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control the starting screen space error relaxation for tiles outside the foveated cone. The screen space error will be raised starting with tileset value up to {@link Cesium3DTileset#maximumScreenSpaceError} based on the provided {@link Cesium3DTileset#foveatedInterpolationCallback}.
-     * [foveatedInterpolationCallback = Math.lerp] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control how much to raise the screen space error for tiles outside the foveated cone, interpolating between {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation} and {@link Cesium3DTileset#maximumScreenSpaceError}
-     * [foveatedTimeDelay = 0.2] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control how long in seconds to wait after the camera stops moving before deferred tiles start loading in. This time delay prevents requesting tiles around the edges of the screen when the camera is moving. Setting this to 0.0 will immediately request all tiles in any given view.
-     * [skipLevelOfDetail = false] - Optimization option. Determines if level of detail skipping should be applied during the traversal.
-     * [baseScreenSpaceError = 1024] - When <code>skipLevelOfDetail</code> is <code>true</code>, the screen space error that must be reached before skipping levels of detail.
-     * [skipScreenSpaceErrorFactor = 16] - When <code>skipLevelOfDetail</code> is <code>true</code>, a multiplier defining the minimum screen space error to skip. Used in conjunction with <code>skipLevels</code> to determine which tiles to load.
-     * [skipLevels = 1] - When <code>skipLevelOfDetail</code> is <code>true</code>, a constant defining the minimum number of levels to skip when loading tiles. When it is 0, no levels are skipped. Used in conjunction with <code>skipScreenSpaceErrorFactor</code> to determine which tiles to load.
-     * [immediatelyLoadDesiredLevelOfDetail = false] - When <code>skipLevelOfDetail</code> is <code>true</code>, only tiles that meet the maximum screen space error will ever be downloaded. Skipping factors are ignored and just the desired tiles are loaded.
-     * [loadSiblings = false] - When <code>skipLevelOfDetail</code> is <code>true</code>, determines whether siblings of visible tiles are always downloaded during traversal.
-     * [clippingPlanes] - The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
-     * [classificationType] - Determines whether terrain, 3D Tiles or both will be classified by this tileset. See {@link Cesium3DTileset#classificationType} for details about restrictions and limitations.
-     * [ellipsoid = Ellipsoid.WGS84] - The ellipsoid determining the size and shape of the globe.
-     * [pointCloudShading] - Options for constructing a {@link PointCloudShading} object to control point attenuation based on geometric error and lighting.
-     * [lightColor] - The light color when shading models. When <code>undefined</code> the scene's light color is used instead.
-     * [imageBasedLighting] - The properties for managing image-based lighting for this tileset.
-     * [backFaceCulling = true] - Whether to cull back-facing geometry. When true, back face culling is determined by the glTF material's doubleSided property; when false, back face culling is disabled.
-     * [enableShowOutline = true] - Whether to enable outlines for models using the {@link https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/CESIUM_primitive_outline|CESIUM_primitive_outline} extension. This can be set to false to avoid the additional processing of geometry at load time. When false, the showOutlines and outlineColor options are ignored.
-     * [showOutline = true] - Whether to display the outline for models using the {@link https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/CESIUM_primitive_outline|CESIUM_primitive_outline} extension. When true, outlines are displayed. When false, outlines are not displayed.
-     * [outlineColor = Color.BLACK] - The color to use when rendering outlines.
-     * [vectorClassificationOnly = false] - Indicates that only the tileset's vector tiles should be used for classification.
-     * [vectorKeepDecodedPositions = false] - Whether vector tiles should keep decoded positions in memory. This is used with {@link Cesium3DTileFeature.getPolylinePositions}.
-     * [featureIdLabel = "featureId_0"] - Label of the feature ID set to use for picking and styling. For EXT_mesh_features, this is the feature ID's label property, or "featureId_N" (where N is the index in the featureIds array) when not specified. EXT_feature_metadata did not have a label field, so such feature ID sets are always labeled "featureId_N" where N is the index in the list of all feature Ids, where feature ID attributes are listed before feature ID textures. If featureIdLabel is an integer N, it is converted to the string "featureId_N" automatically. If both per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
-     * [instanceFeatureIdLabel = "instanceFeatureId_0"] - Label of the instance feature ID set used for picking and styling. If instanceFeatureIdLabel is set to an integer N, it is converted to the string "instanceFeatureId_N" automatically. If both per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
-     * [showCreditsOnScreen = false] - Whether to display the credits of this tileset on screen.
-     * [splitDirection = SplitDirection.NONE] - The {@link SplitDirection} split to apply to this tileset.
-     * [projectTo2D = false] - Whether to accurately project the tileset to 2D. If this is true, the tileset will be projected accurately to 2D, but it will use more memory to do so. If this is false, the tileset will use less memory and will still render in 2D / CV mode, but its projected positions may be inaccurate. This cannot be set after the tileset has loaded.
-     * [debugHeatmapTilePropertyName] - The tile variable to colorize as a heatmap. All rendered tiles will be colorized relative to each other's specified variable value.
-     * [debugFreezeFrame = false] - For debugging only. Determines if only the tiles from last frame should be used for rendering.
-     * [debugColorizeTiles = false] - For debugging only. When true, assigns a random color to each tile.
-     * [enableDebugWireframe] - For debugging only. This must be true for debugWireframe to work in WebGL1. This cannot be set after the tileset has loaded.
-     * [debugWireframe = false] - For debugging only. When true, render's each tile's content as a wireframe.
-     * [debugShowBoundingVolume = false] - For debugging only. When true, renders the bounding volume for each tile.
-     * [debugShowContentBoundingVolume = false] - For debugging only. When true, renders the bounding volume for each tile's content.
-     * [debugShowViewerRequestVolume = false] - For debugging only. When true, renders the viewer request volume for each tile.
-     * [debugShowGeometricError = false] - For debugging only. When true, draws labels to indicate the geometric error of each tile.
-     * [debugShowRenderingStatistics = false] - For debugging only. When true, draws labels to indicate the number of commands, points, triangles and features for each tile.
-     * [debugShowMemoryUsage = false] - For debugging only. When true, draws labels to indicate the texture and geometry memory in megabytes used by each tile.
-     * [debugShowUrl = false] - For debugging only. When true, draws labels to indicate the url of each tile.
+     * @property [show = true] - Determines if the tileset will be shown.
+     * @property [modelMatrix = Matrix4.IDENTITY] - A 4x4 transformation matrix that transforms the tileset's root tile.
+     * @property [modelUpAxis = Axis.Y] - Which axis is considered up when loading models for tile contents.
+     * @property [modelForwardAxis = Axis.X] - Which axis is considered forward when loading models for tile contents.
+     * @property [shadows = ShadowMode.ENABLED] - Determines whether the tileset casts or receives shadows from light sources.
+     * @property [maximumScreenSpaceError = 16] - The maximum screen space error used to drive level of detail refinement.
+     * @property [cacheBytes = 536870912] - The size (in bytes) to which the tile cache will be trimmed, if the cache contains tiles not needed for the current view.
+     * @property [maximumCacheOverflowBytes = 536870912] - The maximum additional memory (in bytes) to allow for cache headroom, if more than {@link Cesium3DTileset#cacheBytes} are needed for the current view.
+     * @property [cullWithChildrenBounds = true] - Optimization option. Whether to cull tiles using the union of their children bounding volumes.
+     * @property [cullRequestsWhileMoving = true] - Optimization option. Don't request tiles that will likely be unused when they come back because of the camera's movement. This optimization only applies to stationary tilesets.
+     * @property [cullRequestsWhileMovingMultiplier = 60.0] - Optimization option. Multiplier used in culling requests while moving. Larger is more aggressive culling, smaller less aggressive culling.
+     * @property [preloadWhenHidden = false] - Preload tiles when <code>tileset.show</code> is <code>false</code>. Loads tiles as if the tileset is visible but does not render them.
+     * @property [preloadFlightDestinations = true] - Optimization option. Preload tiles at the camera's flight destination while the camera is in flight.
+     * @property [preferLeaves = false] - Optimization option. Prefer loading of leaves first.
+     * @property [dynamicScreenSpaceError = true] - Optimization option. For street-level horizon views, use lower resolution tiles far from the camera. This reduces the amount of data loaded and improves tileset loading time with a slight drop in visual quality in the distance.
+     * @property [dynamicScreenSpaceErrorDensity = 2.0e-4] - Similar to {@link Fog#density}, this option controls the camera distance at which the {@link Cesium3DTileset#dynamicScreenSpaceError} optimization applies. Larger values will cause tiles closer to the camera to be affected.
+     * @property [dynamicScreenSpaceErrorFactor = 24.0] - A parameter that controls the intensity of the {@link Cesium3DTileset#dynamicScreenSpaceError} optimization for tiles on the horizon. Larger values cause lower resolution tiles to load, improving runtime performance at a slight reduction of visual quality.
+     * @property [dynamicScreenSpaceErrorHeightFalloff = 0.25] - A ratio of the tileset's height that determines where "street level" camera views occur. When the camera is below this height, the {@link Cesium3DTileset#dynamicScreenSpaceError} optimization will have the maximum effect, and it will roll off above this value.
+     * @property [progressiveResolutionHeightFraction = 0.3] - Optimization option. If between (0.0, 0.5], tiles at or above the screen space error for the reduced screen resolution of <code>progressiveResolutionHeightFraction*screenHeight</code> will be prioritized first. This can help get a quick layer of tiles down while full resolution tiles continue to load.
+     * @property [foveatedScreenSpaceError = true] - Optimization option. Prioritize loading tiles in the center of the screen by temporarily raising the screen space error for tiles around the edge of the screen. Screen space error returns to normal once all the tiles in the center of the screen as determined by the {@link Cesium3DTileset#foveatedConeSize} are loaded.
+     * @property [foveatedConeSize = 0.1] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control the cone size that determines which tiles are deferred. Tiles that are inside this cone are loaded immediately. Tiles outside the cone are potentially deferred based on how far outside the cone they are and their screen space error. This is controlled by {@link Cesium3DTileset#foveatedInterpolationCallback} and {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation}. Setting this to 0.0 means the cone will be the line formed by the camera position and its view direction. Setting this to 1.0 means the cone encompasses the entire field of view of the camera, disabling the effect.
+     * @property [foveatedMinimumScreenSpaceErrorRelaxation = 0.0] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control the starting screen space error relaxation for tiles outside the foveated cone. The screen space error will be raised starting with tileset value up to {@link Cesium3DTileset#maximumScreenSpaceError} based on the provided {@link Cesium3DTileset#foveatedInterpolationCallback}.
+     * @property [foveatedInterpolationCallback = Math.lerp] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control how much to raise the screen space error for tiles outside the foveated cone, interpolating between {@link Cesium3DTileset#foveatedMinimumScreenSpaceErrorRelaxation} and {@link Cesium3DTileset#maximumScreenSpaceError}
+     * @property [foveatedTimeDelay = 0.2] - Optimization option. Used when {@link Cesium3DTileset#foveatedScreenSpaceError} is true to control how long in seconds to wait after the camera stops moving before deferred tiles start loading in. This time delay prevents requesting tiles around the edges of the screen when the camera is moving. Setting this to 0.0 will immediately request all tiles in any given view.
+     * @property [skipLevelOfDetail = false] - Optimization option. Determines if level of detail skipping should be applied during the traversal.
+     * @property [baseScreenSpaceError = 1024] - When <code>skipLevelOfDetail</code> is <code>true</code>, the screen space error that must be reached before skipping levels of detail.
+     * @property [skipScreenSpaceErrorFactor = 16] - When <code>skipLevelOfDetail</code> is <code>true</code>, a multiplier defining the minimum screen space error to skip. Used in conjunction with <code>skipLevels</code> to determine which tiles to load.
+     * @property [skipLevels = 1] - When <code>skipLevelOfDetail</code> is <code>true</code>, a constant defining the minimum number of levels to skip when loading tiles. When it is 0, no levels are skipped. Used in conjunction with <code>skipScreenSpaceErrorFactor</code> to determine which tiles to load.
+     * @property [immediatelyLoadDesiredLevelOfDetail = false] - When <code>skipLevelOfDetail</code> is <code>true</code>, only tiles that meet the maximum screen space error will ever be downloaded. Skipping factors are ignored and just the desired tiles are loaded.
+     * @property [loadSiblings = false] - When <code>skipLevelOfDetail</code> is <code>true</code>, determines whether siblings of visible tiles are always downloaded during traversal.
+     * @property [clippingPlanes] - The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
+     * @property [clippingPolygons] - The {@link ClippingPolygonCollection} used to selectively disable rendering the tileset.
+     * @property [classificationType] - Determines whether terrain, 3D Tiles or both will be classified by this tileset. See {@link Cesium3DTileset#classificationType} for details about restrictions and limitations.
+     * @property [ellipsoid = Ellipsoid.WGS84] - The ellipsoid determining the size and shape of the globe.
+     * @property [pointCloudShading] - Options for constructing a {@link PointCloudShading} object to control point attenuation based on geometric error and lighting.
+     * @property [lightColor] - The light color when shading models. When <code>undefined</code> the scene's light color is used instead.
+     * @property [imageBasedLighting] - The properties for managing image-based lighting for this tileset.
+     * @property [backFaceCulling = true] - Whether to cull back-facing geometry. When true, back face culling is determined by the glTF material's doubleSided property; when false, back face culling is disabled.
+     * @property [enableShowOutline = true] - Whether to enable outlines for models using the {@link https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/CESIUM_primitive_outline|CESIUM_primitive_outline} extension. This can be set to false to avoid the additional processing of geometry at load time. When false, the showOutlines and outlineColor options are ignored.
+     * @property [showOutline = true] - Whether to display the outline for models using the {@link https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/CESIUM_primitive_outline|CESIUM_primitive_outline} extension. When true, outlines are displayed. When false, outlines are not displayed.
+     * @property [outlineColor = Color.BLACK] - The color to use when rendering outlines.
+     * @property [vectorClassificationOnly = false] - Indicates that only the tileset's vector tiles should be used for classification.
+     * @property [vectorKeepDecodedPositions = false] - Whether vector tiles should keep decoded positions in memory. This is used with {@link Cesium3DTileFeature.getPolylinePositions}.
+     * @property [featureIdLabel = "featureId_0"] - Label of the feature ID set to use for picking and styling. For EXT_mesh_features, this is the feature ID's label property, or "featureId_N" (where N is the index in the featureIds array) when not specified. EXT_feature_metadata did not have a label field, so such feature ID sets are always labeled "featureId_N" where N is the index in the list of all feature Ids, where feature ID attributes are listed before feature ID textures. If featureIdLabel is an integer N, it is converted to the string "featureId_N" automatically. If both per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
+     * @property [instanceFeatureIdLabel = "instanceFeatureId_0"] - Label of the instance feature ID set used for picking and styling. If instanceFeatureIdLabel is set to an integer N, it is converted to the string "instanceFeatureId_N" automatically. If both per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
+     * @property [showCreditsOnScreen = false] - Whether to display the credits of this tileset on screen.
+     * @property [splitDirection = SplitDirection.NONE] - The {@link SplitDirection} split to apply to this tileset.
+     * @property [enableCollision = false] - When <code>true</code>, enables collisions for camera or CPU picking. While this is <code>true</code> the camera will be prevented from going below the tileset surface if {@link ScreenSpaceCameraController#enableCollisionDetection} is true.
+     * @property [projectTo2D = false] - Whether to accurately project the tileset to 2D. If this is true, the tileset will be projected accurately to 2D, but it will use more memory to do so. If this is false, the tileset will use less memory and will still render in 2D / CV mode, but its projected positions may be inaccurate. This cannot be set after the tileset has been created.
+     * @property [enablePick = false] - Whether to allow collision and CPU picking with <code>pick</code> when using WebGL 1. If using WebGL 2 or above, this option will be ignored. If using WebGL 1 and this is true, the <code>pick</code> operation will work correctly, but it will use more memory to do so. If running with WebGL 1 and this is false, the model will use less memory, but <code>pick</code> will always return <code>undefined</code>. This cannot be set after the tileset has loaded.
+     * @property [debugHeatmapTilePropertyName] - The tile variable to colorize as a heatmap. All rendered tiles will be colorized relative to each other's specified variable value.
+     * @property [debugFreezeFrame = false] - For debugging only. Determines if only the tiles from last frame should be used for rendering.
+     * @property [debugColorizeTiles = false] - For debugging only. When true, assigns a random color to each tile.
+     * @property [enableDebugWireframe = false] - For debugging only. This must be true for debugWireframe to work in WebGL1. This cannot be set after the tileset has been created.
+     * @property [debugWireframe = false] - For debugging only. When true, render's each tile's content as a wireframe.
+     * @property [debugShowBoundingVolume = false] - For debugging only. When true, renders the bounding volume for each tile.
+     * @property [debugShowContentBoundingVolume = false] - For debugging only. When true, renders the bounding volume for each tile's content.
+     * @property [debugShowViewerRequestVolume = false] - For debugging only. When true, renders the viewer request volume for each tile.
+     * @property [debugShowGeometricError = false] - For debugging only. When true, draws labels to indicate the geometric error of each tile.
+     * @property [debugShowRenderingStatistics = false] - For debugging only. When true, draws labels to indicate the number of commands, points, triangles and features for each tile.
+     * @property [debugShowMemoryUsage = false] - For debugging only. When true, draws labels to indicate the texture and geometry memory in megabytes used by each tile.
+     * @property [debugShowUrl = false] - For debugging only. When true, draws labels to indicate the url of each tile.
      */
     type ConstructorOptions = {
         show?: boolean;
@@ -28717,6 +29177,7 @@ export namespace Cesium3DTileset {
         immediatelyLoadDesiredLevelOfDetail?: boolean;
         loadSiblings?: boolean;
         clippingPlanes?: ClippingPlaneCollection;
+        clippingPolygons?: ClippingPolygonCollection;
         classificationType?: ClassificationType;
         ellipsoid?: Ellipsoid;
         pointCloudShading?: any;
@@ -28732,7 +29193,9 @@ export namespace Cesium3DTileset {
         instanceFeatureIdLabel?: string | number;
         showCreditsOnScreen?: boolean;
         splitDirection?: SplitDirection;
+        enableCollision?: boolean;
         projectTo2D?: boolean;
+        enablePick?: boolean;
         debugHeatmapTilePropertyName?: string;
         debugFreezeFrame?: boolean;
         debugColorizeTiles?: boolean;
@@ -28773,6 +29236,17 @@ export namespace Cesium3DTileset {
  *   console.error(`Error creating tileset: ${error}`);
  * }
  * @example
+ * // Turn on camera collisions with the tileset.
+ * try {
+ *   const tileset = await Cesium.Cesium3DTileset.fromUrl(
+ *      "http://localhost:8002/tilesets/Seattle/tileset.json",
+ *      { enableCollision: true }
+ *   );
+ *   scene.primitives.add(tileset);
+ * } catch (error) {
+ *   console.error(`Error creating tileset: ${error}`);
+ * }
+ * @example
  * // Common setting for the skipLevelOfDetail optimization
  * const tileset = await Cesium.Cesium3DTileset.fromUrl(
  *   "http://localhost:8002/tilesets/Seattle/tileset.json", {
@@ -28790,8 +29264,8 @@ export namespace Cesium3DTileset {
  * const tileset = await Cesium.Cesium3DTileset.fromUrl(
  *   "http://localhost:8002/tilesets/Seattle/tileset.json", {
  *      dynamicScreenSpaceError: true,
- *      dynamicScreenSpaceErrorDensity: 0.00278,
- *      dynamicScreenSpaceErrorFactor: 4.0,
+ *      dynamicScreenSpaceErrorDensity: 2.0e-4,
+ *      dynamicScreenSpaceErrorFactor: 24.0,
  *      dynamicScreenSpaceErrorHeightFalloff: 0.25
  * });
  * scene.primitives.add(tileset);
@@ -28824,11 +29298,11 @@ export class Cesium3DTileset {
      */
     preloadFlightDestinations: boolean;
     /**
-     * Optimization option. Whether the tileset should refine based on a dynamic screen space error. Tiles that are further
-     * away will be rendered with lower detail than closer tiles. This improves performance by rendering fewer
-     * tiles and making less requests, but may result in a slight drop in visual quality for tiles in the distance.
-     * The algorithm is biased towards "street views" where the camera is close to the ground plane of the tileset and looking
-     * at the horizon. In addition results are more accurate for tightly fitting bounding volumes like box and region.
+     * Optimization option. For street-level horizon views, use lower resolution tiles far from the camera. This reduces
+     * the amount of data loaded and improves tileset loading time with a slight drop in visual quality in the distance.
+     * <p>
+     * This optimization is strongest when the camera is close to the ground plane of the tileset and looking at the
+     * horizon. Furthermore, the results are more accurate for tightly fitting bounding volumes like box and region.
      */
     dynamicScreenSpaceError: boolean;
     /**
@@ -28850,33 +29324,43 @@ export class Cesium3DTileset {
      */
     foveatedTimeDelay: number;
     /**
-     * A scalar that determines the density used to adjust the dynamic screen space error, similar to {@link Fog}. Increasing this
-     * value has the effect of increasing the maximum screen space error for all tiles, but in a non-linear fashion.
-     * The error starts at 0.0 and increases exponentially until a midpoint is reached, and then approaches 1.0 asymptotically.
-     * This has the effect of keeping high detail in the closer tiles and lower detail in the further tiles, with all tiles
-     * beyond a certain distance all roughly having an error of 1.0.
+     * Similar to {@link Fog#density}, this option controls the camera distance at which the {@link Cesium3DTileset#dynamicScreenSpaceError}
+     * optimization applies. Larger values will cause tiles closer to the camera to be affected. This value must be
+     * non-negative.
      * <p>
-     * The dynamic error is in the range [0.0, 1.0) and is multiplied by <code>dynamicScreenSpaceErrorFactor</code> to produce the
-     * final dynamic error. This dynamic error is then subtracted from the tile's actual screen space error.
+     * This optimization works by rolling off the tile screen space error (SSE) with camera distance like a bell curve.
+     * This has the effect of selecting lower resolution tiles far from the camera. Near the camera, no adjustment is
+     * made. For tiles further away, the SSE is reduced by up to {@link Cesium3DTileset#dynamicScreenSpaceErrorFactor}
+     * (measured in pixels of error).
      * </p>
      * <p>
-     * Increasing <code>dynamicScreenSpaceErrorDensity</code> has the effect of moving the error midpoint closer to the camera.
-     * It is analogous to moving fog closer to the camera.
+     * Increasing the density makes the bell curve narrower so tiles closer to the camera are affected. This is analagous
+     * to moving fog closer to the camera.
+     * </p>
+     * <p>
+     * When the density is 0, the optimization will have no effect on the tileset.
      * </p>
      */
     dynamicScreenSpaceErrorDensity: number;
     /**
-     * A factor used to increase the screen space error of tiles for dynamic screen space error. As this value increases less tiles
-     * are requested for rendering and tiles in the distance will have lower detail. If set to zero, the feature will be disabled.
+     * A parameter that controls the intensity of the {@link Cesium3DTileset#dynamicScreenSpaceError} optimization for
+     * tiles on the horizon. Larger values cause lower resolution tiles to load, improving runtime performance at a slight
+     * reduction of visual quality. The value must be non-negative.
+     * <p>
+     * More specifically, this parameter represents the maximum adjustment to screen space error (SSE) in pixels for tiles
+     * far away from the camera. See {@link Cesium3DTileset#dynamicScreenSpaceErrorDensity} for more details about how
+     * this optimization works.
+     * </p>
+     * <p>
+     * When the SSE factor is set to 0, the optimization will have no effect on the tileset.
+     * </p>
      */
     dynamicScreenSpaceErrorFactor: number;
     /**
-     * A ratio of the tileset's height at which the density starts to falloff. If the camera is below this height the
-     * full computed density is applied, otherwise the density falls off. This has the effect of higher density at
-     * street level views.
+     * A ratio of the tileset's height that determines "street level" for the {@link Cesium3DTileset#dynamicScreenSpaceError}
+     * optimization. When the camera is below this height, the dynamic screen space error optimization will have the maximum
+     * effect, and it will roll off above this value. Valid values are between 0.0 and 1.0.
      * <p>
-     * Valid values are between 0.0 and 1.0.
-     * </p>
      */
     dynamicScreenSpaceErrorHeightFalloff: number;
     /**
@@ -29113,6 +29597,10 @@ export class Cesium3DTileset {
      */
     splitDirection: SplitDirection;
     /**
+     * If <code>true</code>, allows collisions for camera collisions or picking. While this is  <code>true</code> the camera will be prevented from going in or below the tileset surface if {@link ScreenSpaceCameraController#enableCollisionDetection} is true. This can have performance implecations if the tileset contains tile with a larger number of vertices.
+     */
+    enableCollision: boolean;
+    /**
      * This property is for debugging only; it is not optimized for production use.
      * <p>
      * Determines if only the tiles from last frame should be used for rendering.  This
@@ -29209,6 +29697,10 @@ export class Cesium3DTileset {
      * The {@link ClippingPlaneCollection} used to selectively disable rendering the tileset.
      */
     clippingPlanes: ClippingPlaneCollection;
+    /**
+     * The {@link ClippingPolygonCollection} used to selectively disable rendering the tileset.
+     */
+    clippingPolygons: ClippingPolygonCollection;
     /**
      * Gets the tileset's properties dictionary object, which contains metadata about per-feature properties.
      * <p>
@@ -29380,6 +29872,7 @@ export class Cesium3DTileset {
      *     <li>The glTF cannot contain morph targets, skins, or animations.</li>
      *     <li>The glTF cannot contain the <code>EXT_mesh_gpu_instancing</code> extension.</li>
      *     <li>Only meshes with TRIANGLES can be used to classify other assets.</li>
+     *     <li>The meshes must be watertight.</li>
      *     <li>The <code>POSITION</code> semantic is required.</li>
      *     <li>If <code>_BATCHID</code>s and an index buffer are both present, all indices with the same batch id must occupy contiguous sections of the index buffer.</li>
      *     <li>If <code>_BATCHID</code>s are present with no index buffer, all positions with the same batch id must occupy contiguous sections of the position buffer.</li>
@@ -29388,6 +29881,9 @@ export class Cesium3DTileset {
      * <p>
      * Additionally, classification is not supported for points or instanced 3D
      * models.
+     * </p>
+     * <p>
+     * The 3D Tiles or terrain receiving the classification must be opaque.
      * </p>
      */
     readonly classificationType: ClassificationType;
@@ -29468,9 +29964,9 @@ export class Cesium3DTileset {
      *   console.error(`Error creating tileset: ${error}`);
      * }
      * @param assetId - The Cesium ion asset id.
-     * @param options - An object describing initialization options
+     * @param [options] - An object describing initialization options
      */
-    static fromIonAssetId(assetId: number, options: Cesium3DTileset.ConstructorOptions): Promise<Cesium3DTileset>;
+    static fromIonAssetId(assetId: number, options?: Cesium3DTileset.ConstructorOptions): Promise<Cesium3DTileset>;
     /**
      * Creates a {@link https://github.com/CesiumGS/3d-tiles/tree/main/specification|3D Tiles tileset},
      * used for streaming massive heterogeneous 3D geospatial datasets.
@@ -29501,8 +29997,8 @@ export class Cesium3DTileset {
      * const tileset = await Cesium.Cesium3DTileset.fromUrl(
      *   "http://localhost:8002/tilesets/Seattle/tileset.json", {
      *      dynamicScreenSpaceError: true,
-     *      dynamicScreenSpaceErrorDensity: 0.00278,
-     *      dynamicScreenSpaceErrorFactor: 4.0,
+     *      dynamicScreenSpaceErrorDensity: 2.0e-4,
+     *      dynamicScreenSpaceErrorFactor: 24.0,
      *      dynamicScreenSpaceErrorHeightFalloff: 0.25
      * });
      * scene.primitives.add(tileset);
@@ -29557,6 +30053,18 @@ export class Cesium3DTileset {
      * tileset = tileset && tileset.destroy();
      */
     destroy(): void;
+    /**
+     * Get the height of the loaded surface at a given cartographic. This function will only take into account meshes for loaded tiles, not neccisarily the most detailed tiles available for a tileset. This function will always return undefined when sampling a point cloud.
+     * @example
+     * const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(124624234);
+     * scene.primitives.add(tileset);
+     *
+     * const height = tileset.getHeight(scene.camera.positionCartographic, scene);
+     * @param cartographic - The cartographic for which to find the height.
+     * @param scene - The scene where visualization is taking place.
+     * @returns The height of the cartographic or undefined if it could not be found.
+     */
+    getHeight(cartographic: Cartographic, scene: Scene): number | undefined;
 }
 
 /**
@@ -29949,6 +30457,200 @@ export class ClippingPlaneCollection {
 }
 
 /**
+ * A geodesic polygon to be used with {@link ClippingPlaneCollection} for selectively hiding regions in a model, a 3D tileset, or the globe.
+ * @example
+ * const positions = Cesium.Cartesian3.fromRadiansArray([
+ *     -1.3194369277314022,
+ *     0.6988062530900625,
+ *     -1.31941,
+ *     0.69879,
+ *     -1.3193955980204217,
+ *     0.6988091578771254,
+ *     -1.3193931220959367,
+ *     0.698743632490865,
+ *     -1.3194358224045408,
+ *     0.6987471965556998,
+ * ]);
+ *
+ * const polygon = new Cesium.ClippingPolygon({
+ *     positions: positions
+ * });
+ * @param options - Object with the following properties:
+ * @param options.positions - A list of three or more Cartesian coordinates defining the outer ring of the clipping polygon.
+ */
+export class ClippingPolygon {
+    constructor(options: {
+        positions: Cartesian3[];
+        ellipsoid?: Ellipsoid;
+    });
+    /**
+     * Returns the total number of positions in the polygon, include any holes.
+     */
+    readonly length: number;
+    /**
+     * Returns the outer ring of positions.
+     */
+    readonly positions: Cartesian3[];
+    /**
+     * Returns the ellipsoid used to project the polygon onto surfaces when clipping.
+     */
+    readonly ellipsoid: Ellipsoid;
+    /**
+     * Clones the ClippingPolygon without setting its ownership.
+     * @param polygon - The ClippingPolygon to be cloned
+     * @param [result] - The object on which to store the cloned parameters.
+     * @returns a clone of the input ClippingPolygon
+     */
+    static clone(polygon: ClippingPolygon, result?: ClippingPolygon): ClippingPolygon;
+    /**
+     * Compares the provided ClippingPolygons and returns
+     * <code>true</code> if they are equal, <code>false</code> otherwise.
+     * @param left - The first polygon.
+     * @param right - The second polygon.
+     * @returns <code>true</code> if left and right are equal, <code>false</code> otherwise.
+     */
+    static equals(left: Plane, right: Plane): boolean;
+    /**
+     * Computes a cartographic rectangle which encloses the polygon defined by the list of positions, including cases over the international date line and the poles.
+     * @param [result] - An object in which to store the result.
+     * @returns The result rectangle
+     */
+    computeRectangle(result?: Rectangle): Rectangle;
+}
+
+/**
+ * Specifies a set of clipping polygons. Clipping polygons selectively disable rendering in a region
+ * inside or outside the specified list of {@link ClippingPolygon} objects for a single glTF model, 3D Tileset, or the globe.
+ *
+ * Clipping Polygons are only supported in WebGL 2 contexts.
+ * @example
+ * const positions = Cesium.Cartesian3.fromRadiansArray([
+ *     -1.3194369277314022,
+ *     0.6988062530900625,
+ *     -1.31941,
+ *     0.69879,
+ *     -1.3193955980204217,
+ *     0.6988091578771254,
+ *     -1.3193931220959367,
+ *     0.698743632490865,
+ *     -1.3194358224045408,
+ *     0.6987471965556998,
+ * ]);
+ *
+ * const polygon = new Cesium.ClippingPolygon({
+ *     positions: positions
+ * });
+ *
+ * const polygons = new Cesium.ClippingPolygonCollection({
+ *    polygons: [ polygon ]
+ * });
+ * @param [options] - Object with the following properties:
+ * @param [options.polygons = []] - An array of {@link ClippingPolygon} objects used to selectively disable rendering on the inside of each polygon.
+ * @param [options.enabled = true] - Determines whether the clipping polygons are active.
+ * @param [options.inverse = false] - If true, a region will be clipped if it is outside of every polygon in the collection. Otherwise, a region will only be clipped if it is on the inside of any polygon.
+ */
+export class ClippingPolygonCollection {
+    constructor(options?: {
+        polygons?: ClippingPolygon[];
+        enabled?: boolean;
+        inverse?: boolean;
+    });
+    /**
+     * An event triggered when a new clipping polygon is added to the collection.  Event handlers
+     * are passed the new polygon and the index at which it was added.
+     */
+    polygonAdded: Event;
+    /**
+     * An event triggered when a new clipping polygon is removed from the collection.  Event handlers
+     * are passed the new polygon and the index from which it was removed.
+     */
+    polygonRemoved: Event;
+    /**
+     * Returns the number of polygons in this collection.  This is commonly used with
+     * {@link ClippingPolygonCollection#get} to iterate over all the polygons
+     * in the collection.
+     */
+    readonly length: number;
+    /**
+     * Adds the specified {@link ClippingPolygon} to the collection to be used to selectively disable rendering
+     * on the inside of each polygon. Use {@link ClippingPolygonCollection#unionClippingRegions} to modify
+     * how modify the clipping behavior of multiple polygons.
+     * @example
+     * const polygons = new Cesium.ClippingPolygonCollection();
+     *
+     * const positions = Cesium.Cartesian3.fromRadiansArray([
+     *     -1.3194369277314022,
+     *     0.6988062530900625,
+     *     -1.31941,
+     *     0.69879,
+     *     -1.3193955980204217,
+     *     0.6988091578771254,
+     *     -1.3193931220959367,
+     *     0.698743632490865,
+     *     -1.3194358224045408,
+     *     0.6987471965556998,
+     * ]);
+     *
+     * polygons.add(new Cesium.ClippingPolygon({
+     *     positions: positions
+     * }));
+     * @param polygon - The ClippingPolygon to add to the collection.
+     * @returns The added ClippingPolygon.
+     */
+    add(polygon: ClippingPolygon): ClippingPolygon;
+    /**
+     * Returns the clipping polygon in the collection at the specified index.  Indices are zero-based
+     * and increase as polygons are added.  Removing a polygon polygon all polygons after
+     * it to the left, changing their indices.  This function is commonly used with
+     * {@link ClippingPolygonCollection#length} to iterate over all the polygons
+     * in the collection.
+     * @param index - The zero-based index of the polygon.
+     * @returns The ClippingPolygon at the specified index.
+     */
+    get(index: number): ClippingPolygon;
+    /**
+     * Checks whether this collection contains a ClippingPolygon equal to the given ClippingPolygon.
+     * @param polygon - The ClippingPolygon to check for.
+     * @returns true if this collection contains the ClippingPolygon, false otherwise.
+     */
+    contains(polygon: ClippingPolygon): boolean;
+    /**
+     * Removes the first occurrence of the given ClippingPolygon from the collection.
+     * @returns <code>true</code> if the polygon was removed; <code>false</code> if the polygon was not found in the collection.
+     */
+    remove(polygon: ClippingPolygon): boolean;
+    /**
+     * Removes all polygons from the collection.
+     */
+    removeAll(): void;
+    /**
+     * Function for checking if the context will allow clipping polygons, which require floating point textures.
+     * @param scene - The scene that will contain clipped objects and clipping textures.
+     * @returns <code>true</code> if the context supports clipping polygons.
+     */
+    static isSupported(scene: Scene | any): boolean;
+    /**
+     * Returns true if this object was destroyed; otherwise, false.
+     * <br /><br />
+     * If this object was destroyed, it should not be used; calling any function other than
+     * <code>isDestroyed</code> will result in a {@link DeveloperError} exception.
+     * @returns <code>true</code> if this object was destroyed; otherwise, <code>false</code>.
+     */
+    isDestroyed(): boolean;
+    /**
+     * Destroys the WebGL resources held by this object.  Destroying an object allows for deterministic
+     * release of WebGL resources, instead of relying on the garbage collector to destroy this object.
+     * <br /><br />
+     * Once an object is destroyed, it should not be used; calling any function other than
+     * <code>isDestroyed</code> will result in a {@link DeveloperError} exception.  Therefore,
+     * assign the return value (<code>undefined</code>) to the object as done in the example.
+     * @example
+     * clippingPolygons = clippingPolygons && clippingPolygons.destroy();
+     */
+    destroy(): void;
+}
+
+/**
  * A renderable collection of clouds in the 3D scene.
  * <br /><br />
  * <div align='center'>
@@ -30228,7 +30930,7 @@ export class ConeEmitter {
  * const credit = new Cesium.Credit('<a href="https://cesium.com/" target="_blank">Cesium</a>');
  * viewer.creditDisplay.addStaticCredit(credit);
  * @param container - The HTML element where credits will be displayed
- * @param [delimiter = ' • '] - The string to separate text credits
+ * @param [delimiter = '•'] - The string to separate text credits
  * @param [viewport = document.body] - The HTML element that will contain the credits popup
  */
 export class CreditDisplay {
@@ -30710,6 +31412,16 @@ export enum DepthFunction {
 }
 
 /**
+ * Returns the type that the given class property has in a GLSL shader.
+ *
+ * It returns the same string as `PropertyTextureProperty.prototype.getGlslType`
+ * for a property texture property with the given class property
+ * @param classProperty - The class property
+ * @returns The GLSL shader type string for the property
+ */
+export function getGlslType(classProperty: MetadataClassProperty): string;
+
+/**
  * A light that gets emitted in a single direction from infinitely far away.
  * @param options - Object with the following properties:
  * @param options.direction - The direction in which light gets emitted.
@@ -30788,6 +31500,28 @@ export class DiscardMissingTileImagePolicy {
      * @returns True if the image should be discarded; otherwise, false.
      */
     shouldDiscardImage(image: HTMLImageElement): boolean;
+}
+
+/**
+ * Atmosphere lighting effects (sky atmosphere, ground atmosphere, fog) can be
+ * further modified with dynamic lighting from the sun or other light source
+ * that changes over time. This enum determines which light source to use.
+ */
+export enum DynamicAtmosphereLightingType {
+    /**
+     * Do not use dynamic atmosphere lighting. Atmosphere lighting effects will
+     * be lit from directly above rather than using the scene's light source.
+     */
+    NONE = 0,
+    /**
+     * Use the scene's current light source for dynamic atmosphere lighting.
+     */
+    SCENE_LIGHT = 1,
+    /**
+     * Force the dynamic atmosphere lighting to always use the sunlight direction,
+     * even if the scene uses a different light source.
+     */
+    SUNLIGHT = 2
 }
 
 /**
@@ -31136,7 +31870,7 @@ export class GetFeatureInfoFormat {
 /**
  * The globe rendered in the scene, including its terrain ({@link Globe#terrainProvider})
  * and imagery layers ({@link Globe#imageryLayers}).  Access the globe using {@link Scene#globe}.
- * @param [ellipsoid = Ellipsoid.WGS84] - Determines the size and shape of the
+ * @param [ellipsoid = Ellipsoid.default] - Determines the size and shape of the
  * globe.
  */
 export class Globe {
@@ -31297,20 +32031,6 @@ export class Globe {
      */
     atmosphereBrightnessShift: number;
     /**
-     * A scalar used to exaggerate the terrain. Defaults to <code>1.0</code> (no exaggeration).
-     * A value of <code>2.0</code> scales the terrain by 2x.
-     * A value of <code>0.0</code> makes the terrain completely flat.
-     * Note that terrain exaggeration will not modify any other primitive as they are positioned relative to the ellipsoid.
-     */
-    terrainExaggeration: number;
-    /**
-     * The height from which terrain is exaggerated. Defaults to <code>0.0</code> (scaled relative to ellipsoid surface).
-     * Terrain that is above this height will scale upwards and terrain that is below this height will scale downwards.
-     * Note that terrain exaggeration will not modify any other primitive as they are positioned relative to the ellipsoid.
-     * If {@link Globe#terrainExaggeration} is <code>1.0</code> this value will have no effect.
-     */
-    terrainExaggerationRelativeHeight: number;
-    /**
      * Whether to show terrain skirts. Terrain skirts are geometry extending downwards from a tile's edges used to hide seams between neighboring tiles.
      * Skirts are always hidden when the camera is underground or translucency is enabled.
      */
@@ -31349,6 +32069,10 @@ export class Globe {
      * A property specifying a {@link ClippingPlaneCollection} used to selectively disable rendering on the outside of each plane.
      */
     clippingPlanes: ClippingPlaneCollection;
+    /**
+     * A property specifying a {@link ClippingPolygonCollection} used to selectively disable rendering inside or outside a list of polygons.
+     */
+    clippingPolygons: ClippingPolygonCollection;
     /**
      * A property specifying a {@link Rectangle} used to limit globe rendering to a cartographic area.
      * Defaults to the maximum extent of cartographic coordinates.
@@ -31544,11 +32268,11 @@ export function removeExtension(gltf: any, extension: string): any;
 export namespace GoogleEarthEnterpriseImageryProvider {
     /**
      * Initialization options for the GoogleEarthEnterpriseImageryProvider constructor
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [tileDiscardPolicy] - The policy that determines if a tile
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [tileDiscardPolicy] - The policy that determines if a tile
      *        is invalid and should be discarded. If this value is not specified, a default
      *        is to discard tiles that fail to download.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         ellipsoid?: Ellipsoid;
@@ -31673,7 +32397,7 @@ export class GoogleEarthEnterpriseImageryProvider {
 export namespace GoogleEarthEnterpriseMapsProvider {
     /**
      * Initialization options for the GoogleEarthEnterpriseMapsProvider constructor
-     * channel - The channel (id) to be used when requesting data from the server.
+     * @property channel - The channel (id) to be used when requesting data from the server.
      *        The channel number can be found by looking at the json file located at:
      *        earth.localdomain/default_map/query?request=Json&vars=geeServerDefs The /default_map path may
      *        differ depending on your Google Earth Enterprise server configuration. Look for the "id" that
@@ -31691,13 +32415,13 @@ export namespace GoogleEarthEnterpriseMapsProvider {
      *            }
      *          ]
      *        }
-     * [path = "/default_map"] - The path of the Google Earth server hosting the imagery.
-     * [maximumLevel] - The maximum level-of-detail supported by the Google Earth
+     * @property [path = "/default_map"] - The path of the Google Earth server hosting the imagery.
+     * @property [maximumLevel] - The maximum level-of-detail supported by the Google Earth
      *        Enterprise server, or undefined if there is no limit.
-     * [tileDiscardPolicy] - The policy that determines if a tile
+     * @property [tileDiscardPolicy] - The policy that determines if a tile
      *        is invalid and should be discarded. To ensure that no tiles are discarded, construct and pass
      *        a {@link NeverTileDiscardPolicy} for this parameter.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
      */
     type ConstructorOptions = {
         channel: number;
@@ -31852,18 +32576,18 @@ export class GoogleEarthEnterpriseMapsProvider {
 export namespace GridImageryProvider {
     /**
      * Initialization options for the GridImageryProvider constructor
-     * [tilingScheme = new GeographicTilingScheme()] - The tiling scheme for which to draw tiles.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+     * @property [tilingScheme = new GeographicTilingScheme()] - The tiling scheme for which to draw tiles.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If the tilingScheme is specified,
      *                    this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
-     *                    parameter is specified, the WGS84 ellipsoid is used.
-     * [cells = 8] - The number of grids cells.
-     * [color = Color(1.0, 1.0, 1.0, 0.4)] - The color to draw grid lines.
-     * [glowColor = Color(0.0, 1.0, 0.0, 0.05)] - The color to draw glow for grid lines.
-     * [glowWidth = 6] - The width of lines used for rendering the line glow effect.
-     * [backgroundColor = Color(0.0, 0.5, 0.0, 0.2)] - Background fill color.
-     * [tileWidth = 256] - The width of the tile for level-of-detail selection purposes.
-     * [tileHeight = 256] - The height of the tile for level-of-detail selection purposes.
-     * [canvasSize = 256] - The size of the canvas used for rendering.
+     *                    parameter is specified, the default ellipsoid is used.
+     * @property [cells = 8] - The number of grids cells.
+     * @property [color = Color(1.0, 1.0, 1.0, 0.4)] - The color to draw grid lines.
+     * @property [glowColor = Color(0.0, 1.0, 0.0, 0.05)] - The color to draw glow for grid lines.
+     * @property [glowWidth = 6] - The width of lines used for rendering the line glow effect.
+     * @property [backgroundColor = Color(0.0, 0.5, 0.0, 0.2)] - Background fill color.
+     * @property [tileWidth = 256] - The width of the tile for level-of-detail selection purposes.
+     * @property [tileHeight = 256] - The height of the tile for level-of-detail selection purposes.
+     * @property [canvasSize = 256] - The size of the canvas used for rendering.
      */
     type ConstructorOptions = {
         tilingScheme?: TilingScheme;
@@ -32399,13 +33123,29 @@ export enum HeightReference {
      */
     NONE = 0,
     /**
-     * The position is clamped to the terrain.
+     * The position is clamped to the terrain and 3D Tiles.
      */
     CLAMP_TO_GROUND = 1,
     /**
-     * The position height is the height above the terrain.
+     * The position height is the height above the terrain and 3D Tiles.
      */
-    RELATIVE_TO_GROUND = 2
+    RELATIVE_TO_GROUND = 2,
+    /**
+     * The position is clamped to terain.
+     */
+    CLAMP_TO_TERRAIN = 3,
+    /**
+     * The position height is the height above terrain.
+     */
+    RELATIVE_TO_TERRAIN = 4,
+    /**
+     * The position is clamped to 3D Tiles.
+     */
+    CLAMP_TO_3D_TILE = 5,
+    /**
+     * The position height is the height above 3D Tiles.
+     */
+    RELATIVE_TO_3D_TILE = 6
 }
 
 /**
@@ -32436,18 +33176,41 @@ export enum HorizontalOrigin {
 export namespace I3SDataProvider {
     /**
      * Initialization options for the I3SDataProvider constructor
-     * [name] - The name of the I3S dataset.
-     * [show = true] - Determines if the dataset will be shown.
-     * [geoidTiledTerrainProvider] - Tiled elevation provider describing an Earth Gravitational Model. If defined, geometry will be shifted based on the offsets given by this provider. Required to position I3S data sets with gravity-related height at the correct location.
-     * [traceFetches = false] - Debug option. When true, log a message whenever an I3S tile is fetched.
-     * [cesium3dTilesetOptions] - Object containing options to pass to an internally created {@link Cesium3DTileset}. See {@link Cesium3DTileset} for list of valid properties. All options can be used with the exception of <code>url</code> and <code>show</code> which are overridden by values from I3SDataProvider.
+     * @example
+     * // Increase LOD by reducing SSE
+     * const cesium3dTilesetOptions = {
+     *   maximumScreenSpaceError: 1,
+     * };
+     * const i3sOptions = {
+     *   cesium3dTilesetOptions: cesium3dTilesetOptions,
+     * };
+     * @example
+     * // Set a custom outline color to replace the color defined in I3S symbology
+     * const cesium3dTilesetOptions = {
+     *   outlineColor: Cesium.Color.BLUE,
+     * };
+     * const i3sOptions = {
+     *   cesium3dTilesetOptions: cesium3dTilesetOptions,
+     *   applySymbology: true,
+     * };
+     * @property [name] - The name of the I3S dataset.
+     * @property [show = true] - Determines if the dataset will be shown.
+     * @property [geoidTiledTerrainProvider] - Tiled elevation provider describing an Earth Gravitational Model. If defined, geometry will be shifted based on the offsets given by this provider. Required to position I3S data sets with gravity-related height at the correct location.
+     * @property [cesium3dTilesetOptions] - Object containing options to pass to an internally created {@link Cesium3DTileset}. See {@link Cesium3DTileset} for list of valid properties. All options can be used with the exception of <code>url</code> and <code>show</code> which are overridden by values from I3SDataProvider.
+     * @property [showFeatures = false] - Determines if the features will be shown.
+     * @property [adjustMaterialAlphaMode = false] - The option to adjust the alpha mode of the material based on the transparency of the vertex color. When <code>true</code>, the alpha mode of the material (if not defined) will be set to BLEND for geometry with any transparency in the color vertex attribute.
+     * @property [applySymbology = false] - Determines if the I3S symbology will be parsed and applied for the layers.
+     * @property [calculateNormals = false] - Determines if the flat normals will be generated for I3S geometry without normals.
      */
     type ConstructorOptions = {
         name?: string;
         show?: boolean;
         geoidTiledTerrainProvider?: ArcGISTiledElevationTerrainProvider | Promise<ArcGISTiledElevationTerrainProvider>;
-        traceFetches?: boolean;
         cesium3dTilesetOptions?: Cesium3DTileset.ConstructorOptions;
+        showFeatures?: boolean;
+        adjustMaterialAlphaMode?: boolean;
+        applySymbology?: boolean;
+        calculateNormals?: boolean;
     };
 }
 
@@ -32495,10 +33258,6 @@ export class I3SDataProvider {
      */
     show: boolean;
     /**
-     * Gets or sets debugging and tracing of I3S fetches.
-     */
-    traceFetches: boolean;
-    /**
      * The terrain provider referencing the GEOID service to be used for orthometric to ellipsoidal conversion.
      */
     readonly geoidTiledTerrainProvider: ArcGISTiledElevationTerrainProvider;
@@ -32506,6 +33265,10 @@ export class I3SDataProvider {
      * Gets the collection of layers.
      */
     readonly layers: I3SLayer[];
+    /**
+     * Gets the collection of building sublayers.
+     */
+    readonly sublayers: I3SSublayer[];
     /**
      * Gets the I3S data for this object.
      */
@@ -32518,6 +33281,22 @@ export class I3SDataProvider {
      * The resource used to fetch the I3S dataset.
      */
     readonly resource: Resource;
+    /**
+     * Determines if the features will be shown.
+     */
+    readonly showFeatures: boolean;
+    /**
+     * Determines if the alpha mode of the material will be adjusted depending on the color vertex attribute.
+     */
+    readonly adjustMaterialAlphaMode: boolean;
+    /**
+     * Determines if the I3S symbology will be parsed and applied for the layers.
+     */
+    readonly applySymbology: boolean;
+    /**
+     * Determines if the flat normals will be generated for I3S geometry without normals.
+     */
+    readonly calculateNormals: boolean;
     /**
      * Destroys the WebGL resources held by this object. Destroying an object allows for deterministic
      * release of WebGL resources, instead of relying on the garbage collector to destroy this object.
@@ -32566,6 +33345,23 @@ export class I3SDataProvider {
      * @param options - An object describing initialization options
      */
     static fromUrl(url: string | Resource, options: I3SDataProvider.ConstructorOptions): Promise<I3SDataProvider>;
+    /**
+     * Returns the collection of names for all available attributes
+     * @returns The collection of attribute names
+     */
+    getAttributeNames(): string[];
+    /**
+     * Returns the collection of values for the attribute with the given name
+     * @param name - The attribute name
+     * @returns The collection of attribute values
+     */
+    getAttributeValues(name: string): string[];
+    /**
+     * Filters the drawn elements of a scene to specific attribute names and values
+     * @param [filters = []] - The collection of attribute filters
+     * @returns A promise that is resolved when the filter is applied
+     */
+    filterByAttributes(filters?: I3SNode.AttributeFilter[]): Promise<void>;
 }
 
 /**
@@ -32690,6 +33486,25 @@ export class I3SLayer {
      * When <code>true</code>, when the loaded I3S version is 1.6 or older
      */
     readonly legacyVersion16: boolean;
+    /**
+     * Filters the drawn elements of a layer to specific attribute names and values
+     * @param [filters = []] - The collection of attribute filters
+     * @returns A promise that is resolved when the filter is applied
+     */
+    filterByAttributes(filters?: I3SNode.AttributeFilter[]): Promise<void>;
+}
+
+export namespace I3SNode {
+    /**
+     * A filter given by an attribute name and values.
+     * The 3D feature object should be hidden if its value for the attribute name is not specified in the collection of values.
+     * @property name - The name of the attribute
+     * @property values - The collection of values
+     */
+    type AttributeFilter = {
+        name: string;
+        values: string[] | number[];
+    };
 }
 
 /**
@@ -32742,6 +33557,12 @@ export class I3SNode {
      */
     loadFields(): Promise<void>;
     /**
+     * Loads the node field.
+     * @param name - The field name
+     * @returns A promise that is resolved when the I3S Node field is loaded
+     */
+    loadField(name: string): Promise<void>;
+    /**
      * Returns the fields for a given picked position
      * @param pickedPosition - The picked position
      * @returns Object containing field names and their values
@@ -32753,6 +33574,80 @@ export class I3SNode {
      * @returns Object containing field names and their values
      */
     getFieldsForFeature(featureIndex: number): any;
+}
+
+/**
+ * This class implements an I3S statistics for Building Scene Layer.
+ * <p>
+ * Do not construct this directly, instead access statistics through {@link I3SDataProvider}.
+ * </p>
+ */
+export class I3SStatistics {
+    constructor();
+    /**
+     * Gets the resource for the statistics
+     */
+    readonly resource: Resource;
+    /**
+     * Gets the I3S data for this object.
+     */
+    readonly data: any;
+    /**
+     * Gets the collection of attribute names.
+     */
+    readonly names: string[];
+}
+
+/**
+ * This class implements an I3S sublayer for Building Scene Layer.
+ * <p>
+ * This object is normally not instantiated directly, use {@link I3SSublayer.fromData}.
+ * </p>
+ */
+export class I3SSublayer {
+    constructor();
+    /**
+     * Gets the resource for the sublayer
+     */
+    readonly resource: Resource;
+    /**
+     * Gets the I3S data for this object.
+     */
+    readonly data: any;
+    /**
+     * Gets the name for the sublayer.
+     */
+    readonly name: string;
+    /**
+     * Gets the model name for the sublayer.
+     */
+    readonly modelName: string;
+    /**
+     * Gets the collection of child sublayers.
+     */
+    readonly sublayers: I3SSublayer[];
+    /**
+     * Gets or sets the sublayer visibility.
+     */
+    visibility: boolean;
+    /**
+     * Determines if the sublayer will be shown.
+     */
+    readonly show: boolean;
+}
+
+/**
+ * This class implements an I3S symbology for I3S Layers.
+ * <p>
+ * Do not construct this directly, instead access symbology through {@link I3SLayer}.
+ * </p>
+ */
+export class I3SSymbology {
+    constructor();
+    /**
+     * Gets the default symbology data.
+     */
+    readonly defaultSymbology: any;
 }
 
 /**
@@ -32794,8 +33689,8 @@ export class ImageBasedLighting {
      * </p>
      *
      * These values can be obtained by preprocessing the environment map using the <code>cmgen</code> tool of
-     * {@link https://github.com/google/filament/releases|Google's Filament project}. This will also generate a KTX file that can be
-     * supplied to {@link Model#specularEnvironmentMaps}.
+     * {@link https://github.com/google/filament/releases|Google's Filament project}.
+     * Be sure to use the <code>--no-mirror</code> option in <code>cmgen</code>.
      */
     sphericalHarmonicCoefficients: Cartesian3[];
     /**
@@ -32817,27 +33712,27 @@ export namespace ImageryLayer {
     type ReadyEventCallback = (this: ImageryLayer, provider: ImageryProvider) => void;
     /**
      * Initialization options for the ImageryLayer constructor.
-     * [rectangle = imageryProvider.rectangle] - The rectangle of the layer.  This rectangle
+     * @property [rectangle = imageryProvider.rectangle] - The rectangle of the layer.  This rectangle
      *        can limit the visible portion of the imagery provider.
-     * [alpha = 1.0] - The alpha blending value of this layer, from 0.0 to 1.0.
+     * @property [alpha = 1.0] - The alpha blending value of this layer, from 0.0 to 1.0.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
      *                          current frame state, this layer, and the x, y, and level coordinates of the
      *                          imagery tile for which the alpha is required, and it is expected to return
      *                          the alpha value to use for the tile.
-     * [nightAlpha = 1.0] - The alpha blending value of this layer on the night side of the globe, from 0.0 to 1.0.
+     * @property [nightAlpha = 1.0] - The alpha blending value of this layer on the night side of the globe, from 0.0 to 1.0.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
      *                          current frame state, this layer, and the x, y, and level coordinates of the
      *                          imagery tile for which the alpha is required, and it is expected to return
      *                          the alpha value to use for the tile. This only takes effect when <code>enableLighting</code> is <code>true</code>.
-     * [dayAlpha = 1.0] - The alpha blending value of this layer on the day side of the globe, from 0.0 to 1.0.
+     * @property [dayAlpha = 1.0] - The alpha blending value of this layer on the day side of the globe, from 0.0 to 1.0.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
      *                          current frame state, this layer, and the x, y, and level coordinates of the
      *                          imagery tile for which the alpha is required, and it is expected to return
      *                          the alpha value to use for the tile. This only takes effect when <code>enableLighting</code> is <code>true</code>.
-     * [brightness = 1.0] - The brightness of this layer.  1.0 uses the unmodified imagery
+     * @property [brightness = 1.0] - The brightness of this layer.  1.0 uses the unmodified imagery
      *                          color.  Less than 1.0 makes the imagery darker while greater than 1.0 makes it brighter.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
@@ -32845,7 +33740,7 @@ export namespace ImageryLayer {
      *                          imagery tile for which the brightness is required, and it is expected to return
      *                          the brightness value to use for the tile.  The function is executed for every
      *                          frame and for every tile, so it must be fast.
-     * [contrast = 1.0] - The contrast of this layer.  1.0 uses the unmodified imagery color.
+     * @property [contrast = 1.0] - The contrast of this layer.  1.0 uses the unmodified imagery color.
      *                          Less than 1.0 reduces the contrast while greater than 1.0 increases it.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
@@ -32853,14 +33748,14 @@ export namespace ImageryLayer {
      *                          imagery tile for which the contrast is required, and it is expected to return
      *                          the contrast value to use for the tile.  The function is executed for every
      *                          frame and for every tile, so it must be fast.
-     * [hue = 0.0] - The hue of this layer.  0.0 uses the unmodified imagery color.
+     * @property [hue = 0.0] - The hue of this layer.  0.0 uses the unmodified imagery color.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
      *                          current frame state, this layer, and the x, y, and level coordinates
      *                          of the imagery tile for which the hue is required, and it is expected to return
      *                          the contrast value to use for the tile.  The function is executed for every
      *                          frame and for every tile, so it must be fast.
-     * [saturation = 1.0] - The saturation of this layer.  1.0 uses the unmodified imagery color.
+     * @property [saturation = 1.0] - The saturation of this layer.  1.0 uses the unmodified imagery color.
      *                          Less than 1.0 reduces the saturation while greater than 1.0 increases it.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
@@ -32868,34 +33763,34 @@ export namespace ImageryLayer {
      *                          of the imagery tile for which the saturation is required, and it is expected to return
      *                          the contrast value to use for the tile.  The function is executed for every
      *                          frame and for every tile, so it must be fast.
-     * [gamma = 1.0] - The gamma correction to apply to this layer.  1.0 uses the unmodified imagery color.
+     * @property [gamma = 1.0] - The gamma correction to apply to this layer.  1.0 uses the unmodified imagery color.
      *                          This can either be a simple number or a function with the signature
      *                          <code>function(frameState, layer, x, y, level)</code>.  The function is passed the
      *                          current frame state, this layer, and the x, y, and level coordinates of the
      *                          imagery tile for which the gamma is required, and it is expected to return
      *                          the gamma value to use for the tile.  The function is executed for every
      *                          frame and for every tile, so it must be fast.
-     * [splitDirection = SplitDirection.NONE] - The {@link SplitDirection} split to apply to this layer.
-     * [minificationFilter = TextureMinificationFilter.LINEAR] - The
+     * @property [splitDirection = SplitDirection.NONE] - The {@link SplitDirection} split to apply to this layer.
+     * @property [minificationFilter = TextureMinificationFilter.LINEAR] - The
      *                                    texture minification filter to apply to this layer. Possible values
      *                                    are <code>TextureMinificationFilter.LINEAR</code> and
      *                                    <code>TextureMinificationFilter.NEAREST</code>.
-     * [magnificationFilter = TextureMagnificationFilter.LINEAR] - The
+     * @property [magnificationFilter = TextureMagnificationFilter.LINEAR] - The
      *                                     texture minification filter to apply to this layer. Possible values
      *                                     are <code>TextureMagnificationFilter.LINEAR</code> and
      *                                     <code>TextureMagnificationFilter.NEAREST</code>.
-     * [show = true] - True if the layer is shown; otherwise, false.
-     * [maximumAnisotropy = maximum supported] - The maximum anisotropy level to use
+     * @property [show = true] - True if the layer is shown; otherwise, false.
+     * @property [maximumAnisotropy = maximum supported] - The maximum anisotropy level to use
      *        for texture filtering.  If this parameter is not specified, the maximum anisotropy supported
      *        by the WebGL stack will be used.  Larger values make the imagery look better in horizon
      *        views.
-     * [minimumTerrainLevel] - The minimum terrain level-of-detail at which to show this imagery layer,
+     * @property [minimumTerrainLevel] - The minimum terrain level-of-detail at which to show this imagery layer,
      *                 or undefined to show it at all levels.  Level zero is the least-detailed level.
-     * [maximumTerrainLevel] - The maximum terrain level-of-detail at which to show this imagery layer,
+     * @property [maximumTerrainLevel] - The maximum terrain level-of-detail at which to show this imagery layer,
      *                 or undefined to show it at all levels.  Level zero is the least-detailed level.
-     * [cutoutRectangle] - Cartographic rectangle for cutting out a portion of this ImageryLayer.
-     * [colorToAlpha] - Color to be used as alpha.
-     * [colorToAlphaThreshold = 0.004] - Threshold for color-to-alpha.
+     * @property [cutoutRectangle] - Cartographic rectangle for cutting out a portion of this ImageryLayer.
+     * @property [colorToAlpha] - Color to be used as alpha.
+     * @property [colorToAlphaThreshold = 0.004] - Threshold for color-to-alpha.
      */
     type ConstructorOptions = {
         rectangle?: Rectangle;
@@ -32920,7 +33815,7 @@ export namespace ImageryLayer {
     };
     /**
      * Initialization options for ImageryLayer.fromWorldImagery
-     * [options.style = IonWorldImageryStyle] - The style of base imagery, only AERIAL, AERIAL_WITH_LABELS, and ROAD are currently supported.
+     * @property [options.style = IonWorldImageryStyle] - The style of base imagery, only AERIAL, AERIAL_WITH_LABELS, and ROAD are currently supported.
      */
     type WorldImageryConstructorOptions = ImageryLayer.ConstructorOptions;
 }
@@ -32932,7 +33827,7 @@ export namespace ImageryLayer {
  * // Add an OpenStreetMaps layer
  * const imageryLayer = new Cesium.ImageryLayer(new Cesium.OpenStreetMapImageryProvider({
  *   url: "https://tile.openstreetmap.org/"
- * })),
+ * }));
  * scene.imageryLayers.add(imageryLayer);
  * @example
  * // Add Cesium ion's default world imagery layer
@@ -32943,11 +33838,11 @@ export namespace ImageryLayer {
  * const imageryLayer = Cesium.ImageryLayer.fromProviderAsync(Cesium.IonImageryProvider.fromAssetId(3812));
  * imageryLayer.alpha = 0.5;
  * scene.imageryLayers.add(imageryLayer);
- * @param imageryProvider - The imagery provider to use.
- * @param options - An object describing initialization options
+ * @param [imageryProvider] - The imagery provider to use.
+ * @param [options] - An object describing initialization options
  */
 export class ImageryLayer {
-    constructor(imageryProvider: ImageryProvider, options: ImageryLayer.ConstructorOptions);
+    constructor(imageryProvider?: ImageryProvider, options?: ImageryLayer.ConstructorOptions);
     /**
      * The alpha blending value of this layer, with 0.0 representing fully transparent and
      * 1.0 representing fully opaque.
@@ -33523,8 +34418,8 @@ export class ImageryProvider {
 export namespace IonImageryProvider {
     /**
      * Initialization options for the TileMapServiceImageryProvider constructor
-     * [accessToken = Ion.defaultAccessToken] - The access token to use.
-     * [server = Ion.defaultServer] - The resource to the Cesium ion API server.
+     * @property [accessToken = Ion.defaultAccessToken] - The access token to use.
+     * @property [server = Ion.defaultServer] - The resource to the Cesium ion API server.
      */
     type ConstructorOptions = {
         accessToken?: string;
@@ -33608,10 +34503,10 @@ export class IonImageryProvider {
      * const imageryLayer = Cesium.ImageryLayer.fromProviderAsync(Cesium.IonImageryProvider.fromAssetId(3812));
      * viewer.imageryLayers.add(imageryLayer);
      * @param assetId - An ion imagery asset ID.
-     * @param options - Object describing initialization options.
+     * @param [options] - Object describing initialization options.
      * @returns A promise which resolves to the created IonImageryProvider.
      */
-    static fromAssetId(assetId: number, options: IonImageryProvider.ConstructorOptions): Promise<IonImageryProvider>;
+    static fromAssetId(assetId: number, options?: IonImageryProvider.ConstructorOptions): Promise<IonImageryProvider>;
     /**
      * Gets the credits to be displayed when a given tile is displayed.
      * @param x - The tile X coordinate.
@@ -33664,13 +34559,69 @@ export enum IonWorldImageryStyle {
     ROAD = 4
 }
 
+export namespace Label {
+    /**
+     * Initialization options for the Label constructor
+     * @property position - The cartesian position of the label.
+     * @property [id] - A user-defined object to return when the label is picked with {@link Scene#pick}.
+     * @property [show = true] - Determines if this label will be shown.
+     * @property [text] - A string specifying the text of the label.
+     * @property [font = '30px sans-serif'] - A string specifying the font used to draw this label. Fonts are specified using the same syntax as the CSS 'font' property.
+     * @property [style = LabelStyle.FILL] - A {@link LabelStyle} specifying the style of the label.
+     * @property [scale = 1.0] - A number specifying the uniform scale that is multiplied with the label size.
+     * @property [showBackground = false] - Determines if a background behind this label will be shown.
+     * @property [backgroundColor = new Color(0.165, 0.165, 0.165, 0.8)] - A {@link Color} specifying the background color of the label.
+     * @property [backgroundPadding = new Cartesian2(7, 5)] - A {@link Cartesian2} Specifying the horizontal and vertical background padding in pixels.
+     * @property [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} specifying the pixel offset in screen space from the origin of this label.
+     * @property [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} specifying the 3D Cartesian offset applied to this label in eye coordinates.
+     * @property [horizontalOrigin = HorizontalOrigin.LEFT] - A {@link HorizontalOrigin} specifying the horizontal origin of this label.
+     * @property [verticalOrigin = VerticalOrigin.BASELINE] - A {@link VerticalOrigin} specifying the vertical origin of this label.
+     * @property [heightReference = HeightReference.NONE] - A {@link HeightReference} specifying the height reference of this label.
+     * @property [fillColor = Color.WHITE] - A {@link Color} specifying the fill color of the label.
+     * @property [outlineColor = Color.BLACK] - A {@link Color} specifying the outline color of the label.
+     * @property [outlineWidth = 1.0] - A number specifying the outline width of the label.
+     * @property [translucencyByDistance] - A {@link NearFarScalar} specifying near and far translucency properties of the label based on the label's distance from the camera.
+     * @property [pixelOffsetScaleByDistance] - A {@link NearFarScalar} specifying near and far pixel offset scaling properties of the label based on the label's distance from the camera.
+     * @property [scaleByDistance] - A {@link NearFarScalar} specifying near and far scaling properties of the label based on the label's distance from the camera.
+     * @property [distanceDisplayCondition] - A {@link DistanceDisplayCondition} specifying at what distance from the camera that this label will be displayed.
+     * @property [disableDepthTestDistance] - A number specifying the distance from the camera at which to disable the depth test to, for example, prevent clipping against terrain.
+     */
+    type ConstructorOptions = {
+        position: Cartesian3;
+        id?: any;
+        show?: boolean;
+        text?: string;
+        font?: string;
+        style?: LabelStyle;
+        scale?: number;
+        showBackground?: boolean;
+        backgroundColor?: Color;
+        backgroundPadding?: Cartesian2;
+        pixelOffset?: Cartesian2;
+        eyeOffset?: Cartesian3;
+        horizontalOrigin?: HorizontalOrigin;
+        verticalOrigin?: VerticalOrigin;
+        heightReference?: HeightReference;
+        fillColor?: Color;
+        outlineColor?: Color;
+        outlineWidth?: number;
+        translucencyByDistance?: NearFarScalar;
+        pixelOffsetScaleByDistance?: NearFarScalar;
+        scaleByDistance?: NearFarScalar;
+        distanceDisplayCondition?: DistanceDisplayCondition;
+        disableDepthTestDistance?: number;
+    };
+}
+
 /**
  * <div class="notice">
  * Create labels by calling {@link LabelCollection#add}. Do not call the constructor directly.
  * </div>
+ * @param options - Object describing initialization options
+ * @param labelCollection - Instance of LabelCollection
  */
 export class Label {
-    constructor();
+    constructor(options: Label.ConstructorOptions, labelCollection: LabelCollection);
     /**
      * Determines if this label will be shown.  Use this to hide or show a label, instead
      * of removing it and re-adding it to the collection.
@@ -34055,7 +35006,7 @@ export class LabelCollection {
      * @param [options] - A template describing the label's properties as shown in Example 1.
      * @returns The label that was added to the collection.
      */
-    add(options?: any): Label;
+    add(options?: Label.ConstructorOptions): Label;
     /**
      * Removes a label from the collection.  Once removed, a label is no longer usable.
      * @example
@@ -34167,17 +35118,17 @@ export enum MapMode2D {
 export namespace MapboxImageryProvider {
     /**
      * Initialization options for the MapboxImageryProvider constructor
-     * [url = 'https://api.mapbox.com/v4/'] - The Mapbox server url.
-     * mapId - The Mapbox Map ID.
-     * accessToken - The public access token for the imagery.
-     * [format = 'png'] - The format of the image request.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
+     * @property [url = 'https://api.mapbox.com/v4/'] - The Mapbox server url.
+     * @property mapId - The Mapbox Map ID.
+     * @property accessToken - The public access token for the imagery.
+     * @property [format = 'png'] - The format of the image request.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
      *                 this that the number of tiles at the minimum level is small, such as four or less.  A larger number is likely
      *                 to result in rendering problems.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         url?: string;
@@ -34302,19 +35253,19 @@ export class MapboxImageryProvider {
 export namespace MapboxStyleImageryProvider {
     /**
      * Initialization options for the MapboxStyleImageryProvider constructor
-     * [url = 'https://api.mapbox.com/styles/v1/'] - The Mapbox server url.
-     * [username = 'mapbox'] - The username of the map account.
-     * styleId - The Mapbox Style ID.
-     * accessToken - The public access token for the imagery.
-     * [tilesize = 512] - The size of the image tiles.
-     * [scaleFactor] - Determines if tiles are rendered at a @2x scale factor.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
+     * @property [url = 'https://api.mapbox.com/styles/v1/'] - The Mapbox server url.
+     * @property [username = 'mapbox'] - The username of the map account.
+     * @property styleId - The Mapbox Style ID.
+     * @property accessToken - The public access token for the imagery.
+     * @property [tilesize = 512] - The size of the image tiles.
+     * @property [scaleFactor] - Determines if tiles are rendered at a @2x scale factor.
+     * @property [ellipsoid = Ellipsoid.default] - The ellipsoid.  If not specified, the default ellipsoid is used.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
      *                 this that the number of tiles at the minimum level is small, such as four or less.  A larger number is likely
      *                 to result in rendering problems.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         url?: Resource | string;
@@ -34621,6 +35572,11 @@ export class MapboxStyleImageryProvider {
  *      <li><code>heights</code>: image of heights sorted from lowest to highest.</li>
  *      <li><code>colors</code>: image of colors at the corresponding heights.</li>
  * </ul>
+ * <li>WaterMask</li>
+ * <ul>
+ *      <li><code>waterColor</code>: diffuse color and alpha for the areas covered by water.</li>
+ *      <li><code>landColor</code>: diffuse color and alpha for the areas covered by land.</li>
+ * </ul>
  * </ul>
  * </ul>
  * </div>
@@ -34648,7 +35604,6 @@ export class MapboxStyleImageryProvider {
  * @param [options.minificationFilter = TextureMinificationFilter.LINEAR] - The {@link TextureMinificationFilter} to apply to this material's textures.
  * @param [options.magnificationFilter = TextureMagnificationFilter.LINEAR] - The {@link TextureMagnificationFilter} to apply to this material's textures.
  * @param options.fabric - The fabric JSON used to generate the material.
- * ructor
  */
 export class Material {
     constructor(options?: {
@@ -34820,6 +35775,10 @@ export class Material {
      * Gets the name of the elevation band material.
      */
     static readonly ElevationBandType: string;
+    /**
+     * Gets the name of the water mask material.
+     */
+    static readonly WaterMaskType: string;
 }
 
 /**
@@ -35421,8 +36380,8 @@ export enum MetadataType {
 
 /**
  * An object describing a uniform, its type, and an initial value
- * type - The Glsl type of the uniform.
- * value - The initial value of the uniform
+ * @property type - The Glsl type of the uniform.
+ * @property value - The initial value of the uniform
  */
 export type UniformSpecifier = {
     type: UniformType;
@@ -35587,6 +36546,291 @@ export enum CustomShaderTranslucencyMode {
     TRANSLUCENT = 2
 }
 
+export namespace AnchorPointDirect {
+    /**
+     * Initialization options for the AnchorPointDirect constructor
+     * @property position - Anchor point geographic coordinates
+     * @property adjustmentParams - The adjustment values in meters
+     */
+    type ConstructorOptions = {
+        position: Cartesian3;
+        adjustmentParams: Cartesian3;
+    };
+}
+
+/**
+ * Metadata for one stored anchor point using direct storage.
+ *
+ * This reflects the `anchronPointDirect` definition of the
+ * {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local} glTF extension.
+ * @param options - An object describing initialization options
+ */
+export class AnchorPointDirect {
+    constructor(options: AnchorPointDirect.ConstructorOptions);
+    /**
+     * Anchor point geographic coordinates in meters as X/Easting, Y/Northing, Z/HAE
+     */
+    readonly position: Cartesian3;
+    /**
+     * The delta-x delta-y delta-z adjustment values in meters per anchor
+     * point.
+     */
+    readonly adjustmentParams: Cartesian3;
+}
+
+export namespace AnchorPointIndirect {
+    /**
+     * Initialization options for the AnchorPointIndirect constructor
+     * @property position - Anchor point geographic coordinates
+     * @property adjustmentParams - The adjustment values in meters
+     * @property covarianceMatrix - The 3x3 covariance matrix
+     */
+    type ConstructorOptions = {
+        position: Cartesian3;
+        adjustmentParams: Cartesian3;
+        covarianceMatrix: Matrix3;
+    };
+}
+
+/**
+ * Metadata for one stored anchor point.
+ *
+ * This reflects the `anchronPointIndirect` definition of the
+ * {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local} glTF extension.
+ * @param options - An object describing initialization options
+ */
+export class AnchorPointIndirect {
+    constructor(options: AnchorPointIndirect.ConstructorOptions);
+    /**
+     * Anchor point geographic coordinates in meters as X/Easting, Y/Northing, Z/HAE
+     */
+    readonly position: Cartesian3;
+    /**
+     * The delta-x delta-y delta-z adjustment values in meters per anchor
+     * point.
+     */
+    readonly adjustmentParams: Cartesian3;
+    /**
+     * The 3x3 covariance matrix.
+     */
+    readonly covarianceMatrix: Matrix3;
+}
+
+export namespace CorrelationGroup {
+    /**
+     * Initialization options for the CorrelationGroup constructor
+     * @property groupFlags - Array of 3 booleans indicating if
+     * parameters delta-x delta-y delta-z used in the correlation group
+     * @property rotationThetas - Rotations in milliradians
+     * about X, Y, Z axes, respectively
+     * @property params - Array of `Spdcf` (Strictly Positive-Definite
+     * Correlation Function) parameters, for the U, V, W directions, respectively
+     */
+    type ConstructorOptions = {
+        groupFlags: boolean[];
+        rotationThetas: Cartesian3;
+        params: Spdcf[];
+    };
+}
+
+/**
+ * Metadata identifying parameters using same correlation modeling and
+ * associated correlation parameters.
+ *
+ * This reflects the `correlationGroup` definition of the
+ * {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local} glTF extension.
+ * @param options - An object describing initialization options
+ */
+export class CorrelationGroup {
+    constructor(options: CorrelationGroup.ConstructorOptions);
+    /**
+     * Array of 3 booleans indicating if parameters delta-x delta-y delta-z
+     * used in the correlation group
+     */
+    readonly groupFlags: boolean[];
+    /**
+     * Rotations in milliradians about X, Y, Z axes, respectively
+     */
+    readonly rotationThetas: Cartesian3;
+    /**
+     * Array of 3 sets of SPDCF parameters, for the U, V, W directions, respectively
+     */
+    readonly params: Spdcf[];
+}
+
+/**
+ * Creates a Matrix3 that describes a covariance matrix (which is
+ * symmetric) from the array containing the upper triangle, in
+ * column-major order.
+ * @param array - The input array
+ * @returns The Matrix3
+ */
+export function createCovarianceMatrixFromUpperTriangle(array: number[]): Matrix3;
+
+/**
+ * Creates an `AnchorPointDirect` from the given JSON representation
+ * @param anchorPointDirectJson - The input JSON
+ * @returns The direct anchor point
+ */
+export function createAnchorPointDirect(anchorPointDirectJson: any): AnchorPointDirect;
+
+/**
+ * Creates an `AnchorPointIndirect` from the given JSON representation
+ * @param anchorPointIndirectJson - The input JSON
+ * @returns The indirect anchor point
+ */
+export function createAnchorPointIndirect(anchorPointIndirectJson: any): AnchorPointIndirect;
+
+/**
+ * Creates a `CorrelationGroup` from the given JSON representation
+ * @param correlationGroupJson - The input JSON
+ * @returns The correlation group
+ */
+export function createCorrelationGroup(correlationGroupJson: any): CorrelationGroup;
+
+export namespace GltfGpmLocal {
+    /**
+     * Initialization options for the GltfGpmLocal constructor
+     * @property storageType - The storage type.
+     * This must be one of the `StorageType` constants, i.e. `Direct` or `Indirect`.
+     * @property [anchorPointsIndirect] - The indirect anchor points.
+     * This must be present if and only if the storage type is `Indirect`.
+     * @property [intraTileCorrelationGroups] - The intra-tile correlation groups.
+     * This must be present if and only if the storage type is `Indirect`.
+     * @property [anchorPointsDirect] - The direct anchor points.
+     * This must be present if and only if the storage type is `Direct`.
+     * @property [covarianceDirect] - The covariance of anchor point parameters.
+     * This must be present if and only if the storage type is `Direct`.
+     */
+    type ConstructorOptions = {
+        storageType: string;
+        anchorPointsIndirect?: AnchorPointIndirect[] | undefined;
+        intraTileCorrelationGroups?: CorrelationGroup[] | undefined;
+        anchorPointsDirect?: AnchorPointDirect[] | undefined;
+        covarianceDirect?: Matrix3 | undefined;
+    };
+}
+
+/**
+ * The GPM metadata for a Ground-Space Indirect implementation stored
+ * locally (i.e. a tile and/or leaf node).
+ *
+ * This reflects the root extension object of the {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local}
+ * glTF extension. When a model that contains this extension was loaded,
+ * then an object of this type can be obtained by calling
+ * ```
+ * const gltfGpmLocal = model.getExtension("NGA_gpm_local");
+ * ```
+ *
+ * The storage type determines the presence of the optional properties:
+ * <ul>
+ *  <li>
+ *   When the storage type is `StorageType.Indirect`, then the
+ *   `anchorPointsIndirect` and `intraTileCorrelationGroups`
+ *   are present.
+ *  </li>
+ *  <li>
+ *   When the storage type is `StorageType.Direct`, then the
+ *   `anchorPointsDirect` and `covarianceDirect` are present.
+ *  </li>
+ * </ul>
+ * @param options - An object describing initialization options
+ */
+export class GltfGpmLocal {
+    constructor(options: GltfGpmLocal.ConstructorOptions);
+    /**
+     * Specifies if covariance storage is indirect or direct.
+     */
+    readonly storageType: StorageType;
+    /**
+     * Array of stored indirect anchor points
+     */
+    readonly anchorPointsIndirect: AnchorPointIndirect[] | undefined;
+    /**
+     * Array of stored direct anchor points
+     */
+    readonly anchorPointsDirect: AnchorPointDirect[] | undefined;
+    /**
+     * Metadata identifying parameters using same correlation modeling and
+     * associated correlation parameters
+     */
+    readonly intraTileCorrelationGroups: CorrelationGroup[] | undefined;
+    /**
+     * The full covariance of anchor point parameters
+     */
+    readonly covarianceDirect: Matrix3 | undefined;
+}
+
+export namespace Spdcf {
+    /**
+     * Initialization options for the Spdcf constructor
+     * @property A - The factor A, in (0, 1]
+     * @property alpha - The alpha value, in [0, 1)
+     * @property beta - The beta value, in [0, 10]
+     * @property T - the tau value, in (0, +inf)
+     */
+    type ConstructorOptions = {
+        A: number;
+        alpha: number;
+        beta: number;
+        T: number;
+    };
+}
+
+/**
+ * Variables for a Strictly Positive-Definite Correlation Function.
+ *
+ * This reflects the `spdcf` definition of the
+ * {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local} glTF extension.
+ * Instances of this type are stored as the parameters within a
+ * `CorrelationGroup`.
+ *
+ * Parameters (A, alpha, beta, T) describe the correlation decrease
+ * between points as a function of delta time:
+ * ```
+ * spdcf(delta_t) = A_t * (alpha_t + ((1 - alpha_t)(1 + beta_t)) / (beta_t + e^(delta_t/T_t)))
+ * ```
+ * @param options - An object describing initialization options
+ */
+export class Spdcf {
+    constructor(options: Spdcf.ConstructorOptions);
+    /**
+     * In (0, 1]
+     */
+    readonly A: number;
+    /**
+     * In [0, 1)
+     */
+    readonly alpha: number;
+    /**
+     * In [0, 10]
+     */
+    readonly beta: number;
+    /**
+     * In (0, +inf)
+     */
+    readonly T: number;
+}
+
+/**
+ * An enum of storage types for covariance information.
+ *
+ * This reflects the `gltfGpmLocal.storageType` definition of the
+ * {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local} glTF extension.
+ */
+export enum StorageType {
+    /**
+     * Store the full error covariance of the anchor points, to include the cross-covariance terms
+     */
+    Direct = "Direct",
+    /**
+     * A full covariance matrix is stored for each of the anchor points. However, in this case the
+     * cross-covariance terms are not directly stored, but can be computed by a set of spatial
+     * correlation function parameters which are stored in the metadata.
+     */
+    Indirect = "Indirect"
+}
+
 /**
  * The lighting model to use for lighting a {@link Model}.
  */
@@ -35667,6 +36911,9 @@ export enum LightingModel {
  *  </li>
  *  <li>
  *  {@link https://github.com/KhronosGroup/glTF/blob/main/extensions/1.0/Vendor/WEB3D_quantized_attributes/README.md|WEB3D_quantized_attributes}
+ *  </li>
+ *  <li>
+ *  {@link https://nsgreg.nga.mil/csmwg.jsp|NGA_gpm_local (experimental)}
  *  </li>
  * </ul>
  * </p>
@@ -35839,6 +37086,18 @@ export class Model {
      */
     clippingPlanes: ClippingPlaneCollection;
     /**
+     * The {@link ClippingPolygonCollection} used to selectively disable rendering the model.
+     */
+    clippingPolygons: ClippingPolygonCollection;
+    /**
+     * If <code>true</code>, the model is exaggerated along the ellipsoid normal when {@link Scene.verticalExaggeration} is set to a value other than <code>1.0</code>.
+     * @example
+     * // Exaggerate terrain by a factor of 2, but prevent model exaggeration
+     * scene.verticalExaggeration = 2.0;
+     * model.enableVerticalExaggeration = false;
+     */
+    enableVerticalExaggeration: boolean;
+    /**
      * The light color when shading the model. When <code>undefined</code> the scene's light color is used instead.
      * <p>
      * Disabling additional light sources by setting
@@ -35902,10 +37161,14 @@ export class Model {
      *     <li>The glTF cannot contain morph targets, skins, or animations.</li>
      *     <li>The glTF cannot contain the <code>EXT_mesh_gpu_instancing</code> extension.</li>
      *     <li>Only meshes with TRIANGLES can be used to classify other assets.</li>
-     *     <li>The position attribute is required.</li>
+     *     <li>The meshes must be watertight.</li>
+     *     <li>The POSITION attribute is required.</li>
      *     <li>If feature IDs and an index buffer are both present, all indices with the same feature id must occupy contiguous sections of the index buffer.</li>
      *     <li>If feature IDs are present without an index buffer, all positions with the same feature id must occupy contiguous sections of the position buffer.</li>
      * </ul>
+     * </p>
+     * <p>
+     * The 3D Tiles or terrain receiving the classification must be opaque.
      * </p>
      */
     readonly classificationType: ClassificationType;
@@ -35937,6 +37200,17 @@ export class Model {
      * transformations on participating nodes.
      */
     applyArticulations(): void;
+    /**
+     * Returns the object that was created for the given extension.
+     *
+     * The given name may be the name of a glTF extension, like `"EXT_example_extension"`.
+     * If the specified extension was present in the root of the underlying glTF asset,
+     * and a loder for the specified extension has processed the extension data, then
+     * this will return the model representation of the extension.
+     * @param extensionName - The name of the extension
+     * @returns The object, or `undefined`
+     */
+    getExtension(extensionName: string): any | undefined;
     /**
      * Marks the model's {@link Model#style} as dirty, which forces all features
      * to re-evaluate the style in the next frame the model is visible.
@@ -36041,6 +37315,7 @@ export class Model {
      * @param [options.show = true] - Whether or not to render the model.
      * @param [options.modelMatrix = Matrix4.IDENTITY] - The 4x4 transformation matrix that transforms the model from model to world coordinates.
      * @param [options.scale = 1.0] - A uniform scale applied to this model.
+     * @param [options.enableVerticalExaggeration = true] - If <code>true</code>, the model is exaggerated along the ellipsoid normal when {@link Scene.verticalExaggeration} is set to a value other than <code>1.0</code>.
      * @param [options.minimumPixelSize = 0.0] - The approximate minimum pixel size of the model regardless of zoom.
      * @param [options.maximumScale] - The maximum scale size of a model. An upper limit for minimumPixelSize.
      * @param [options.id] - A user-defined object to return when the model is picked with {@link Scene#pick}.
@@ -36071,6 +37346,7 @@ export class Model {
      * @param [options.showOutline = true] - Whether to display the outline for models using the {@link https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/CESIUM_primitive_outline|CESIUM_primitive_outline} extension. When true, outlines are displayed. When false, outlines are not displayed.
      * @param [options.outlineColor = Color.BLACK] - The color to use when rendering outlines.
      * @param [options.clippingPlanes] - The {@link ClippingPlaneCollection} used to selectively disable rendering the model.
+     * @param [options.clippingPolygons] - The {@link ClippingPolygonCollection} used to selectively disable rendering the model.
      * @param [options.lightColor] - The light color when shading the model. When <code>undefined</code> the scene's light color is used instead.
      * @param [options.imageBasedLighting] - The properties for managing image-based lighting on this model.
      * @param [options.backFaceCulling = true] - Whether to cull back-facing geometry. When true, back face culling is determined by the material's doubleSided property; when false, back face culling is disabled. Back faces are not culled if the model's color is translucent.
@@ -36078,6 +37354,7 @@ export class Model {
      * @param [options.showCreditsOnScreen = false] - Whether to display the credits of this model on screen.
      * @param [options.splitDirection = SplitDirection.NONE] - The {@link SplitDirection} split to apply to this model.
      * @param [options.projectTo2D = false] - Whether to accurately project the model's positions in 2D. If this is true, the model will be projected accurately to 2D, but it will use more memory to do so. If this is false, the model will use less memory and will still render in 2D / CV mode, but its positions may be inaccurate. This disables minimumPixelSize and prevents future modification to the model matrix. This also cannot be set after the model has loaded.
+     * @param [options.enablePick = false] - Whether to allow with CPU picking with <code>pick</code> when not using WebGL 2 or above. If using WebGL 2 or above, this option will be ignored. If using WebGL 1 and this is true, the <code>pick</code> operation will work correctly, but it will use more memory to do so. If running with WebGL 1 and this is false, the model will use less memory, but <code>pick</code> will always return <code>undefined</code>. This cannot be set after the model has loaded.
      * @param [options.featureIdLabel = "featureId_0"] - Label of the feature ID set to use for picking and styling. For EXT_mesh_features, this is the feature ID's label property, or "featureId_N" (where N is the index in the featureIds array) when not specified. EXT_feature_metadata did not have a label field, so such feature ID sets are always labeled "featureId_N" where N is the index in the list of all feature Ids, where feature ID attributes are listed before feature ID textures. If featureIdLabel is an integer N, it is converted to the string "featureId_N" automatically. If both per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
      * @param [options.instanceFeatureIdLabel = "instanceFeatureId_0"] - Label of the instance feature ID set used for picking and styling. If instanceFeatureIdLabel is set to an integer N, it is converted to the string "instanceFeatureId_N" automatically. If both per-primitive and per-instance feature IDs are present, the instance feature IDs take priority.
      * @param [options.pointCloudShading] - Options for constructing a {@link PointCloudShading} object to control point attenuation and lighting.
@@ -36091,6 +37368,7 @@ export class Model {
         show?: boolean;
         modelMatrix?: Matrix4;
         scale?: number;
+        enableVerticalExaggeration?: boolean;
         minimumPixelSize?: number;
         maximumScale?: number;
         id?: any;
@@ -36121,6 +37399,7 @@ export class Model {
         showOutline?: boolean;
         outlineColor?: Color;
         clippingPlanes?: ClippingPlaneCollection;
+        clippingPolygons?: ClippingPolygonCollection;
         lightColor?: Cartesian3;
         imageBasedLighting?: ImageBasedLighting;
         backFaceCulling?: boolean;
@@ -36128,6 +37407,7 @@ export class Model {
         showCreditsOnScreen?: boolean;
         splitDirection?: SplitDirection;
         projectTo2D?: boolean;
+        enablePick?: boolean;
         featureIdLabel?: string | number;
         instanceFeatureIdLabel?: string | number;
         pointCloudShading?: any;
@@ -36834,14 +38114,14 @@ export class NeverTileDiscardPolicy {
 export namespace OpenStreetMapImageryProvider {
     /**
      * Initialization options for the OpenStreetMapImageryProvider constructor
-     * [url = 'https://tile.openstreetmap.org'] - The OpenStreetMap server url.
-     * [fileExtension = 'png'] - The file extension for images on the server.
-     * [retinaTiles = false] - When true, request tiles at the 2x resolution for retina displays.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle of the layer.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [credit = 'MapQuest, Open Street Map and contributors, CC-BY-SA'] - A credit for the data source, which is displayed on the canvas.
+     * @property [url = 'https://tile.openstreetmap.org'] - The OpenStreetMap server url.
+     * @property [fileExtension = 'png'] - The file extension for images on the server.
+     * @property [retinaTiles = false] - When true, request tiles at the 2x resolution for retina displays.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle of the layer.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
+     * @property [credit = 'MapQuest, Open Street Map and contributors, CC-BY-SA'] - A credit for the data source, which is displayed on the canvas.
      */
     type ConstructorOptions = {
         url?: string;
@@ -37342,6 +38622,54 @@ export class PerInstanceColorAppearance {
 }
 
 /**
+ * The optional ID of the metadata schema
+ */
+export var schemaId: string | undefined;
+
+/**
+ * The name of the metadata class
+ */
+export var className: string;
+
+/**
+ * The name of the metadata property
+ */
+export var propertyName: string;
+
+/**
+ * The optional ID of the metadata schema
+ */
+export var classProperty: MetadataClassProperty;
+
+/**
+ * Compute the rectangle that describes the part of the drawing buffer
+ * that is relevant for picking.
+ * @param drawingBufferHeight - The height of the drawing buffer
+ * @param position - The position inside the drawing buffer
+ * @param width - The width of the rectangle, assumed to
+ * be an odd integer number, default : 3.0
+ * @param height - The height of the rectangle. If unspecified,
+ * height will default to the value of <code>width</code>
+ * @param result - The result rectangle
+ * @returns The result rectangle
+ */
+export function computePickingDrawingBufferRectangle(drawingBufferHeight: number, position: Cartesian2, width: number | undefined, height: number | undefined, result: BoundingRectangle): BoundingRectangle;
+
+/**
+ * Information about metadata that is supposed to be picked
+ * @property schemaId - The optional ID of the metadata schema
+ * @property className - The name of the metadata class
+ * @property propertyName - The name of the metadata property
+ * @property classProperty - The metadata class property
+ */
+export type PickedMetadataInfo = {
+    schemaId: string | undefined;
+    className: string;
+    propertyName: string;
+    classProperty: MetadataClassProperty;
+};
+
+/**
  * Options for performing point attenuation based on geometric error when rendering
  * point clouds using 3D Tiles.
  * @param [options] - Object with the following properties:
@@ -37512,6 +38840,10 @@ export class PointPrimitive {
      * Gets or sets the user-defined value returned when the point is picked.
      */
     id: any;
+    /**
+     * The {@link SplitDirection} to apply to this point.
+     */
+    splitDirection: SplitDirection;
     /**
      * Computes the screen-space position of the point's origin.
      * The screen space origin is the top, left corner of the canvas; <code>x</code> increases from
@@ -38364,6 +39696,19 @@ export class PostProcessStageCollection {
      */
     readonly length: number;
     /**
+     * Specifies the tonemapping algorithm used when rendering with high dynamic range.
+     * {@link https://sandcastle.cesium.com/?src=High%20Dynamic%20Range.html|Sandcastle Demo}
+     * @example
+     * viewer.scene.postProcessStages.tonemapper = Cesium.Tonemapper.ACES;
+     */
+    tonemapper: Tonemapper;
+    /**
+     * Control the exposure when HDR is on. Less than 1.0 makes the tonemapping darker while greater than 1.0 makes it brighter.
+     * @example
+     * viewer.scene.postProcessStages.exposure = 1.0;
+     */
+    exposure: number;
+    /**
      * Adds the post-process stage to the collection.
      * @param stage - The post-process stage to add to the collection.
      * @returns The post-process stage that was added to the collection.
@@ -39151,7 +40496,8 @@ export class PrimitiveCollection {
  * @param [options.contextOptions] - Context and WebGL creation properties.
  * @param [options.creditContainer] - The HTML element in which the credits will be displayed.
  * @param [options.creditViewport] - The HTML element in which to display the credit popup.  If not specified, the viewport will be a added as a sibling of the canvas.
- * @param [options.mapProjection = new GeographicProjection()] - The map projection to use in 2D and Columbus View modes.
+ * @param [options.ellipsoid = Ellipsoid.default] - The default ellipsoid. If not specified, the default ellipsoid is used.
+ * @param [options.mapProjection = new GeographicProjection(options.ellipsoid)] - The map projection to use in 2D and Columbus View modes.
  * @param [options.orderIndependentTranslucency = true] - If true and the configuration supports it, use order independent translucency.
  * @param [options.scene3DOnly = false] - If true, optimizes memory use and performance for 3D mode but disables the ability to use 2D or Columbus View.
  * @param [options.shadows = false] - Determines if shadows are cast by light sources.
@@ -39159,7 +40505,7 @@ export class PrimitiveCollection {
  * @param [options.requestRenderMode = false] - If true, rendering a frame will only occur when needed as determined by changes within the scene. Enabling improves performance of the application, but requires using {@link Scene#requestRender} to render a new frame explicitly in this mode. This will be necessary in many cases after making changes to the scene in other parts of the API. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
  * @param [options.maximumRenderTimeChange = 0.0] - If requestRenderMode is true, this value defines the maximum change in simulation time allowed before a render is requested. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
  * @param [options.depthPlaneEllipsoidOffset = 0.0] - Adjust the DepthPlane to address rendering artefacts below ellipsoid zero elevation.
- * @param [options.msaaSamples = 1] - If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets.
+ * @param [options.msaaSamples = 4] - If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets. Set to 1 to disable MSAA.
  */
 export class Scene {
     constructor(options: {
@@ -39167,6 +40513,7 @@ export class Scene {
         contextOptions?: ContextOptions;
         creditContainer?: Element;
         creditViewport?: Element;
+        ellipsoid?: Ellipsoid;
         mapProjection?: MapProjection;
         orderIndependentTranslucency?: boolean;
         scene3DOnly?: boolean;
@@ -39250,6 +40597,16 @@ export class Scene {
      * other hand, increasing this will increase performance but may cause z-fighting among primitives close to the surface.
      */
     nearToFarDistance2D: number;
+    /**
+     * The vertical exaggeration of the scene.
+     * When set to 1.0, no exaggeration is applied.
+     */
+    verticalExaggeration: number;
+    /**
+     * The reference height for vertical exaggeration of the scene.
+     * When set to 0.0, the exaggeration is applied relative to the ellipsoid surface.
+     */
+    verticalExaggerationRelativeHeight: number;
     /**
      * This property is for debugging only; it is not for production use.
      * <p>
@@ -39339,8 +40696,15 @@ export class Scene {
      */
     pickTranslucentDepth: boolean;
     /**
+     * Settings for atmosphere lighting effects affecting 3D Tiles and model rendering. This is not to be confused with
+     * {@link Scene#skyAtmosphere} which is responsible for rendering the sky.
+     */
+    atmosphere: Atmosphere;
+    /**
      * Blends the atmosphere to geometry far from the camera for horizon views. Allows for additional
      * performance improvements by rendering less geometry and dispatching less terrain requests.
+     *
+     * Disbaled by default if an ellipsoid other than WGS84 is used.
      */
     fog: Fog;
     /**
@@ -39399,6 +40763,11 @@ export class Scene {
      */
     light: Light;
     /**
+     * Use this to set the default value for {@link Scene#logarithmicDepthBuffer} in newly constructed Scenes
+     * This property relies on fragmentDepth being supported.
+     */
+    static defaultLogDepthBuffer: any;
+    /**
      * Gets the canvas element to which this scene is bound.
      */
     readonly canvas: HTMLCanvasElement;
@@ -39438,6 +40807,10 @@ export class Scene {
      * Returns <code>true</code> if specular environment maps are supported.
      */
     readonly specularEnvironmentMapsSupported: boolean;
+    /**
+     * The ellipsoid.  If not specified, the default ellipsoid is used.
+     */
+    readonly ellipsoid: Ellipsoid;
     /**
      * Gets or sets the depth-test ellipsoid.
      */
@@ -39626,6 +40999,43 @@ export class Scene {
      */
     pick(windowPosition: Cartesian2, width?: number, height?: number): any;
     /**
+     * Returns a {@link VoxelCell} for the voxel sample rendered at a particular window coordinate,
+     * or undefined if no voxel is rendered at that position.
+     * @example
+     * On left click, report the value of the "color" property at that voxel sample.
+     * handler.setInputAction(function(movement) {
+     *   const voxelCell = scene.pickVoxel(movement.position);
+     *   if (defined(voxelCell)) {
+     *     console.log(voxelCell.getProperty("color"));
+     *   }
+     * }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+     * @param windowPosition - Window coordinates to perform picking on.
+     * @param [width = 3] - Width of the pick rectangle.
+     * @param [height = 3] - Height of the pick rectangle.
+     * @returns Information about the voxel cell rendered at the picked position.
+     */
+    pickVoxel(windowPosition: Cartesian2, width?: number, height?: number): VoxelCell | undefined;
+    /**
+     * Pick a metadata value at the given window position.
+     * @param windowPosition - Window coordinates to perform picking on.
+     * @param schemaId - The ID of the metadata schema to pick values
+     * from. If this is `undefined`, then it will pick the values from the object
+     * that match the given class- and property name, regardless of the schema ID.
+     * @param className - The name of the metadata class to pick
+     * values from
+     * @param propertyName - The name of the metadata property to pick
+     * values from
+     * @returns The metadata value
+     */
+    pickMetadata(windowPosition: Cartesian2, schemaId: string | undefined, className: string, propertyName: string): any;
+    /**
+     * Pick the schema of the metadata of the object at the given position
+     * @param windowPosition - Window coordinates to perform picking on.
+     * @returns The metadata schema, or `undefined` if there is no object with
+     * associated metadata at the given position.
+     */
+    pickMetadataSchema(windowPosition: Cartesian2): MetadataSchema;
+    /**
      * Returns the cartesian position reconstructed from the depth buffer and window position.
      * <p>
      * The position reconstructed from the depth buffer in 2D may be slightly different from those
@@ -39741,7 +41151,6 @@ export class Scene {
      * @example
      * // Output the canvas position of longitude/latitude (0, 0) every time the mouse moves.
      * const scene = widget.scene;
-     * const ellipsoid = scene.globe.ellipsoid;
      * const position = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
      * handler.setInputAction(function(movement) {
@@ -39810,6 +41219,18 @@ export class Scene {
 }
 
 /**
+ * Determine how translucent surfaces will be handled.
+ *
+ * When OIT is enabled, then this will delegate to OIT.executeCommands.
+ * Otherwise, it will just be executeTranslucentCommandsBackToFront
+ * for render passes, or executeTranslucentCommandsFrontToBack for
+ * other passes.
+ * @param scene - The scene.
+ * @returns A function to execute translucent commands.
+ */
+export function obtainTranslucentCommandExecutionFunction(scene: Scene): (...params: any[]) => any;
+
+/**
  * Indicates if the scene is viewed in 3D, 2D, or 2.5D Columbus view.
  */
 export enum SceneMode {
@@ -39837,41 +41258,37 @@ export enum SceneMode {
  */
 export namespace SceneTransforms {
     /**
-     * Transforms a position in WGS84 coordinates to window coordinates.  This is commonly used to place an
+     * Transforms a position in world (WGS84 or alternative ellipsoid) coordinates to window coordinates.  This is commonly used to place an
      * HTML element at the same screen position as an object in the scene.
      * @example
      * // Output the window position of longitude/latitude (0, 0) every time the mouse moves.
-     * const scene = widget.scene;
-     * const ellipsoid = scene.globe.ellipsoid;
      * const position = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
      * handler.setInputAction(function(movement) {
-     *     console.log(Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, position));
+     *     console.log(Cesium.SceneTransforms.worldToWindowCoordinates(scene, position));
      * }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
      * @param scene - The scene.
-     * @param position - The position in WGS84 (world) coordinates.
+     * @param position - The position in world (WGS84 or alternative ellipsoid) coordinates.
      * @param [result] - An optional object to return the input position transformed to window coordinates.
      * @returns The modified result parameter or a new Cartesian2 instance if one was not provided.  This may be <code>undefined</code> if the input position is near the center of the ellipsoid.
      */
-    function wgs84ToWindowCoordinates(scene: Scene, position: Cartesian3, result?: Cartesian2): Cartesian2;
+    function worldToWindowCoordinates(scene: Scene, position: Cartesian3, result?: Cartesian2): Cartesian2 | undefined;
     /**
-     * Transforms a position in WGS84 coordinates to drawing buffer coordinates.  This may produce different
-     * results from SceneTransforms.wgs84ToWindowCoordinates when the browser zoom is not 100%, or on high-DPI displays.
+     * Transforms a position in world coordinates to drawing buffer coordinates.  This may produce different
+     * results from SceneTransforms.worldToWindowCoordinates when the browser zoom is not 100%, or on high-DPI displays.
      * @example
      * // Output the window position of longitude/latitude (0, 0) every time the mouse moves.
-     * const scene = widget.scene;
-     * const ellipsoid = scene.globe.ellipsoid;
      * const position = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
      * const handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
      * handler.setInputAction(function(movement) {
-     *     console.log(Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, position));
+     *     console.log(Cesium.SceneTransforms.worldToDrawingBufferCoordinates(scene, position));
      * }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
      * @param scene - The scene.
-     * @param position - The position in WGS84 (world) coordinates.
+     * @param position - The position in world (WGS84 or alternative ellipsoid) coordinates.
      * @param [result] - An optional object to return the input position transformed to window coordinates.
      * @returns The modified result parameter or a new Cartesian2 instance if one was not provided.  This may be <code>undefined</code> if the input position is near the center of the ellipsoid.
      */
-    function wgs84ToDrawingBufferCoordinates(scene: Scene, position: Cartesian3, result?: Cartesian2): Cartesian2;
+    function worldToDrawingBufferCoordinates(scene: Scene, position: Cartesian3, result?: Cartesian2): Cartesian2 | undefined;
 }
 
 /**
@@ -39952,6 +41369,10 @@ export class ScreenSpaceCameraController {
      */
     maximumZoomDistance: number;
     /**
+     * A multiplier for the speed at which the camera will zoom.
+     */
+    zoomFactor: number;
+    /**
      * The input that allows the user to pan around the map. This only applies in 2D and Columbus view modes.
      * <p>
      * The type can be a {@link CameraEventType}, <code>undefined</code>, an object with <code>eventType</code>
@@ -39997,20 +41418,20 @@ export class ScreenSpaceCameraController {
      */
     lookEventTypes: CameraEventType | any[] | undefined;
     /**
-     * The minimum height the camera must be before picking the terrain or scene content instead of the ellipsoid.
+     * The minimum height the camera must be before picking the terrain or scene content instead of the ellipsoid. Defaults to scene.ellipsoid.minimumRadius * 0.025 when another ellipsoid than WGS84 is used.
      */
     minimumPickingTerrainHeight: number;
     /**
-     * The minimum distance the camera must be before testing for collision with terrain when zoom with inertia.
+     * The minimum distance the camera must be before testing for collision with terrain when zoom with inertia. Default to scene.ellipsoid.minimumRadius * 0.00063 when another ellipsoid than WGS84 is used.
      */
     minimumPickingTerrainDistanceWithInertia: number;
     /**
-     * The minimum height the camera must be before testing for collision with terrain.
+     * The minimum height the camera must be before testing for collision with terrain. Default to scene.ellipsoid.minimumRadius * 0.0025 when another ellipsoid than WGS84 is used.
      */
     minimumCollisionTerrainHeight: number;
     /**
      * The minimum height the camera must be before switching from rotating a track ball to
-     * free look when clicks originate on the sky or in space.
+     * free look when clicks originate on the sky or in space. Defaults to ellipsoid.minimumRadius * 1.175 when another ellipsoid than WGS84 is used.
      */
     minimumTrackBallHeight: number;
     /**
@@ -40035,6 +41456,24 @@ export class ScreenSpaceCameraController {
      * controller = controller && controller.destroy();
      */
     destroy(): void;
+}
+
+/**
+ * Constants used to indicated what part of the sensor volume to display.
+ */
+export enum SensorVolumePortionToDisplay {
+    /**
+     * 0x0000.  Display the complete sensor volume.
+     */
+    COMPLETE = 0,
+    /**
+     * 0x0001.  Display the portion of the sensor volume that lies below the true horizon of the ellipsoid.
+     */
+    BELOW_ELLIPSOID_HORIZON = 1,
+    /**
+     * 0x0002.  Display the portion of the sensor volume that lies above the true horizon of the ellipsoid.
+     */
+    ABOVE_ELLIPSOID_HORIZON = 2
 }
 
 /**
@@ -40105,12 +41544,12 @@ export enum ShadowMode {
 export namespace SingleTileImageryProvider {
     /**
      * Initialization options for the SingleTileImageryProvider constructor
-     * url - The url for the tile.
-     * [tileWidth] - The width of the tile, in pixels.
-     * [tileHeight] - The height of the tile, in pixels.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
+     * @property url - The url for the tile.
+     * @property [tileWidth] - The width of the tile, in pixels.
+     * @property [tileHeight] - The height of the tile, in pixels.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
      */
     type ConstructorOptions = {
         url: Resource | string;
@@ -40122,9 +41561,9 @@ export namespace SingleTileImageryProvider {
     };
     /**
      * Initialization options for the SingleTileImageryProvider constructor when using SingleTileImageryProvider.fromUrl
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
      */
     type fromUrlOptions = {
         rectangle?: Rectangle;
@@ -40390,6 +41829,13 @@ export class SkyBox {
      * skyBox = skyBox && skyBox.destroy();
      */
     destroy(): void;
+    /**
+     * Creates a skybox instance with the default starmap for the Earth.
+     * @example
+     * viewer.scene.skyBox = Cesium.SkyBox.createEarthSkyBox();
+     * @returns The default skybox for the Earth
+     */
+    static createEarthSkyBox(): SkyBox;
 }
 
 /**
@@ -40652,6 +42098,14 @@ export class Terrain {
      */
     readonly readyEvent: Event<Terrain.ReadyEventCallback>;
     /**
+     * Returns true when the terrain provider has been successfully created. Otherwise, returns false.
+     */
+    readonly ready: boolean;
+    /**
+     * The terrain provider providing surface geometry to a globe. Do not use until {@link Terrain.readyEvent} is raised.
+     */
+    readonly provider: TerrainProvider;
+    /**
      * Creates a {@link Terrain} instance for {@link https://cesium.com/content/#cesium-world-terrain|Cesium World Terrain}.
      * @example
      * // Create Cesium World Terrain with default settings
@@ -40692,18 +42146,56 @@ export class Terrain {
         requestVertexNormals?: boolean;
         requestWaterMask?: boolean;
     }): Terrain;
+    /**
+     * Creates a {@link Terrain} instance for {@link https://cesium.com/content/#cesium-world-bathymetry|Cesium World Bathymetry}.
+     * @example
+     * // Create Cesium World Bathymetry with default settings
+     * const viewer = new Cesium.Viewer("cesiumContainer", {
+     *   terrain: Cesium.Terrain.fromWorldBathymetry)
+     * });
+     * @example
+     * // Create Cesium World Terrain with normals.
+     * const viewer1 = new Cesium.Viewer("cesiumContainer", {
+     *   terrain: Cesium.Terrain.fromWorldBathymetry({
+     *      requestVertexNormals: true
+     *    });
+     * });
+     * @example
+     * // Handle loading events
+     * const bathymetry = Cesium.Terrain.fromWorldBathymetry();
+     *
+     * scene.setTerrain(bathymetry);
+     *
+     * bathymetry.readyEvent.addEventListener(provider => {
+     *   scene.globe.enableLighting = true;
+     *
+     *   bathymetry.provider.errorEvent.addEventListener(error => {
+     *     alert(`Encountered an error while loading bathymetric terrain tiles! ${error}`);
+     *   });
+     * });
+     *
+     * bathymetry.errorEvent.addEventListener(error => {
+     *   alert(`Encountered an error while creating bathymetric terrain! ${error}`);
+     * });
+     * @param [options] - Object with the following properties:
+     * @param [options.requestVertexNormals = false] - Flag that indicates if the client should request additional lighting information from the server if available.
+     * @returns An asynchronous helper object for a CesiumTerrainProvider
+     */
+    static fromWorldBathymetry(options?: {
+        requestVertexNormals?: boolean;
+    }): Terrain;
 }
 
 export namespace TileCoordinatesImageryProvider {
     /**
      * Initialization options for the TileCoordinatesImageryProvider constructor
-     * [tilingScheme = new GeographicTilingScheme()] - The tiling scheme for which to draw tiles.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+     * @property [tilingScheme = new GeographicTilingScheme()] - The tiling scheme for which to draw tiles.
+     * @property [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
      *                    this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
      *                    parameter is specified, the WGS84 ellipsoid is used.
-     * [color = Color.YELLOW] - The color to draw the tile box and label.
-     * [tileWidth = 256] - The width of the tile for level-of-detail selection purposes.
-     * [tileHeight = 256] - The height of the tile for level-of-detail selection purposes.
+     * @property [color = Color.YELLOW] - The color to draw the tile box and label.
+     * @property [tileWidth = 256] - The width of the tile for level-of-detail selection purposes.
+     * @property [tileHeight = 256] - The height of the tile for level-of-detail selection purposes.
      */
     type ConstructorOptions = {
         tilingScheme?: TilingScheme;
@@ -40827,23 +42319,23 @@ export class TileDiscardPolicy {
 export namespace TileMapServiceImageryProvider {
     /**
      * Initialization options for the TileMapServiceImageryProvider constructor
-     * [fileExtension = 'png'] - The file extension for images on the server.
-     * [credit = ''] - A credit for the data source, which is displayed on the canvas.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
+     * @property [fileExtension = 'png'] - The file extension for images on the server.
+     * @property [credit = ''] - A credit for the data source, which is displayed on the canvas.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
      *                 this that the number of tiles at the minimum level is small, such as four or less.  A larger number is likely
      *                 to result in rendering problems.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
-     * [tilingScheme] - The tiling scheme specifying how the ellipsoidal
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
+     * @property [tilingScheme] - The tiling scheme specifying how the ellipsoidal
      * surface is broken into tiles.  If this parameter is not provided, a {@link WebMercatorTilingScheme}
      * is used.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+     * @property [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
      *                    this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
      *                    parameter is specified, the WGS84 ellipsoid is used.
-     * [tileWidth = 256] - Pixel width of image tiles.
-     * [tileHeight = 256] - Pixel height of image tiles.
-     * [flipXY] - Older versions of gdal2tiles.py flipped X and Y values in tilemapresource.xml.
-     * [tileDiscardPolicy] - A policy for discarding tile images according to some criteria
+     * @property [tileWidth = 256] - Pixel width of image tiles.
+     * @property [tileHeight = 256] - Pixel height of image tiles.
+     * @property [flipXY] - Older versions of gdal2tiles.py flipped X and Y values in tilemapresource.xml.
+     * @property [tileDiscardPolicy] - A policy for discarding tile images according to some criteria
      * Specifying this option will do the same, allowing for loading of these incorrect tilesets.
      */
     type ConstructorOptions = {
@@ -41102,10 +42594,36 @@ export class TimeDynamicPointCloud {
     destroy(): void;
 }
 
+/**
+ * A tonemapping algorithm when rendering with high dynamic range.
+ */
+export enum Tonemapper {
+    /**
+     * Use the Reinhard tonemapping.
+     */
+    REINHARD = "REINHARD",
+    /**
+     * Use the modified Reinhard tonemapping.
+     */
+    MODIFIED_REINHARD = "MODIFIED_REINHARD",
+    /**
+     * Use the Filmic tonemapping.
+     */
+    FILMIC = "FILMIC",
+    /**
+     * Use the ACES tonemapping.
+     */
+    ACES = "ACES",
+    /**
+     * Use the PBR Neutral tonemapping {@link https://github.com/KhronosGroup/ToneMapping/tree/main/PBR_Neutral|from Khronos}.
+     */
+    PBR_NEUTRAL = "PBR_NEUTRAL"
+}
+
 export namespace UrlTemplateImageryProvider {
     /**
      * Initialization options for the UrlTemplateImageryProvider constructor
-     * url - The URL template to use to request tiles.  It has the following keywords:
+     * @property url - The URL template to use to request tiles.  It has the following keywords:
      * <ul>
      *     <li><code>{z}</code>: The level of the tile in the tiling scheme.  Level zero is the root of the quadtree pyramid.</li>
      *     <li><code>{x}</code>: The tile X coordinate in the tiling scheme, where 0 is the Westernmost tile.</li>
@@ -41125,7 +42643,7 @@ export namespace UrlTemplateImageryProvider {
      *     <li><code>{width}</code>: The width of each tile in pixels.</li>
      *     <li><code>{height}</code>: The height of each tile in pixels.</li>
      * </ul>
-     * [pickFeaturesUrl] - The URL template to use to pick features.  If this property is not specified,
+     * @property [pickFeaturesUrl] - The URL template to use to pick features.  If this property is not specified,
      *                 {@link UrlTemplateImageryProvider#pickFeatures} will immediately returned undefined, indicating no
      *                 features picked.  The URL template supports all of the keywords supported by the <code>url</code>
      *                 parameter, plus the following:
@@ -41140,7 +42658,7 @@ export namespace UrlTemplateImageryProvider {
      *     <li><code>{latitudeProjected}</code>: The latitude of the picked position in the projected coordinates of the tiling scheme.</li>
      *     <li><code>{format}</code>: The format in which to get feature information, as specified in the {@link GetFeatureInfoFormat}.</li>
      * </ul>
-     * [urlSchemeZeroPadding] - Gets the URL scheme zero padding for each tile coordinate. The format is '000' where
+     * @property [urlSchemeZeroPadding] - Gets the URL scheme zero padding for each tile coordinate. The format is '000' where
      * each coordinate will be padded on the left with zeros to match the width of the passed string of zeros. e.g. Setting:
      * urlSchemeZeroPadding : { '{x}' : '0000'}
      * will cause an 'x' value of 12 to return the string '0012' for {x} in the generated URL.
@@ -41153,40 +42671,40 @@ export namespace UrlTemplateImageryProvider {
      *  <li> <code>{reverseY}</code>: The zero padding for the tile reverseY coordinate in the tiling scheme.</li>
      *  <li> <code>{reverseZ}</code>: The zero padding for the reverseZ coordinate of the tile in the tiling scheme.</li>
      * </ul>
-     * [subdomains = 'abc'] - The subdomains to use for the <code>{s}</code> placeholder in the URL template.
+     * @property [subdomains = 'abc'] - The subdomains to use for the <code>{s}</code> placeholder in the URL template.
      *                          If this parameter is a single string, each character in the string is a subdomain.  If it is
      *                          an array, each element in the array is a subdomain.
-     * [credit = ''] - A credit for the data source, which is displayed on the canvas.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
+     * @property [credit = ''] - A credit for the data source, which is displayed on the canvas.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when specifying
      *                 this that the number of tiles at the minimum level is small, such as four or less.  A larger number is likely
      *                 to result in rendering problems.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
-     * [tilingScheme = WebMercatorTilingScheme] - The tiling scheme specifying how the ellipsoidal
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle, in radians, covered by the image.
+     * @property [tilingScheme = WebMercatorTilingScheme] - The tiling scheme specifying how the ellipsoidal
      * surface is broken into tiles.  If this parameter is not provided, a {@link WebMercatorTilingScheme}
      * is used.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+     * @property [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
      *                    this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
      *                    parameter is specified, the WGS84 ellipsoid is used.
-     * [tileWidth = 256] - Pixel width of image tiles.
-     * [tileHeight = 256] - Pixel height of image tiles.
-     * [hasAlphaChannel = true] - true if the images provided by this imagery provider
+     * @property [tileWidth = 256] - Pixel width of image tiles.
+     * @property [tileHeight = 256] - Pixel height of image tiles.
+     * @property [hasAlphaChannel = true] - true if the images provided by this imagery provider
      *                  include an alpha channel; otherwise, false.  If this property is false, an alpha channel, if
      *                  present, will be ignored.  If this property is true, any images without an alpha channel will
      *                  be treated as if their alpha is 1.0 everywhere.  When this property is false, memory usage
      *                  and texture upload time are potentially reduced.
-     * [getFeatureInfoFormats] - The formats in which to get feature information at a
+     * @property [getFeatureInfoFormats] - The formats in which to get feature information at a
      *                                 specific location when {@link UrlTemplateImageryProvider#pickFeatures} is invoked.  If this
      *                                 parameter is not specified, feature picking is disabled.
-     * [enablePickFeatures = true] - If true, {@link UrlTemplateImageryProvider#pickFeatures} will
+     * @property [enablePickFeatures = true] - If true, {@link UrlTemplateImageryProvider#pickFeatures} will
      *        request the <code>pickFeaturesUrl</code> and attempt to interpret the features included in the response.  If false,
      *        {@link UrlTemplateImageryProvider#pickFeatures} will immediately return undefined (indicating no pickable
      *        features) without communicating with the server.  Set this property to false if you know your data
      *        source does not support picking features or if you don't want this provider's features to be pickable. Note
      *        that this can be dynamically overridden by modifying the {@link UriTemplateImageryProvider#enablePickFeatures}
      *        property.
-     * [tileDiscardPolicy] - A policy for discarding tile images according to some criteria
-     * [customTags] - Allow to replace custom keywords in the URL template. The object must have strings as keys and functions as values.
+     * @property [tileDiscardPolicy] - A policy for discarding tile images according to some criteria
+     * @property [customTags] - Allow to replace custom keywords in the URL template. The object must have strings as keys and functions as values.
      */
     type ConstructorOptions = {
         url: Resource | string;
@@ -41491,6 +43009,76 @@ export class ViewportQuad {
 }
 
 /**
+ * A cell from a {@link VoxelPrimitive}.
+ * <p>
+ * Provides access to properties associated with one cell of a voxel primitive.
+ * </p>
+ * <p>
+ * Do not construct this directly.  Access it through picking using {@link Scene#pickVoxel}.
+ * </p>
+ * @example
+ * // On left click, display all the properties for a voxel cell in the console log.
+ * handler.setInputAction(function(movement) {
+ *   const voxelCell = scene.pickVoxel(movement.position);
+ *   if (voxelCell instanceof Cesium.VoxelCell) {
+ *     const propertyIds = voxelCell.getPropertyIds();
+ *     const length = propertyIds.length;
+ *     for (let i = 0; i < length; ++i) {
+ *       const propertyId = propertyIds[i];
+ *       console.log(`{propertyId}: ${voxelCell.getProperty(propertyId)}`);
+ *     }
+ *   }
+ * }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+ * @param primitive - The voxel primitive containing the cell
+ * @param tileIndex - The index of the tile
+ * @param sampleIndex - The index of the sample within the tile, containing metadata for this cell
+ */
+export class VoxelCell {
+    constructor(primitive: VoxelPrimitive, tileIndex: number, sampleIndex: number);
+    /**
+     * All objects returned by {@link Scene#pick} have a <code>primitive</code> property. This returns
+     * the VoxelPrimitive containing the cell.
+     */
+    readonly primitive: VoxelPrimitive;
+    /**
+     * Get the sample index of the cell.
+     */
+    readonly sampleIndex: number;
+    /**
+     * Get the index of the tile containing the cell.
+     */
+    readonly tileIndex: number;
+    /**
+     * Get a copy of the oriented bounding box containing the cell.
+     */
+    readonly orientedBoundingBox: OrientedBoundingBox;
+    /**
+     * Returns <code>true</code> if the feature contains this property.
+     * @param name - The case-sensitive name of the property.
+     * @returns Whether the feature contains this property.
+     */
+    hasProperty(name: string): boolean;
+    /**
+     * Returns an array of metadata property names for the feature.
+     * @returns The IDs of the feature's properties.
+     */
+    getNames(): string[];
+    /**
+     * Returns a copy of the value of the metadata in the cell with the given name.
+     * @example
+     * // Display all the properties for a voxel cell in the console log.
+     * const names = voxelCell.getNames();
+     * for (let i = 0; i < names.length; ++i) {
+     *   const name = names[i];
+     *   console.log(`{name}: ${voxelCell.getProperty(name)}`);
+     * }
+     * @param name - The case-sensitive name of the property.
+     * @returns The value of the property or <code>undefined</code> if the feature does not have this property.
+     */
+    getProperty(name: string): any;
+}
+
+/**
  * A primitive that renders voxel data from a {@link VoxelProvider}.
  * @param [options] - Object with the following properties:
  * @param [options.provider] - The voxel provider that supplies the primitive with tile data.
@@ -41557,11 +43145,6 @@ export class VoxelPrimitive {
      * Gets or sets whether or not to test against depth when rendering.
      */
     depthTest: boolean;
-    /**
-     * Gets or sets whether or not to jitter the view ray during the raymarch.
-     * This reduces stair-step artifacts but introduces noise.
-     */
-    jitter: boolean;
     /**
      * Gets or sets the nearest sampling.
      */
@@ -41770,39 +43353,39 @@ export const excludesReverseAxis: number[];
 export namespace WebMapServiceImageryProvider {
     /**
      * Initialization options for the WebMapServiceImageryProvider constructor
-     * url - The URL of the WMS service. The URL supports the same keywords as the {@link UrlTemplateImageryProvider}.
-     * layers - The layers to include, separated by commas.
-     * [parameters = WebMapServiceImageryProvider.DefaultParameters] - Additional parameters to pass to the WMS server in the GetMap URL.
-     * [getFeatureInfoParameters = WebMapServiceImageryProvider.GetFeatureInfoDefaultParameters] - Additional parameters to pass to the WMS server in the GetFeatureInfo URL.
-     * [enablePickFeatures = true] - If true, {@link WebMapServiceImageryProvider#pickFeatures} will invoke
+     * @property url - The URL of the WMS service. The URL supports the same keywords as the {@link UrlTemplateImageryProvider}.
+     * @property layers - The layers to include, separated by commas.
+     * @property [parameters = WebMapServiceImageryProvider.DefaultParameters] - Additional parameters to pass to the WMS server in the GetMap URL.
+     * @property [getFeatureInfoParameters = WebMapServiceImageryProvider.GetFeatureInfoDefaultParameters] - Additional parameters to pass to the WMS server in the GetFeatureInfo URL.
+     * @property [enablePickFeatures = true] - If true, {@link WebMapServiceImageryProvider#pickFeatures} will invoke
      *        the GetFeatureInfo operation on the WMS server and return the features included in the response.  If false,
      *        {@link WebMapServiceImageryProvider#pickFeatures} will immediately return undefined (indicating no pickable features)
      *        without communicating with the server.  Set this property to false if you know your WMS server does not support
      *        GetFeatureInfo or if you don't want this provider's features to be pickable. Note that this can be dynamically
      *        overridden by modifying the WebMapServiceImageryProvider#enablePickFeatures property.
-     * [getFeatureInfoFormats = WebMapServiceImageryProvider.DefaultGetFeatureInfoFormats] - The formats
+     * @property [getFeatureInfoFormats = WebMapServiceImageryProvider.DefaultGetFeatureInfoFormats] - The formats
      *        in which to try WMS GetFeatureInfo requests.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle of the layer.
-     * [tilingScheme = new GeographicTilingScheme()] - The tiling scheme to use to divide the world into tiles.
-     * [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle of the layer.
+     * @property [tilingScheme = new GeographicTilingScheme()] - The tiling scheme to use to divide the world into tiles.
+     * @property [ellipsoid] - The ellipsoid.  If the tilingScheme is specified,
      *        this parameter is ignored and the tiling scheme's ellipsoid is used instead. If neither
      *        parameter is specified, the WGS84 ellipsoid is used.
-     * [tileWidth = 256] - The width of each tile in pixels.
-     * [tileHeight = 256] - The height of each tile in pixels.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when
+     * @property [tileWidth = 256] - The width of each tile in pixels.
+     * @property [tileHeight = 256] - The height of each tile in pixels.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.  Take care when
      *        specifying this that the number of tiles at the minimum level is small, such as four or less.  A larger number is
      *        likely to result in rendering problems.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
      *        If not specified, there is no limit.
-     * [crs] - CRS specification, for use with WMS specification >= 1.3.0.
-     * [srs] - SRS specification, for use with WMS specification 1.1.0 or 1.1.1
-     * [credit] - A credit for the data source, which is displayed on the canvas.
-     * [subdomains = 'abc'] - The subdomains to use for the <code>{s}</code> placeholder in the URL template.
+     * @property [crs] - CRS specification, for use with WMS specification >= 1.3.0.
+     * @property [srs] - SRS specification, for use with WMS specification 1.1.0 or 1.1.1
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [subdomains = 'abc'] - The subdomains to use for the <code>{s}</code> placeholder in the URL template.
      *                          If this parameter is a single string, each character in the string is a subdomain.  If it is
      *                          an array, each element in the array is a subdomain.
-     * [clock] - A Clock instance that is used when determining the value for the time dimension. Required when `times` is specified.
-     * [times] - TimeIntervalCollection with its data property being an object containing time dynamic dimension and their values.
-     * [getFeatureInfoUrl] - The getFeatureInfo URL of the WMS service. If the property is not defined then we use the property value of url.
+     * @property [clock] - A Clock instance that is used when determining the value for the time dimension. Required when `times` is specified.
+     * @property [times] - TimeIntervalCollection with its data property being an object containing time dynamic dimension and their values.
+     * @property [getFeatureInfoUrl] - The getFeatureInfo URL of the WMS service. If the property is not defined then we use the property value of url.
      */
     type ConstructorOptions = {
         url: Resource | string;
@@ -41977,24 +43560,24 @@ export class WebMapServiceImageryProvider {
 export namespace WebMapTileServiceImageryProvider {
     /**
      * Initialization options for the WebMapTileServiceImageryProvider constructor
-     * url - The base URL for the WMTS GetTile operation (for KVP-encoded requests) or the tile-URL template (for RESTful requests). The tile-URL template should contain the following variables: &#123;style&#125;, &#123;TileMatrixSet&#125;, &#123;TileMatrix&#125;, &#123;TileRow&#125;, &#123;TileCol&#125;. The first two are optional if actual values are hardcoded or not required by the server. The &#123;s&#125; keyword may be used to specify subdomains.
-     * [format = 'image/jpeg'] - The MIME type for images to retrieve from the server.
-     * layer - The layer name for WMTS requests.
-     * style - The style name for WMTS requests.
-     * tileMatrixSetID - The identifier of the TileMatrixSet to use for WMTS requests.
-     * [tileMatrixLabels] - A list of identifiers in the TileMatrix to use for WMTS requests, one per TileMatrix level.
-     * [clock] - A Clock instance that is used when determining the value for the time dimension. Required when `times` is specified.
-     * [times] - TimeIntervalCollection with its <code>data</code> property being an object containing time dynamic dimension and their values.
-     * [dimensions] - A object containing static dimensions and their values.
-     * [tileWidth = 256] - The tile width in pixels.
-     * [tileHeight = 256] - The tile height in pixels.
-     * [tilingScheme] - The tiling scheme corresponding to the organization of the tiles in the TileMatrixSet.
-     * [rectangle = Rectangle.MAX_VALUE] - The rectangle covered by the layer.
-     * [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.
-     * [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
-     * [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
-     * [credit] - A credit for the data source, which is displayed on the canvas.
-     * [subdomains = 'abc'] - The subdomains to use for the <code>{s}</code> placeholder in the URL template.
+     * @property url - The base URL for the WMTS GetTile operation (for KVP-encoded requests) or the tile-URL template (for RESTful requests). The tile-URL template should contain the following variables: &#123;style&#125;, &#123;TileMatrixSet&#125;, &#123;TileMatrix&#125;, &#123;TileRow&#125;, &#123;TileCol&#125;. The first two are optional if actual values are hardcoded or not required by the server. The &#123;s&#125; keyword may be used to specify subdomains.
+     * @property [format = 'image/jpeg'] - The MIME type for images to retrieve from the server.
+     * @property layer - The layer name for WMTS requests.
+     * @property style - The style name for WMTS requests.
+     * @property tileMatrixSetID - The identifier of the TileMatrixSet to use for WMTS requests.
+     * @property [tileMatrixLabels] - A list of identifiers in the TileMatrix to use for WMTS requests, one per TileMatrix level.
+     * @property [clock] - A Clock instance that is used when determining the value for the time dimension. Required when `times` is specified.
+     * @property [times] - TimeIntervalCollection with its <code>data</code> property being an object containing time dynamic dimension and their values.
+     * @property [dimensions] - A object containing static dimensions and their values.
+     * @property [tileWidth = 256] - The tile width in pixels.
+     * @property [tileHeight = 256] - The tile height in pixels.
+     * @property [tilingScheme] - The tiling scheme corresponding to the organization of the tiles in the TileMatrixSet.
+     * @property [rectangle = Rectangle.MAX_VALUE] - The rectangle covered by the layer.
+     * @property [minimumLevel = 0] - The minimum level-of-detail supported by the imagery provider.
+     * @property [maximumLevel] - The maximum level-of-detail supported by the imagery provider, or undefined if there is no limit.
+     * @property [ellipsoid] - The ellipsoid.  If not specified, the WGS84 ellipsoid is used.
+     * @property [credit] - A credit for the data source, which is displayed on the canvas.
+     * @property [subdomains = 'abc'] - The subdomains to use for the <code>{s}</code> placeholder in the URL template.
      *                          If this parameter is a single string, each character in the string is a subdomain.  If it is
      *                          an array, each element in the array is a subdomain.
      */
@@ -42181,8 +43764,8 @@ export class WebMapTileServiceImageryProvider {
 }
 
 /**
- * height - The height.
- * color - The color at this height.
+ * @property height - The height.
+ * @property color - The color at this height.
  */
 export type createElevationBandMaterialEntry = {
     height: number;
@@ -42190,9 +43773,9 @@ export type createElevationBandMaterialEntry = {
 };
 
 /**
- * entries - A list of elevation entries. They will automatically be sorted from lowest to highest. If there is only one entry and <code>extendsDownards</code> and <code>extendUpwards</code> are both <code>false</code>, they will both be set to <code>true</code>.
- * [extendDownwards = false] - If <code>true</code>, the band's minimum elevation color will extend infinitely downwards.
- * [extendUpwards = false] - If <code>true</code>, the band's maximum elevation color will extend infinitely upwards.
+ * @property entries - A list of elevation entries. They will automatically be sorted from lowest to highest. If there is only one entry and <code>extendsDownards</code> and <code>extendUpwards</code> are both <code>false</code>, they will both be set to <code>true</code>.
+ * @property [extendDownwards = false] - If <code>true</code>, the band's minimum elevation color will extend infinitely downwards.
+ * @property [extendUpwards = false] - If <code>true</code>, the band's maximum elevation color will extend infinitely upwards.
  */
 export type createElevationBandMaterialBand = {
     entries: createElevationBandMaterialEntry[];
@@ -42241,6 +43824,16 @@ export function createElevationBandMaterial(options: {
 /**
  * Creates a {@link Cesium3DTileset} instance for the Google Photorealistic 3D Tiles tileset.
  * @example
+ * const viewer = new Cesium.Viewer("cesiumContainer");
+ *
+ * try {
+ *   const tileset = await Cesium.createGooglePhotorealistic3DTileset();
+ *   viewer.scene.primitives.add(tileset));
+ * } catch (error) {
+ *   console.log(`Error creating tileset: ${error}`);
+ * }
+ * @example
+ * // Use your own Google Maps API key
  * Cesium.GoogleMaps.defaultApiKey = "your-api-key";
  *
  * const viewer = new Cesium.Viewer("cesiumContainer");
@@ -42386,16 +43979,17 @@ export function createWorldImageryAsync(options?: {
  * @param container - The DOM element or ID that will contain the widget.
  * @param [options] - Object with the following properties:
  * @param [options.clock = new Clock()] - The clock to use to control current time.
+ * @param [options.ellipsoid = Ellipsoid.default] - The default ellipsoid.
  * @param [options.baseLayer = ImageryLayer.fromWorldImagery()] - The bottommost imagery layer applied to the globe. If set to <code>false</code>, no imagery provider will be added.
- * @param [options.terrainProvider = new EllipsoidTerrainProvider] - The terrain provider.
+ * @param [options.terrainProvider = new EllipsoidTerrainProvider(options.ellipsoid)] - The terrain provider.
  * @param [options.terrain] - A terrain object which handles asynchronous terrain provider. Can only specify if options.terrainProvider is undefined.
- * @param [options.skyBox] - The skybox used to render the stars.  When <code>undefined</code>, the default stars are used. If set to <code>false</code>, no skyBox, Sun, or Moon will be added.
- * @param [options.skyAtmosphere] - Blue sky, and the glow around the Earth's limb.  Set to <code>false</code> to turn it off.
+ * @param [options.skyBox] - The skybox used to render the stars. When <code>undefined</code> and the WGS84 ellipsoid used, the default stars are used. If set to <code>false</code>, no skyBox, Sun, or Moon will be added.
+ * @param [options.skyAtmosphere] - Blue sky, and the glow around the Earth's limb. Enabled when the default ellipsoid used. Set to <code>false</code> to turn it off.
  * @param [options.sceneMode = SceneMode.SCENE3D] - The initial scene mode.
  * @param [options.scene3DOnly = false] - When <code>true</code>, each geometry instance will only be rendered in 3D to save GPU memory.
  * @param [options.orderIndependentTranslucency = true] - If true and the configuration supports it, use order independent translucency.
- * @param [options.mapProjection = new GeographicProjection()] - The map projection to use in 2D and Columbus View modes.
- * @param [options.globe = new Globe(mapProjection.ellipsoid)] - The globe to use in the scene.  If set to <code>false</code>, no globe will be added and the sky atmosphere will be hidden by default.
+ * @param [options.mapProjection = new GeographicProjection(options.ellipsoid)] - The map projection to use in 2D and Columbus View modes.
+ * @param [options.globe = new Globe(options.ellipsoid)] - The globe to use in the scene.  If set to <code>false</code>, no globe will be added and the sky atmosphere will be hidden by default.
  * @param [options.useDefaultRenderLoop = true] - True if this widget should control the render loop, false otherwise.
  * @param [options.useBrowserRecommendedResolution = true] - If true, render at the browser's recommended resolution and ignore <code>window.devicePixelRatio</code>.
  * @param [options.targetFrameRate] - The target frame rate when using the default render loop.
@@ -42410,11 +44004,12 @@ export function createWorldImageryAsync(options?: {
  * @param [options.blurActiveElementOnCanvasFocus = true] - If true, the active element will blur when the viewer's canvas is clicked. Setting this to false is useful for cases when the canvas is clicked only for retrieving position or an entity data without actually meaning to set the canvas to be the active element.
  * @param [options.requestRenderMode = false] - If true, rendering a frame will only occur when needed as determined by changes within the scene. Enabling improves performance of the application, but requires using {@link Scene#requestRender} to render a new frame explicitly in this mode. This will be necessary in many cases after making changes to the scene in other parts of the API. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
  * @param [options.maximumRenderTimeChange = 0.0] - If requestRenderMode is true, this value defines the maximum change in simulation time allowed before a render is requested. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
- * @param [options.msaaSamples = 1] - If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets.
+ * @param [options.msaaSamples = 4] - If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets. Set to 1 to disable MSAA.
  */
 export class CesiumWidget {
     constructor(container: Element | string, options?: {
         clock?: Clock;
+        ellipsoid?: Ellipsoid;
         baseLayer?: ImageryLayer | false;
         terrainProvider?: TerrainProvider;
         terrain?: Terrain;
@@ -42476,6 +44071,10 @@ export class CesiumWidget {
      * Gets the camera.
      */
     readonly camera: Camera;
+    /**
+     * Gets the default ellipsoid for the scene.
+     */
+    readonly ellipsoid: Ellipsoid;
     /**
      * Gets the clock.
      */
@@ -43870,6 +45469,23 @@ export class HomeButtonViewModel {
 }
 
 /**
+ * I3S Building Scene Layer widget
+ * @param containerId - The DOM element ID that will contain the widget.
+ * @param i3sProvider - I3S Data provider instance.
+ */
+export class I3SBuildingSceneLayerExplorer {
+    constructor(containerId: string, i3sProvider: I3SDataProvider);
+}
+
+/**
+ * The view model for {@link I3SBuildingSceneLayerExplorer}.
+ * @param i3sProvider - I3S Data provider instance.
+ */
+export class I3sBslExplorerViewModel {
+    constructor(i3sProvider: I3SDataProvider);
+}
+
+/**
  * A widget for displaying information or a description.
  * @param container - The DOM element or ID that will contain the widget.
  */
@@ -44324,7 +45940,7 @@ export class SelectionIndicatorViewModel {
      * Gets or sets the function for converting the world position of the object to the screen space position.
      * @example
      * selectionIndicatorViewModel.computeScreenSpacePosition = function(position, result) {
-     *     return Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, position, result);
+     *     return Cesium.SceneTransforms.worldToWindowCoordinates(scene, position, result);
      * };
      */
     computeScreenSpacePosition: SelectionIndicatorViewModel.ComputeScreenSpacePosition;
@@ -44519,54 +46135,55 @@ export class VRButtonViewModel {
 export namespace Viewer {
     /**
      * Initialization options for the Viewer constructor
-     * [animation = true] - If set to false, the Animation widget will not be created.
-     * [baseLayerPicker = true] - If set to false, the BaseLayerPicker widget will not be created.
-     * [fullscreenButton = true] - If set to false, the FullscreenButton widget will not be created.
-     * [vrButton = false] - If set to true, the VRButton widget will be created.
-     * [geocoder = true] - If set to false, the Geocoder widget will not be created.
-     * [homeButton = true] - If set to false, the HomeButton widget will not be created.
-     * [infoBox = true] - If set to false, the InfoBox widget will not be created.
-     * [sceneModePicker = true] - If set to false, the SceneModePicker widget will not be created.
-     * [selectionIndicator = true] - If set to false, the SelectionIndicator widget will not be created.
-     * [timeline = true] - If set to false, the Timeline widget will not be created.
-     * [navigationHelpButton = true] - If set to false, the navigation help button will not be created.
-     * [navigationInstructionsInitiallyVisible = true] - True if the navigation instructions should initially be visible, or false if the should not be shown until the user explicitly clicks the button.
-     * [scene3DOnly = false] - When <code>true</code>, each geometry instance will only be rendered in 3D to save GPU memory.
-     * [shouldAnimate = false] - <code>true</code> if the clock should attempt to advance simulation time by default, <code>false</code> otherwise.  This option takes precedence over setting {@link Viewer#clockViewModel}.
-     * [clockViewModel = new ClockViewModel(clock)] - The clock view model to use to control current time.
-     * [selectedImageryProviderViewModel] - The view model for the current base imagery layer, if not supplied the first available base layer is used.  This value is only valid if `baseLayerPicker` is set to true.
-     * [imageryProviderViewModels = createDefaultImageryProviderViewModels()] - The array of ProviderViewModels to be selectable from the BaseLayerPicker.  This value is only valid if `baseLayerPicker` is set to true.
-     * [selectedTerrainProviderViewModel] - The view model for the current base terrain layer, if not supplied the first available base layer is used.  This value is only valid if `baseLayerPicker` is set to true.
-     * [terrainProviderViewModels = createDefaultTerrainProviderViewModels()] - The array of ProviderViewModels to be selectable from the BaseLayerPicker.  This value is only valid if `baseLayerPicker` is set to true.
-     * [baseLayer = ImageryLayer.fromWorldImagery()] - The bottommost imagery layer applied to the globe. If set to <code>false</code>, no imagery provider will be added. This value is only valid if `baseLayerPicker` is set to false.
-     * [terrainProvider = new EllipsoidTerrainProvider()] - The terrain provider to use
-     * [terrain] - A terrain object which handles asynchronous terrain provider. Can only specify if options.terrainProvider is undefined.
-     * [skyBox] - The skybox used to render the stars.  When <code>undefined</code>, the default stars are used. If set to <code>false</code>, no skyBox, Sun, or Moon will be added.
-     * [skyAtmosphere] - Blue sky, and the glow around the Earth's limb.  Set to <code>false</code> to turn it off.
-     * [fullscreenElement = document.body] - The element or id to be placed into fullscreen mode when the full screen button is pressed.
-     * [useDefaultRenderLoop = true] - True if this widget should control the render loop, false otherwise.
-     * [targetFrameRate] - The target frame rate when using the default render loop.
-     * [showRenderLoopErrors = true] - If true, this widget will automatically display an HTML panel to the user containing the error, if a render loop error occurs.
-     * [useBrowserRecommendedResolution = true] - If true, render at the browser's recommended resolution and ignore <code>window.devicePixelRatio</code>.
-     * [automaticallyTrackDataSourceClocks = true] - If true, this widget will automatically track the clock settings of newly added DataSources, updating if the DataSource's clock changes.  Set this to false if you want to configure the clock independently.
-     * [contextOptions] - Context and WebGL creation properties passed to {@link Scene}.
-     * [sceneMode = SceneMode.SCENE3D] - The initial scene mode.
-     * [mapProjection = new GeographicProjection()] - The map projection to use in 2D and Columbus View modes.
-     * [globe = new Globe(mapProjection.ellipsoid)] - The globe to use in the scene.  If set to <code>false</code>, no globe will be added and the sky atmosphere will be hidden by default.
-     * [orderIndependentTranslucency = true] - If true and the configuration supports it, use order independent translucency.
-     * [creditContainer] - The DOM element or ID that will contain the {@link CreditDisplay}.  If not specified, the credits are added to the bottom of the widget itself.
-     * [creditViewport] - The DOM element or ID that will contain the credit pop up created by the {@link CreditDisplay}.  If not specified, it will appear over the widget itself.
-     * [dataSources = new DataSourceCollection()] - The collection of data sources visualized by the widget.  If this parameter is provided,
+     * @property [animation = true] - If set to false, the Animation widget will not be created.
+     * @property [baseLayerPicker = true] - If set to false, the BaseLayerPicker widget will not be created.
+     * @property [fullscreenButton = true] - If set to false, the FullscreenButton widget will not be created.
+     * @property [vrButton = false] - If set to true, the VRButton widget will be created.
+     * @property [geocoder = true] - If set to false, the Geocoder widget will not be created.
+     * @property [homeButton = true] - If set to false, the HomeButton widget will not be created.
+     * @property [infoBox = true] - If set to false, the InfoBox widget will not be created.
+     * @property [sceneModePicker = true] - If set to false, the SceneModePicker widget will not be created.
+     * @property [selectionIndicator = true] - If set to false, the SelectionIndicator widget will not be created.
+     * @property [timeline = true] - If set to false, the Timeline widget will not be created.
+     * @property [navigationHelpButton = true] - If set to false, the navigation help button will not be created.
+     * @property [navigationInstructionsInitiallyVisible = true] - True if the navigation instructions should initially be visible, or false if the should not be shown until the user explicitly clicks the button.
+     * @property [scene3DOnly = false] - When <code>true</code>, each geometry instance will only be rendered in 3D to save GPU memory.
+     * @property [shouldAnimate = false] - <code>true</code> if the clock should attempt to advance simulation time by default, <code>false</code> otherwise.  This option takes precedence over setting {@link Viewer#clockViewModel}.
+     * @property [clockViewModel = new ClockViewModel(clock)] - The clock view model to use to control current time.
+     * @property [selectedImageryProviderViewModel] - The view model for the current base imagery layer, if not supplied the first available base layer is used.  This value is only valid if `baseLayerPicker` is set to true.
+     * @property [imageryProviderViewModels = createDefaultImageryProviderViewModels()] - The array of ProviderViewModels to be selectable from the BaseLayerPicker.  This value is only valid if `baseLayerPicker` is set to true.
+     * @property [selectedTerrainProviderViewModel] - The view model for the current base terrain layer, if not supplied the first available base layer is used.  This value is only valid if `baseLayerPicker` is set to true.
+     * @property [terrainProviderViewModels = createDefaultTerrainProviderViewModels()] - The array of ProviderViewModels to be selectable from the BaseLayerPicker.  This value is only valid if `baseLayerPicker` is set to true.
+     * @property [baseLayer = ImageryLayer.fromWorldImagery()] - The bottommost imagery layer applied to the globe. If set to <code>false</code>, no imagery provider will be added. This value is only valid if `baseLayerPicker` is set to false.
+     * @property [ellipsoid = Ellipsoid.default] - The default ellipsoid.
+     * @property [terrainProvider = new EllipsoidTerrainProvider()] - The terrain provider to use
+     * @property [terrain] - A terrain object which handles asynchronous terrain provider. Can only specify if options.terrainProvider is undefined.
+     * @property [skyBox] - The skybox used to render the stars. When <code>undefined</code> and the WGS84 ellipsoid used, the default stars are used. If set to <code>false</code>, no skyBox, Sun, or Moon will be added.
+     * @property [skyAtmosphere] - Blue sky, and the glow around the Earth's limb. Enabled when the WGS84 ellipsoid used. Set to <code>false</code> to turn it off.
+     * @property [fullscreenElement = document.body] - The element or id to be placed into fullscreen mode when the full screen button is pressed.
+     * @property [useDefaultRenderLoop = true] - True if this widget should control the render loop, false otherwise.
+     * @property [targetFrameRate] - The target frame rate when using the default render loop.
+     * @property [showRenderLoopErrors = true] - If true, this widget will automatically display an HTML panel to the user containing the error, if a render loop error occurs.
+     * @property [useBrowserRecommendedResolution = true] - If true, render at the browser's recommended resolution and ignore <code>window.devicePixelRatio</code>.
+     * @property [automaticallyTrackDataSourceClocks = true] - If true, this widget will automatically track the clock settings of newly added DataSources, updating if the DataSource's clock changes.  Set this to false if you want to configure the clock independently.
+     * @property [contextOptions] - Context and WebGL creation properties passed to {@link Scene}.
+     * @property [sceneMode = SceneMode.SCENE3D] - The initial scene mode.
+     * @property [mapProjection = new GeographicProjection(options.ellipsoid)] - The map projection to use in 2D and Columbus View modes.
+     * @property [globe = new Globe(options.ellipsoid)] - The globe to use in the scene.  If set to <code>false</code>, no globe will be added and the sky atmosphere will be hidden by default.
+     * @property [orderIndependentTranslucency = true] - If true and the configuration supports it, use order independent translucency.
+     * @property [creditContainer] - The DOM element or ID that will contain the {@link CreditDisplay}.  If not specified, the credits are added to the bottom of the widget itself.
+     * @property [creditViewport] - The DOM element or ID that will contain the credit pop up created by the {@link CreditDisplay}.  If not specified, it will appear over the widget itself.
+     * @property [dataSources = new DataSourceCollection()] - The collection of data sources visualized by the widget.  If this parameter is provided,
      *                               the instance is assumed to be owned by the caller and will not be destroyed when the viewer is destroyed.
-     * [shadows = false] - Determines if shadows are cast by light sources.
-     * [terrainShadows = ShadowMode.RECEIVE_ONLY] - Determines if the terrain casts or receives shadows from light sources.
-     * [mapMode2D = MapMode2D.INFINITE_SCROLL] - Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
-     * [projectionPicker = false] - If set to true, the ProjectionPicker widget will be created.
-     * [blurActiveElementOnCanvasFocus = true] - If true, the active element will blur when the viewer's canvas is clicked. Setting this to false is useful for cases when the canvas is clicked only for retrieving position or an entity data without actually meaning to set the canvas to be the active element.
-     * [requestRenderMode = false] - If true, rendering a frame will only occur when needed as determined by changes within the scene. Enabling reduces the CPU/GPU usage of your application and uses less battery on mobile, but requires using {@link Scene#requestRender} to render a new frame explicitly in this mode. This will be necessary in many cases after making changes to the scene in other parts of the API. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
-     * [maximumRenderTimeChange = 0.0] - If requestRenderMode is true, this value defines the maximum change in simulation time allowed before a render is requested. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
-     * [depthPlaneEllipsoidOffset = 0.0] - Adjust the DepthPlane to address rendering artefacts below ellipsoid zero elevation.
-     * [msaaSamples = 1] - If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets.
+     * @property [shadows = false] - Determines if shadows are cast by light sources.
+     * @property [terrainShadows = ShadowMode.RECEIVE_ONLY] - Determines if the terrain casts or receives shadows from light sources.
+     * @property [mapMode2D = MapMode2D.INFINITE_SCROLL] - Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
+     * @property [projectionPicker = false] - If set to true, the ProjectionPicker widget will be created.
+     * @property [blurActiveElementOnCanvasFocus = true] - If true, the active element will blur when the viewer's canvas is clicked. Setting this to false is useful for cases when the canvas is clicked only for retrieving position or an entity data without actually meaning to set the canvas to be the active element.
+     * @property [requestRenderMode = false] - If true, rendering a frame will only occur when needed as determined by changes within the scene. Enabling reduces the CPU/GPU usage of your application and uses less battery on mobile, but requires using {@link Scene#requestRender} to render a new frame explicitly in this mode. This will be necessary in many cases after making changes to the scene in other parts of the API. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
+     * @property [maximumRenderTimeChange = 0.0] - If requestRenderMode is true, this value defines the maximum change in simulation time allowed before a render is requested. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
+     * @property [depthPlaneEllipsoidOffset = 0.0] - Adjust the DepthPlane to address rendering artefacts below ellipsoid zero elevation.
+     * @property [msaaSamples = 4] - If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets. Set to 1 to disable MSAA.
      */
     type ConstructorOptions = {
         animation?: boolean;
@@ -44589,6 +46206,7 @@ export namespace Viewer {
         selectedTerrainProviderViewModel?: ProviderViewModel;
         terrainProviderViewModels?: ProviderViewModel[];
         baseLayer?: ImageryLayer | false;
+        ellipsoid?: Ellipsoid;
         terrainProvider?: TerrainProvider;
         terrain?: Terrain;
         skyBox?: SkyBox | false;
@@ -44672,14 +46290,6 @@ export namespace Viewer {
  */
 export class Viewer {
     constructor(container: Element | string, options?: Viewer.ConstructorOptions);
-    /**
-     * Returns true when the terrain provider has been successfully created. Otherwise, returns false.
-     */
-    readonly ready: boolean;
-    /**
-     * The terrain provider providing surface geometry to a globe. Do not use until {@link Terrain.readyEvent} is raised.
-     */
-    readonly provider: TerrainProvider;
     /**
      * Gets the parent container.
      */
@@ -44790,6 +46400,10 @@ export class Viewer {
      * Gets the camera.
      */
     readonly camera: Camera;
+    /**
+     * Gets the default ellipsoid for the scene.
+     */
+    readonly ellipsoid: Ellipsoid;
     /**
      * Gets the post-process stages.
      */
@@ -45127,7 +46741,5 @@ export class VoxelInspectorViewModel {
  * @param [canExecute = true] - A boolean indicating whether the function can currently be executed.
  */
 export function createCommand(func: (...params: any[]) => any, canExecute?: boolean): void;
-
-
 
 

@@ -1469,6 +1469,7 @@ declare namespace DC {
      */
     TRANSLUCENT = 2,
   }
+
   enum ModelAnimationLoop {
     /**
      * Play the animation once; do not loop it.
