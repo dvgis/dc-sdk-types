@@ -1,5 +1,5 @@
 # dc-sdk-types
-type definitions for @dvgis/dc-sdk 
+Type definitions for @dvgis/dc-sdk 
 
 ## install
 
